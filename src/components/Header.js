@@ -1,8 +1,13 @@
-import React from 'react'
+import logo from '../images/logo.svg'
 
 const Header = () => {
   return (
-    <div className='header'>Header</div>
+    <div className='header'>
+      <div className='header__nav-container'>
+        <img src={logo} className='header__logo' alt='Логотип' />
+        
+      </div>
+    </div>
   )
 }
 
