@@ -1,18 +1,15 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/font.css);
 
-@import url(./blocks/page/page.css);
-
-@import url(./blocks/header/header.css);
-@import url(./blocks/header/__nav-container/header__nav-container.css);
-@import url(./blocks/header/__logo/header__logo.css);
-
-@import url(./blocks/content/content.css);
-
-@import url(./blocks/footer/footer.css);
-@import url(./blocks/footer/__about/footer__about.css);
-@import url(./blocks/footer/__separator/footer__separator.css);
-@import url(./blocks/footer/__container/footer__container.css);
-@import url(./blocks/footer/__year/footer__year.css);
-@import url(./blocks/footer/__nav-box/footer__nav-box.css);
-@import url(./blocks/footer/__nav-link/footer__nav-link.css);
+#root {
+  font-family: 'Inter', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  color: #000;
+  background: #fff;
+  height: 100vh;
+}
