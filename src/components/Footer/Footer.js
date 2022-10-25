@@ -12,7 +12,7 @@ const Footer = () => {
             <a href='/' className='footer__nav-link'>Яндекс.Практикум</a>
           </li>
           <li className='footer__nav-item'>
-            <a href='/' className='footer__nav-link'>Github</a>
+            <a href='/qw' className='footer__nav-link'>Github</a>
           </li>
         </ul>
       </div>

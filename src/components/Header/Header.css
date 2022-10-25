@@ -11,23 +11,32 @@
   vertical-align: top;
   object-fit: cover;
   object-position: center;
+  transition: opacity 0.3s linear;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
 }
 
 .header__nav-container {
   display: flex;
-  gap: 30px;
-  justify-content: space-between;
+  column-gap: 30px;
   align-items: center;
 }
 
 .header__nav-link {
   text-decoration: none;
+  transition: opacity 0.3s linear;
+}
+
+.header__nav-link:hover {
+  opacity: 0.6;
 }
 
 .header__nav-link_signup {
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: calc(16 / 12);
   color: #fff;
 }
 
@@ -36,7 +45,7 @@
   height: 32px;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: calc(16 / 12);
   display: flex;
   align-items: center;
   justify-content: center;

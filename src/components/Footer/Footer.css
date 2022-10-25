@@ -8,7 +8,7 @@
   margin: 0;
   font-weight: 400;
   font-size: 13px;
-  line-height: 16px;
+  line-height: calc(16 / 13);
   text-align: center;
   color: #a0a0a0;
 }
@@ -28,7 +28,7 @@
   margin: 0;
   font-weight: 400;
   font-size: 13px;
-  line-height: 16px;
+  line-height: calc(16 / 13);
 }
 
 .footer__nav-box {
@@ -36,7 +36,7 @@
   padding: 0;
   display: flex;
   list-style: none;
-  gap: 20px;
+  column-gap: 20px;
 }
 
 .footer__nav-link {
@@ -44,5 +44,5 @@
   color: #000;
   font-weight: 400;
   font-size: 13px;
-  line-height: 16px;
+  line-height: calc(16 / 13);
 }

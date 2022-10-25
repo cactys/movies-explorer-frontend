@@ -11,8 +11,8 @@
   font-weight: 500;
 }
 @font-face {
-  src: url(../vendor/fonts/Inter-Black.woff) format("woff"),
-       url(../vendor/fonts/Inter-Black.woff2) format("woff2");
-  font-family: "Inter";
-  font-weight: 900;
+  src: url(../vendor/fonts/Suisse-Intl.woff) format("woff"),
+       url(../vendor/fonts/Suisse-Intl.woff2) format("woff2");
+  font-family: "Suisse Intl";
+  font-weight: 400;
 }

@@ -4,7 +4,6 @@
   width: 1280px;
   height: 100vh;
   background-color: #fff;
-  z-index: 1;
   padding: 246px 440px 0;
 }
 
@@ -28,7 +27,7 @@
 
 .error-page__link {
   display: block;
-  margin: 184px 0;
+  margin: 184px 0 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
