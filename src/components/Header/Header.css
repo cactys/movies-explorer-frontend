@@ -1,13 +1,8 @@
 .header {
-  padding: 0 70px;
+  padding: 18px 70px;
   background-color: #073042;
-}
-
-.header__nav-container {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  padding: 18px 0;
 }
 
 .header__logo {
@@ -16,4 +11,36 @@
   vertical-align: top;
   object-fit: cover;
   object-position: center;
+}
+
+.header__nav-container {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__nav-link {
+  text-decoration: none;
+}
+
+.header__nav-link_signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.header__nav-link_signin {
+  width: 76px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2be080;
+  border-radius: 3px;
+  color: #000;
 }

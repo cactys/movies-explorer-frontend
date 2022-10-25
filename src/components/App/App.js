@@ -1,16 +1,55 @@
 import './App.css';
-import Footer from "../Footer/Footer"
-import Header from "../Header/Header"
-import Main from "../Main/Main"
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import SaveMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import { Route, Switch } from 'react-router-dom';
+import { createContext } from 'react';
+
+const Context = createContext(null);
 
 const App = () => {
   return (
-    <div className='page'>
-      <Header />
-      <Main />
-      <Footer />
+    <div className="page">
+      <Context.Provider
+        value={{
+          email: 'pochta@yandex.ru',
+          name: 'Виталий',
+        }}
+      >
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/movies">
+            <Movies />
+          </Route>
+          <Route exact path="/save-movies">
+            <SaveMovies />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route exact path="/signin">
+            <SignIn />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+        <Footer />
+      </Context.Provider>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
