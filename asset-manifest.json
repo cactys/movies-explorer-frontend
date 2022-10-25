@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.38c9e7d6.css",
+    "main.js": "/static/js/main.c9b0bf9c.js",
+    "static/js/787.ab3d119a.chunk.js": "/static/js/787.ab3d119a.chunk.js",
+    "static/media/landing-logo.svg": "/static/media/landing-logo.c8fd6fd4440b57ce2f1e81250420354c.svg",
+    "static/media/Inter-Regular.woff": "/static/media/Inter-Regular.34ed58565339f4f3be40.woff",
+    "static/media/Inter-Regular.woff2": "/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
+    "static/media/Inter-Medium.woff": "/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Medium.woff2": "/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Suisse-Intl.woff": "/static/media/Suisse-Intl.4749d7fc2d6ec34a5554.woff",
+    "static/media/Suisse-Intl.woff2": "/static/media/Suisse-Intl.6e440c24ca670850db00.woff2",
+    "index.html": "/index.html",
+    "static/media/logo.svg": "/static/media/logo.95abe6ea32cda131d8733dc7b5c2c5f9.svg",
+    "main.38c9e7d6.css.map": "/static/css/main.38c9e7d6.css.map",
+    "main.c9b0bf9c.js.map": "/static/js/main.c9b0bf9c.js.map",
+    "787.ab3d119a.chunk.js.map": "/static/js/787.ab3d119a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38c9e7d6.css",
+    "static/js/main.c9b0bf9c.js"
+  ]
+}
