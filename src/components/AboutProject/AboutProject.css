@@ -15,10 +15,9 @@
 }
 
 .about-project__cards {
-  margin: 70px 0 110px;
+  margin: 70px 0 0;
   display: flex;
   column-gap: 40px;
-  flex-wrap: nowrap;
 }
 
 .about-project__card {
@@ -43,6 +42,7 @@
 }
 
 .about-project__grid {
+  margin: 110px 0 0;
   display: grid;
   grid-template-columns: repeat(5, 228px);
   grid-template-rows: repeat(2, 36px);
