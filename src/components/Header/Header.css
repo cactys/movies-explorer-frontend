@@ -55,16 +55,19 @@
   color: #000;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 831px) {
   .header {
     padding: 18px 30px;
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 519px) {
   .header {
     padding: 18px 14px;
   }
+}
+
+@media screen and (max-width: 425px) {
   .header__nav-container {
     column-gap: 14px;
   }

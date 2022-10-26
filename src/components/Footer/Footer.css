@@ -47,17 +47,20 @@
   line-height: calc(16 / 13);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 831px) {
   .footer {
     padding: 0 30px;
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 519px) {
   .footer {
     padding: 0 10px;
     margin-bottom: 10px;
   }
+}
+
+@media screen and (max-width: 425px) {
   .footer__about {
     font-size: 12px;
     line-height: calc(15 / 12);

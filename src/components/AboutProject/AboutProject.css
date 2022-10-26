@@ -45,14 +45,17 @@
 .about-project__grid {
   margin: 110px 0 0;
   display: grid;
-  grid-template-columns: repeat(5, 1vw);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 36px);
 }
 
-.about-project__grid-item_frontend-week {
+.about-project__grid-item {
   font-weight: 400;
   font-size: 14px;
   line-height: calc(17 / 14);
+}
+
+.about-project__grid-item_frontend-week {
   background-color: #2be080;
   display: inline-flex;
   justify-content: center;
@@ -61,9 +64,6 @@
 }
 
 .about-project__grid-item_backend-week {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: calc(17 / 14);
   background-color: #f2f2f2;
   display: inline-flex;
   justify-content: center;
@@ -73,8 +73,6 @@
 
 .about-project__grid-item_frontend {
   font-weight: 500;
-  font-size: 14px;
-  line-height: calc(17 / 14);
   color: #a0a0a0;
   display: inline-flex;
   justify-content: center;
@@ -84,8 +82,6 @@
 
 .about-project__grid-item_backend {
   font-weight: 500;
-  font-size: 14px;
-  line-height: calc(17 / 14);
   color: #a0a0a0;
   display: flex;
   justify-content: center;
@@ -93,8 +89,67 @@
   grid-column: 2 / 6;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 831px) {
   .about-project {
     padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__cards {
+    column-gap: 30px;
+  }
+  .about-project__card {
+    row-gap: 22px;
+  }
+  .about-project__description {
+    font-size: 12px;
+    line-height: calc(18 / 12);
+  }
+  .about-project__grid {
+    margin: 93px 0 0;
+  }
+  .about-project__grid-item_frontend,
+  .about-project__grid-item_backend {
+    font-family: 'Suisse Intl';
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .about-project {
+    padding: 70px 18px 58px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .about-project__title {
+    padding: 0 0 28px;
+    font-size: 18px;
+    line-height: calc(18 / 22);
+  }
+  .about-project__cards {
+    margin: 60px 0 0;
+    flex-direction: column;
+    row-gap: 56px;
+  }
+  .about-project__card {
+    row-gap: 16px;
+  }
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: calc(22 / 18);
+  }
+  .about-project__description {
+    font-size: 11px;
+    line-height: calc(16 / 11);
+  }
+  .about-project__grid {
+    margin: 60px 0 0;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(2, 35px);
+  }
+  .about-project__grid-item {
+    font-size: 11px;
+    line-height: calc(13 / 11);
   }
 }
