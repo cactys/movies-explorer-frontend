@@ -1,5 +1,6 @@
 .header {
   padding: 18px 70px;
+  max-width: 100%;
   background-color: #073042;
   display: flex;
   justify-content: space-between;
@@ -52,4 +53,29 @@
   background-color: #2be080;
   border-radius: 3px;
   color: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    padding: 18px 14px;
+  }
+  .header__nav-container {
+    column-gap: 14px;
+  }
+  .header__nav-link_signup {
+    font-size: 10px;
+    line-height: calc(16 / 10);
+  }
+  .header__nav-link_signin {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: calc(16 / 10);
+  }
 }
