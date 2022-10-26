@@ -1,4 +1,5 @@
 .about-project {
+  max-width: 100%;
   padding: 110px 70px;
   display: flex;
   flex-direction: column;
@@ -44,7 +45,7 @@
 .about-project__grid {
   margin: 110px 0 0;
   display: grid;
-  grid-template-columns: repeat(5, 228px);
+  grid-template-columns: repeat(5, 1vw);
   grid-template-rows: repeat(2, 36px);
 }
 
@@ -92,5 +93,8 @@
   grid-column: 2 / 6;
 }
 
-.about-project__grid-item {
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
 }
