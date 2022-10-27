@@ -38,7 +38,7 @@
   background: linear-gradient(to right, #a0a0a000, #073042 50%, #fff 50%);
   background-size: 200% 100%;
   background-position: 100%;
-  transition: opacity .6s, background-position .6s linear;
+  transition: opacity 0.6s, background-position 0.6s linear;
   font-weight: 400;
   font-size: 30px;
   line-height: calc(50 / 30);
@@ -56,7 +56,47 @@
 }
 
 .portfolio__navigation-arrow {
-  width: 29px;
-  height: 60px;
-  object-fit: none;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: calc(60 / 30);
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 831px) {
+  .portfolio {
+    padding: 90px 50px;
+  }
+  .portfolio__navigation-link {
+    font-size: 28px;
+    line-height: calc(50 / 28);
+  }
+  .portfolio__navigation-arrow {
+    font-size: 28px;
+    line-height: calc(60 / 28);
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .portfolio {
+    padding: 70px 50px;
+  }
+  .portfolio__title {
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: calc(20 / 14);
+  }
+  .portfolio__navigation-link {
+    font-size: 18px;
+    line-height: calc(28 / 18);
+  }
+  .portfolio__navigation-arrow {
+    font-size: 18px;
+line-height: calc(28 / 18);
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .portfolio {
+    padding: 70px 18px;
+  }
 }

@@ -1,5 +1,4 @@
 import './Portfolio.css';
-import arrowLink from '../../images/arrow_link.svg';
 
 const Portfolio = () => {
   return (
@@ -7,33 +6,33 @@ const Portfolio = () => {
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__navigation">
         <li className="portfolio__navigation-item">
-          <a className="portfolio__navigation-link" href="/">
+          <a
+            className="portfolio__navigation-link"
+            href="https://cactys.github.io/how-to-learn/"
+            target="blanck"
+          >
             Статичный сайт
-            <img
-              className="portfolio__navigation-arrow"
-              src={arrowLink}
-              alt="Стрелка"
-            />
+            <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>
         <li className="portfolio__navigation-item">
-          <a className="portfolio__navigation-link" href="/">
+          <a
+            className="portfolio__navigation-link"
+            href="https://cactys.github.io/russian-travel/"
+            target="blanck"
+          >
             Адаптивный сайт
-            <img
-              className="portfolio__navigation-arrow"
-              src={arrowLink}
-              alt="Стрелка"
-            />
+            <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>
         <li className="portfolio__navigation-item">
-          <a className="portfolio__navigation-link" href="/">
+          <a
+            className="portfolio__navigation-link"
+            href="https://cactys.nomoredomains.icu/"
+            target="blanck"
+          >
             Одностраничное приложение
-            <img
-              className="portfolio__navigation-arrow"
-              src={arrowLink}
-              alt="Стрелка"
-            />
+            <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>
       </ul>
