@@ -1,23 +1,25 @@
 {
   "files": {
-    "main.css": "/movies-explorer-frontend/static/css/main.7c1b3ffd.css",
-    "main.js": "/movies-explorer-frontend/static/js/main.b299d505.js",
-    "static/js/787.ab3d119a.chunk.js": "/movies-explorer-frontend/static/js/787.ab3d119a.chunk.js",
-    "static/media/Inter-Regular.woff": "/movies-explorer-frontend/static/media/Inter-Regular.34ed58565339f4f3be40.woff",
-    "static/media/landing-logo.svg": "/movies-explorer-frontend/static/media/landing-logo.eefe68546860eb72380bad18b5354ab6.svg",
-    "static/media/Inter-Regular.woff2": "/movies-explorer-frontend/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
-    "static/media/Inter-Medium.woff": "/movies-explorer-frontend/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
-    "static/media/Inter-Medium.woff2": "/movies-explorer-frontend/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
-    "static/media/Suisse-Intl.woff": "/movies-explorer-frontend/static/media/Suisse-Intl.4749d7fc2d6ec34a5554.woff",
-    "static/media/Suisse-Intl.woff2": "/movies-explorer-frontend/static/media/Suisse-Intl.6e440c24ca670850db00.woff2",
-    "index.html": "/movies-explorer-frontend/index.html",
-    "static/media/logo.svg": "/movies-explorer-frontend/static/media/logo.95abe6ea32cda131d8733dc7b5c2c5f9.svg",
-    "main.7c1b3ffd.css.map": "/movies-explorer-frontend/static/css/main.7c1b3ffd.css.map",
-    "main.b299d505.js.map": "/movies-explorer-frontend/static/js/main.b299d505.js.map",
-    "787.ab3d119a.chunk.js.map": "/movies-explorer-frontend/static/js/787.ab3d119a.chunk.js.map"
+    "main.css": "/static/css/main.27f7ee3b.css",
+    "main.js": "/static/js/main.db38aa11.js",
+    "static/js/787.ab3d119a.chunk.js": "/static/js/787.ab3d119a.chunk.js",
+    "static/media/Inter-Regular.woff": "/static/media/Inter-Regular.34ed58565339f4f3be40.woff",
+    "static/media/landing-logo.svg": "/static/media/landing-logo.509ac23d4299c6357e7c24077ee6d402.svg",
+    "static/media/Inter-Regular.woff2": "/static/media/Inter-Regular.4c96ed73beaf6d1e6cc7.woff2",
+    "static/media/Inter-Medium.woff": "/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Medium.woff2": "/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/avatar.jpg": "/static/media/avatar.60ecdcfc670a2f0ad4f4.jpg",
+    "static/media/Suisse-Intl.woff": "/static/media/Suisse-Intl.4749d7fc2d6ec34a5554.woff",
+    "static/media/Suisse-Intl.woff2": "/static/media/Suisse-Intl.6e440c24ca670850db00.woff2",
+    "index.html": "/index.html",
+    "static/media/logo.svg": "/static/media/logo.6e5df113f64f20c61eb7380a57c57d43.svg",
+    "static/media/arrow_link.svg": "/static/media/arrow_link.093d837f03fdca8fb1466efb112a96ac.svg",
+    "main.27f7ee3b.css.map": "/static/css/main.27f7ee3b.css.map",
+    "main.db38aa11.js.map": "/static/js/main.db38aa11.js.map",
+    "787.ab3d119a.chunk.js.map": "/static/js/787.ab3d119a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7c1b3ffd.css",
-    "static/js/main.b299d505.js"
+    "static/css/main.27f7ee3b.css",
+    "static/js/main.db38aa11.js"
   ]
 }
