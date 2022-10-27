@@ -1,0 +1,16 @@
+.logo__link{
+  display: block;
+}
+
+.logo__img {
+  width: 38px;
+  height: 38px;
+  vertical-align: top;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.3s linear;
+}
+
+.logo__img:hover {
+  opacity: 0.6;
+}

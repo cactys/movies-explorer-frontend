@@ -1,8 +1,12 @@
+import Logo from '../Logo/Logo';
 import './SignUp.css';
 
 const SignUp = () => {
   return (
-    <div className='registration'>SignUp</div>
+    <div className='form'>
+      <Logo />
+    </div>
+    // <div className='registration'>SignUp</div>
   )
 }
 

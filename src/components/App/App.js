@@ -1,4 +1,6 @@
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import { createContext } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -8,32 +10,36 @@ import Profile from '../Profile/Profile';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { Route, Switch } from 'react-router-dom';
-import { createContext } from 'react';
 
-const Context = createContext(null);
+export const Context = createContext(null);
 
 const App = () => {
   return (
     <div className="page">
       <Context.Provider
         value={{
-          email: 'pochta@yandex.ru',
-          name: 'Виталий',
+          email: 'cactys95@yandex.ru',
+          name: 'Владимир',
         }}
       >
-        <Header />
         <Switch>
           <Route exact path="/">
+            <Header loggedIn={false} />
             <Main />
+            <Footer />
           </Route>
           <Route exact path="/movies">
+            <Header loggedIn={true} />
             <Movies />
+            <Footer />
           </Route>
-          <Route exact path="/save-movies">
+          <Route exact path="/saved-movies">
+            <Header loggedIn={true} />
             <SaveMovies />
+            <Footer />
           </Route>
           <Route exact path="/profile">
+            <Header loggedIn={true} />
             <Profile />
           </Route>
           <Route exact path="/signin">
@@ -46,7 +52,6 @@ const App = () => {
             <PageNotFound />
           </Route>
         </Switch>
-        <Footer />
       </Context.Provider>
     </div>
   );

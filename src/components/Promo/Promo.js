@@ -12,7 +12,7 @@ const Promo = () => {
         <p className="promo__subtitle">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <Link className="promo__learn-more" to="/">
+        <Link className="promo__learn-more" to="/movies">
           Узнать больше
         </Link>
       </div>

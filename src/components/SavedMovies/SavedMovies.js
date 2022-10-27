@@ -1,8 +1,8 @@
-import React from 'react'
+import './SavedMovies.css';
 
 const SavedMovies = () => {
   return (
-    <div>SavedMovies</div>
+    <div className='save-movies'>SavedMovies</div>
   )
 }
 

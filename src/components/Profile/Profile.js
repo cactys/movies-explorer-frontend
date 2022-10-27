@@ -1,8 +1,13 @@
 import React from 'react'
+import { useContext } from 'react';
+import { Context } from '../App/App';
 
 const Profile = () => {
+  const { email, name } = useContext(Context);
   return (
-    <div>Profile</div>
+    <div className='profile'>
+      {email} : {name}
+    </div>
   )
 }
 

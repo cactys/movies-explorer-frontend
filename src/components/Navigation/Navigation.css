@@ -1,0 +1,43 @@
+.navigation {
+  display: flex;
+  column-gap: 50px;
+  align-items: center;
+}
+
+.navigation__auth {
+  display: flex;
+  column-gap: 20px;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(18 / 14);
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__profile {
+  display: flex;
+  column-gap: 17px;
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: calc(16 / 14);
+}
+
+.navigation__profile-icon {
+  width: 26px;
+  height: 30px;
+  border-radius: 4px;
+  vertical-align: top;
+  background-color: #f9f9f9;
+  object-fit: none;
+  object-position: center;
+}
