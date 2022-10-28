@@ -49,7 +49,7 @@
 }
 
 .footer__nav-link:hover {
-  opacity: .4;
+  opacity: 0.4;
 }
 
 @media screen and (max-width: 831px) {

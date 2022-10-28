@@ -20,6 +20,7 @@ const App = () => {
         value={{
           email: 'cactys95@yandex.ru',
           name: 'Владимир',
+          password: '12345678',
         }}
       >
         <Switch>
