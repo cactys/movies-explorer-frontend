@@ -1,0 +1,29 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 410px;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__editor {
+  display: flex;
+}
+
+.profile__editor:not(:last-child) {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.profile__edit-profile {
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  width: fit-content;
+}

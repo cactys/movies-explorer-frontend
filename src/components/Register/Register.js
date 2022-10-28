@@ -1,11 +1,7 @@
-import { useContext } from 'react';
-import { Context } from '../App/App';
 import Form from '../Form/Form';
-import '../Form/Form.css';
 import FormField from '../FormField/FormField';
 
 const SignUp = () => {
-  const { email, name, password } = useContext(Context);
   return (
     <Form
       name="signup"
@@ -24,7 +20,6 @@ const SignUp = () => {
           inputName="name"
           minLength="2"
           maxLength="30"
-          // value={name}
           inputError={false}
           errorSpan={false}
         />
@@ -34,7 +29,6 @@ const SignUp = () => {
           placeholder="Email"
           id="edit-email"
           inputName="email"
-          // value={email}
           inputError={false}
           errorSpan={false}
         />
@@ -44,7 +38,6 @@ const SignUp = () => {
           placeholder="Пароль"
           id="edit-password"
           inputName="password"
-          // value={password}
           inputError={true}
           errorSpan={true}
         />

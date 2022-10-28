@@ -7,8 +7,8 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SaveMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
-import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 export const Context = createContext(null);
@@ -44,10 +44,10 @@ const App = () => {
             <Profile />
           </Route>
           <Route exact path="/signin">
-            <SignIn />
+            <Login />
           </Route>
           <Route exact path="/signup">
-            <SignUp />
+            <Register />
           </Route>
           <Route path="*">
             <PageNotFound />

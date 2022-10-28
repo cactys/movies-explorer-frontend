@@ -1,11 +1,7 @@
-import { useContext } from 'react';
-import { Context } from '../App/App';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
-import './SignIn.css';
 
 const SignIn = () => {
-  const { email } = useContext(Context);
   return (
     <Form
       name="signin"
@@ -22,7 +18,6 @@ const SignIn = () => {
           placeholder="Email"
           id="edit-email"
           inputName="email"
-          // value={email}
           inputError={false}
           errorSpan={false}
         />
