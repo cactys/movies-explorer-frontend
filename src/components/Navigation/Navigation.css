@@ -1,4 +1,4 @@
-.navigation {
+.navigation__main {
   display: flex;
   column-gap: 50px;
   align-items: center;
@@ -40,4 +40,48 @@
   background-color: #f9f9f9;
   object-fit: none;
   object-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__main {
+    display: none;
+  }
+
+  .navigation__burger {
+  }
+
+  .navigation__burger-btn {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    padding: 11px 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .navigation__burger-btn:before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
+
+  .navigation__burger-btn span {
+    position: absolute;
+    top: 21px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
+
+  .navigation__burger-btn:after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
 }
