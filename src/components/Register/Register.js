@@ -1,9 +1,9 @@
-import Form from '../Form/Form';
+import AuthForm from '../AuthForm/AuthForm';
 import FormField from '../FormField/FormField';
 
 const SignUp = () => {
   return (
-    <Form
+    <AuthForm
       name="signup"
       title="Добро пожаловать!"
       buttonText="Зарегистрироваться"
@@ -11,12 +11,13 @@ const SignUp = () => {
       link="Войти"
       path="/signin"
     >
-      <fieldset className="form__set-auth">
+      <fieldset className="auth-form__set-auth">
         <FormField
+          className="auth-form"
           name="Имя"
           type="name"
           placeholder="Имя"
-          id="edit-name"
+          id="input-name"
           inputName="name"
           minLength="2"
           maxLength="30"
@@ -24,25 +25,27 @@ const SignUp = () => {
           errorSpan={false}
         />
         <FormField
+          className="auth-form"
           name="E-mail"
           type="email"
           placeholder="Email"
-          id="edit-email"
+          id="input-email"
           inputName="email"
           inputError={false}
           errorSpan={false}
         />
         <FormField
+          className="auth-form"
           name="Пароль"
           type="password"
           placeholder="Пароль"
-          id="edit-password"
+          id="input-password"
           inputName="password"
           inputError={true}
           errorSpan={true}
         />
       </fieldset>
-    </Form>
+    </AuthForm>
   );
 };
 

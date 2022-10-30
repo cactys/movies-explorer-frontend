@@ -1,41 +1,15 @@
-import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
-import profileIcon from '../../images/profile-icon.svg';
+import Menu from '../Menu/Menu';
+import Burger from '../Burger/Burger';
+import { useState } from 'react';
 
 const Navigation = () => {
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <nav className="navigation">
-      <div className="navigation__main">
-        <div className="navigation__auth">
-          <NavLink
-            to="/movies"
-            className="navigation__link"
-            activeClassName="navigation__link_active"
-          >
-            Фильмы
-          </NavLink>
-          <NavLink
-            to="/saved-movies"
-            className="navigation__link"
-            activeClassName="navigation__link_active"
-          >
-            Сохранённые фильмы
-          </NavLink>
-        </div>
-        <Link to="/profile" className="navigation__profile">
-          Аккаунт{' '}
-          <img
-            className="navigation__profile-icon"
-            src={profileIcon}
-            alt="Аккаунт"
-          />
-        </Link>
-      </div>
-      <div className='navigation__burger'>
-        <div className='navigation__burger-btn'>
-          <span />
-        </div>
-      </div>
+      <Menu active={menuActive} setActive={setMenuActive} />
+      <Burger menuActive={menuActive} setMenuActive={setMenuActive} />
     </nav>
   );
 };

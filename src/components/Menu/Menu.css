@@ -1,0 +1,141 @@
+.menu__content {
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+}
+
+.menu__main {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: calc(22 / 18);
+  text-decoration: none;
+  color: #000;
+  display: none;
+}
+
+.menu__container {
+  display: flex;
+  column-gap: 50px;
+}
+
+.menu__links {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.menu__link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(18 / 14);
+}
+
+.menu__link_active {
+  font-weight: 500;
+}
+
+.menu__profile {
+  display: flex;
+  column-gap: 17px;
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: calc(16 / 14);
+}
+
+.menu__profile-icon {
+  width: 26px;
+  height: 30px;
+  border-radius: 4px;
+  vertical-align: top;
+  background-color: #f9f9f9;
+  object-fit: none;
+  object-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateY(-159%);
+    transition: all .6s;
+  }
+  .menu_active {
+    transform: translateY(0);
+  }
+  .menu__blur {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.3;
+  }
+  .menu__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 520px;
+    height: 100vh;
+    background-color: #fff;
+    flex-direction: column;
+    align-items: center;
+  }
+  .menu__main {
+    margin: 159px 0 28px;
+    display: inherit;
+  }
+  .menu__container {
+    display: flex;
+    flex: 1 0  auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu__links {
+    flex-direction: column;
+    row-gap: 22px;
+    align-items: center;
+    text-decoration: none;
+  }
+  .menu__link {
+    flex-direction: column;
+    row-gap: 28px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: calc(22 / 18);
+  }
+  .menu__link_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #000;
+  }
+  .menu__profile {
+    margin-bottom: 92px;
+    flex: 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .menu__blur {
+    display: none;
+  }
+  .menu__content {
+    width: 100vw;
+  }
+  .menu__main {
+    margin: 144px 0 24px;
+  }
+  .menu__links {
+    row-gap: 15px;
+  }
+  .menu__profile {
+    margin-bottom: 47px;
+  }
+}

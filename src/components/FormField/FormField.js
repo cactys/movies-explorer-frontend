@@ -1,4 +1,5 @@
 const FormField = ({
+  className,
   name,
   type,
   placeholder,
@@ -11,22 +12,30 @@ const FormField = ({
   errorSpan,
 }) => {
   return (
-    <label className="form__field">
-          <span className='form__input-title'>{name}</span>
-          <input
-            type={type}
-            placeholder={placeholder}
-            className={`form__input ${inputError ? 'form__input_error' : ''} form__input_auth`}
-            id={id}
-            name={inputName}
-            required
-            minLength={minLength ? minLength : ''}
-            maxLength={maxLength ? maxLength : ''}
-            value={value}
-          />
-          <span className={`form__error ${errorSpan ? 'form__error_active' : ''} edit-email-error`}>Что-то пошло не так...</span>
-        </label>
-  )
-}
+    <label className={`${className}__field`}>
+      <span className={`${className}__input-title`}>{name}</span>
+      <input
+        type={type}
+        placeholder={placeholder}
+        className={`${className}__input ${
+          inputError ? `${className}__input_error` : ''
+        } ${className}__input_auth`}
+        id={id}
+        name={inputName}
+        required
+        minLength={minLength ? minLength : ''}
+        maxLength={maxLength ? maxLength : ''}
+        value={value}
+      />
+      <span
+        className={`${className}__error ${
+          errorSpan ? `${className}__error_active` : ''
+        } edit-email-error`}
+      >
+        Что-то пошло не так...
+      </span>
+    </label>
+  );
+};
 
-export default FormField
+export default FormField;

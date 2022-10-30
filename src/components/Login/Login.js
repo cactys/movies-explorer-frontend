@@ -1,4 +1,4 @@
-import Form from '../Form/Form';
+import Form from '../AuthForm/AuthForm';
 import FormField from '../FormField/FormField';
 
 const SignIn = () => {
@@ -11,21 +11,23 @@ const SignIn = () => {
       link="Регистрация"
       path="/signup"
     >
-      <fieldset className="form__set-auth">
+      <fieldset className="auth-form__set-auth">
         <FormField
+          className="auth-form"
           name="E-mail"
           type="email"
           placeholder="Email"
-          id="edit-email"
+          id="input-email"
           inputName="email"
           inputError={false}
           errorSpan={false}
         />
         <FormField
+          className="auth-form"
           name="Пароль"
           type="password"
           placeholder="Пароль"
-          id="edit-password"
+          id="input-password"
           inputName="password"
           inputError={false}
           errorSpan={false}

@@ -1,0 +1,33 @@
+@media screen and (max-width: 768px) {
+  .burger__button {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    padding: 11px 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .burger__button:before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
+  .burger__button span {
+    position: absolute;
+    top: 21px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
+  .burger__button:after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+  }
+}
