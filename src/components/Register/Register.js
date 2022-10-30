@@ -15,7 +15,7 @@ const SignUp = () => {
         <FormField
           className="auth-form"
           name="Имя"
-          type="name"
+          type="text"
           placeholder="Имя"
           id="input-name"
           inputName="name"

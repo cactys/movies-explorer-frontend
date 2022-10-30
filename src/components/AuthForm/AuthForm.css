@@ -45,7 +45,6 @@
   box-sizing: border-box;
   padding: 0 15px;
   height: 46px;
-  position: relative;
   font-weight: 400;
   font-size: 13px;
   line-height: calc(16 / 13);
@@ -53,11 +52,10 @@
   width: 100%;
   border: none;
   background-color: #f9f9f9;
-  border: none;
   border-radius: 8px;
 }
 
-#edit-email {
+#input-email {
   font-weight: 500;
 }
 

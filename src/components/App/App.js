@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import { createContext } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -11,18 +10,9 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
-export const Context = createContext(null);
-
 const App = () => {
   return (
     <div className="page">
-      <Context.Provider
-        value={{
-          email: 'cactys95@yandex.ru',
-          name: 'Владимир',
-          password: '12345678',
-        }}
-      >
         <Switch>
           <Route exact path="/">
             <Header loggedIn={false} />
@@ -53,7 +43,6 @@ const App = () => {
             <PageNotFound />
           </Route>
         </Switch>
-      </Context.Provider>
     </div>
   );
 };

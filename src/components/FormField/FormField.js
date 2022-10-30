@@ -19,7 +19,7 @@ const FormField = ({
         placeholder={placeholder}
         className={`${className}__input ${
           inputError ? `${className}__input_error` : ''
-        } ${className}__input_auth`}
+        }`}
         id={id}
         name={inputName}
         required
@@ -30,7 +30,7 @@ const FormField = ({
       <span
         className={`${className}__error ${
           errorSpan ? `${className}__error_active` : ''
-        } edit-email-error`}
+        } edit-${type}-error`}
       >
         Что-то пошло не так...
       </span>
