@@ -66,7 +66,8 @@
     top: 0;
     left: 0;
     transform: translateY(-159%);
-    transition: all .6s;
+    transition: all 0.6s;
+    z-index: 1;
   }
   .menu_active {
     transform: translateY(0);
@@ -94,7 +95,7 @@
   }
   .menu__container {
     display: flex;
-    flex: 1 0  auto;
+    flex: 1 0 auto;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;

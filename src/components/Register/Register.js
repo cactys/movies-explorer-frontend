@@ -1,7 +1,6 @@
 import AuthForm from '../AuthForm/AuthForm';
-import FormField from '../FormField/FormField';
 
-const SignUp = () => {
+const SignUp = ({ inputError, errorSpan }) => {
   return (
     <AuthForm
       name="signup"
@@ -12,38 +11,68 @@ const SignUp = () => {
       path="/signin"
     >
       <fieldset className="auth-form__set-auth">
-        <FormField
-          className="auth-form"
-          name="Имя"
-          type="text"
-          placeholder="Имя"
-          id="input-name"
-          inputName="name"
-          minLength="2"
-          maxLength="30"
-          inputError={false}
-          errorSpan={false}
-        />
-        <FormField
-          className="auth-form"
-          name="E-mail"
-          type="email"
-          placeholder="Email"
-          id="input-email"
-          inputName="email"
-          inputError={false}
-          errorSpan={false}
-        />
-        <FormField
-          className="auth-form"
-          name="Пароль"
-          type="password"
-          placeholder="Пароль"
-          id="input-password"
-          inputName="password"
-          inputError={true}
-          errorSpan={true}
-        />
+        <label className="auth-form__field">
+          <span className="auth-form__input-title">Имя</span>
+          <input
+            type="text"
+            placeholder="Имя"
+            className={`auth-form__input ${
+              inputError ? `auth-form__input_error` : ''
+            }`}
+            id="input-name"
+            name="name"
+            required
+            minLength="2"
+            maxLength="30"
+          />
+          <span
+            className={`auth-form__error ${
+              errorSpan ? `auth-form__error_active` : ''
+            } input-name-error`}
+          >
+            Что-то пошло не так...
+          </span>
+        </label>
+        <label className="auth-form__field">
+          <span className="auth-form__input-title">E-mail</span>
+          <input
+            type="email"
+            placeholder="E-mail"
+            className={`auth-form__input ${
+              inputError ? `auth-form__input_error` : ''
+            }`}
+            id="input-email"
+            name="name"
+            required
+          />
+          <span
+            className={`auth-form__error ${
+              errorSpan ? `auth-form__error_active` : ''
+            } input-email-error`}
+          >
+            Что-то пошло не так...
+          </span>
+        </label>
+        <label className="auth-form__field">
+          <span className="auth-form__input-title">Пароль</span>
+          <input
+            type="password"
+            placeholder="Пароль"
+            className={`auth-form__input ${
+              inputError ? `auth-form__input_error` : ''
+            }`}
+            id="input-password"
+            name="password"
+            required
+          />
+          <span
+            className={`auth-form__error ${
+              !errorSpan ? `auth-form__error_active` : ''
+            } input-password-error`}
+          >
+            Что-то пошло не так...
+          </span>
+        </label>
       </fieldset>
     </AuthForm>
   );

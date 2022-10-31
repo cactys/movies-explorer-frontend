@@ -9,10 +9,15 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 const App = () => {
   return (
     <div className="page">
+    <CurrentUserContext.Provider value={{
+      name: 'Владимир',
+      email: 'cactys95@yandex.ru'
+    }}>
         <Switch>
           <Route exact path="/">
             <Header loggedIn={false} />
@@ -43,6 +48,7 @@ const App = () => {
             <PageNotFound />
           </Route>
         </Switch>
+        </CurrentUserContext.Provider>
     </div>
   );
 };

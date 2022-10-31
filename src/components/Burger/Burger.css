@@ -6,6 +6,7 @@
     padding: 11px 8px;
     box-sizing: border-box;
     cursor: pointer;
+    z-index: 2;
   }
   .burger__button:before {
     content: '';

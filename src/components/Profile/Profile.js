@@ -1,39 +1,63 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import FormField from '../FormField/FormField';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 import './Profile.css';
 
-const Profile = () => {
-  const [name, setName] = useState('Владимир');
-  const [email, setEmail] = useState('cactys95@yandex.ru');
+const Profile = ({ inputError, errorSpan }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleNameChange = (evt) => {
+    setName(evt.target.value);
+  };
+
+  const handleEmailChange = (evt) => {
+    setEmail(evt.target.value);
+  };
+
+  useEffect(() => {
+    setName(currentUser.name || '');
+    setEmail(currentUser.email || '');
+  }, [currentUser]);
 
   return (
     <div className="profile">
       <h2 className="profile__title">Привет, {name}</h2>
-      <div className="profile__set-profile">
-        <FormField
-          className="profile"
-          name="Имя"
-          type="text"
-          placeholder="Имя"
-          id="edit-name"
-          inputName="name"
-          minLength="2"
-          maxLength="30"
-          value={name}
-        />
-        <FormField
-          className="profile"
-          name="E-mail"
-          type="email"
-          placeholder="E-mail"
-          id="edit-email"
-          inputName="email"
-          value={email}
-        />
-      </div>
+      <fieldset className="profile__set-profile">
+        <label className="profile__field">
+          <span className="profile__input-title">Имя</span>
+          <input
+            type="text"
+            placeholder="Имя"
+            className="profile__input"
+            id="edit-name"
+            name="name"
+            required
+            minLength="2"
+            maxLength="30"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </label>
+        <label className="profile__field">
+          <span className="profile__input-title">E-mail</span>
+          <input
+            type="email"
+            placeholder="E-mail"
+            className="profile__input"
+            id="edit-email"
+            name="email"
+            required
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </label>
+      </fieldset>
       <nav className="profile__navigation">
-        <button className="profile__edit-profile">Редактировать</button>
+        <button className="profile__edit-profile" disabled>
+          Редактировать
+        </button>
         <Link className="profile__exit-auth" to="/">
           Выйти из аккаунта
         </Link>
