@@ -10,6 +10,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { cards } from '../../utils/content';
 
 const App = () => {
   return (
@@ -26,7 +27,9 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={true} />
-            <Movies />
+            <Movies
+              cards={cards}
+            />
             <Footer />
           </Route>
           <Route exact path="/saved-movies">

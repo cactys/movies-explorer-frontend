@@ -55,7 +55,7 @@ const Profile = ({ inputError, errorSpan }) => {
         </label>
       </fieldset>
       <nav className="profile__navigation">
-        <button className="profile__edit-profile" disabled>
+        <button className="profile__edit-profile profile__edit-profile_disable">
           Редактировать
         </button>
         <Link className="profile__exit-auth" to="/">

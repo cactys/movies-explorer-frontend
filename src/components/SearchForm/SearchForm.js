@@ -12,8 +12,11 @@ const SearchForm = () => {
           id="search-movies"
           name="search"
         />
+        <button className="search-form__search-btn" type="button">
+          Найти
+        </button>
       </label>
-      <dev className="search-form__switch-container">
+      <div className="search-form__switch-container">
         <label className="search-form__switch">
           <input
             type="checkbox"
@@ -23,7 +26,7 @@ const SearchForm = () => {
           <span className="search-form__checkbox-buble" />
         </label>
         <span className="search-form__checkbox-title">Короткометражки</span>
-      </dev>
+      </div>
     </fieldset>
   );
 };
