@@ -1,5 +1,7 @@
 .about-author {
-  padding: 100px 70px 0;
+  padding: 100px 5px 0;
+  margin: 0 auto;
+  max-width: 1140px;
 }
 
 .about-author__title {
@@ -78,13 +80,11 @@
   object-position: center;
 }
 
-@media screen and (max-width: 831px) {
-  .about-author {
-    padding: 90px 50px 0;
-  }
-}
-
 @media screen and (max-width: 768px) {
+  .about-author {
+    padding: 90px 5px 0;
+    max-width: 668px;
+  }
   .about-author__block {
     max-width: 364px;
     width: 100%;
@@ -127,9 +127,9 @@
   }
 }
 
-@media screen and (max-width: 519px) {
+@media screen and (max-width: 425px) {
   .about-author {
-    padding: 70px 18px 0;
+    padding: 70px 15px 0;
   }
   .about-author__author-name {
     margin: 0 0 20px;
@@ -140,6 +140,9 @@
 }
 
 @media screen and (max-width: 320px) {
+  .about-author {
+    max-width: 292px;
+  }
   .about-author__title {
     padding: 0 0 28px;
     font-size: 18px;

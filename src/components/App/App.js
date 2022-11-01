@@ -15,10 +15,12 @@ import { cards } from '../../utils/content';
 const App = () => {
   return (
     <div className="page">
-    <CurrentUserContext.Provider value={{
-      name: 'Владимир',
-      email: 'cactys95@yandex.ru'
-    }}>
+      <CurrentUserContext.Provider
+        value={{
+          name: 'Владимир',
+          email: 'cactys95@yandex.ru',
+        }}
+      >
         <Switch>
           <Route exact path="/">
             <Header loggedIn={false} />
@@ -27,14 +29,12 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={true} />
-            <Movies
-              cards={cards}
-            />
+            <Movies cards={cards} />
             <Footer />
           </Route>
           <Route exact path="/saved-movies">
             <Header loggedIn={true} />
-            <SaveMovies />
+            <SaveMovies cards={cards} />
             <Footer />
           </Route>
           <Route exact path="/profile">
@@ -51,7 +51,7 @@ const App = () => {
             <PageNotFound />
           </Route>
         </Switch>
-        </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
     </div>
   );
 };

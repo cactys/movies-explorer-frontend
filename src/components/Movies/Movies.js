@@ -4,13 +4,11 @@ import './Movies.css';
 
 const Movies = ({ cards }) => {
   return (
-    <div className='movies'>
+    <div className="movies">
       <SearchForm />
-      <MoviesCardList
-        cards={cards}
-      />
+      <MoviesCardList cards={cards} mark='tag'/>
     </div>
-  )
-}
+  );
+};
 
-export default Movies
+export default Movies;

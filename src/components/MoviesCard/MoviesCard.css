@@ -1,0 +1,87 @@
+.movies-card {
+  max-width: 364px;
+  max-height: 271px;
+  background-color: #fdfdfd;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.movies-card__header {
+  display: flex;
+  padding: 14px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.movies-card__description {
+  display: flex;
+  flex-direction: column;
+  row-gap: 9px;
+}
+
+.movies-card__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: calc(18 / 15);
+}
+
+.movies-card__duration {
+  margin: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: calc(13 / 11);
+  color: #a0a0a0;
+}
+
+.movies-card__mark {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: #f9f9f9;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.4s;
+}
+
+.movies-card__mark:hover {
+  background-color: #e8e8e8;
+}
+
+.movies-card__mark_tag {
+  background-image: url(../../images/tag.svg);
+}
+
+.movies-card__mark_cross {
+  background-image: url(../../images/cross.svg);
+}
+
+.movies-card__tag_active {
+  background: #2be080;
+  background-image: url(../../images/tag_active.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.4s;
+}
+
+.movies-card__tag_active:hover {
+  opacity: 0.4;
+}
+
+.movies-card__image {
+  max-width: 364px;
+  height: 203px;
+  width: 100%;
+  max-height: 100%;
+  vertical-align: top;
+  background-color: #073042;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card {
+    max-width: 339px;
+    max-height: 358px;
+  }  
+}

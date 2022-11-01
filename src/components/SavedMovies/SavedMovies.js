@@ -2,11 +2,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
-const SavedMovies = () => {
+const SavedMovies = ({ cards }) => {
   return (
     <div className="save-movies">
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList cards={cards} mark='cross' />
     </div>
   );
 };

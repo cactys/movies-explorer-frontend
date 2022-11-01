@@ -3,8 +3,8 @@ import avatar from '../../images/avatar.jpg';
 
 const AboutAuthor = () => {
   return (
-    <div className='about-author'>
-    <h2 className="about-author__title">Студент</h2>
+    <div className="about-author">
+      <h2 className="about-author__title">Студент</h2>
       <div className="about-author__container">
         <address className="about-author__block">
           <h3 className="about-author__author-name">Владимир</h3>
@@ -24,8 +24,9 @@ const AboutAuthor = () => {
           </a>
         </address>
         <img className="about-author__author-avatar" src={avatar} alt="Аватар" />
-      </div></div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default AboutAuthor
+export default AboutAuthor;
