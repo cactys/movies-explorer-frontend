@@ -13,6 +13,7 @@
 }
 
 .movies-card__description {
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   row-gap: 9px;
@@ -23,6 +24,9 @@
   font-weight: 500;
   font-size: 15px;
   line-height: calc(18 / 15);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__duration {

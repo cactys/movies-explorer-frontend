@@ -11,8 +11,14 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { cards } from '../../utils/content';
+import { useState } from 'react';
 
 const App = () => {
+
+  const handleSaveMovie = (card) => {
+    
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider

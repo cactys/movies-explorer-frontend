@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './MoviesCard.css';
 
 const MoviesCard = ({ card, mark }) => {
@@ -8,11 +9,13 @@ const MoviesCard = ({ card, mark }) => {
           <h2 className="movies-card__title">{card.title}</h2>
           <p className="movies-card__duration">{card.duration}</p>
         </div>
-        <div className={`movies-card__mark movies-card__mark_${mark}`} />
+        <div
+          className={`movies-card__mark movies-card__mark_${mark}`}
+        />
       </div>
       <img className="movies-card__image" alt={card.duration} src={card.image} />
     </div>
-  )
-}
+  );
+};
 
-export default MoviesCard
+export default MoviesCard;
