@@ -99,7 +99,7 @@
 }
 
 .auth-form__submit:hover {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .auth-form__question {
@@ -128,7 +128,7 @@
 }
 
 .auth-form__link:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 768px) {

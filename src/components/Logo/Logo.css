@@ -4,7 +4,7 @@
   vertical-align: top;
   object-fit: cover;
   object-position: center;
-  transition: opacity 0.3s linear;
+  transition: opacity 0.4s;
 }
 
 .logo__img:hover {

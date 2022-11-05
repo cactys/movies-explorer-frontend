@@ -51,7 +51,7 @@
   font-size: 12px;
   line-height: calc(16 / 12);
   color: #ffffff;
-  transition: opacity 0.3s linear;
+  transition: opacity 0.4s;
 }
 
 .promo__learn-more:hover {

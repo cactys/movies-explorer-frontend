@@ -6,7 +6,7 @@
 
 .auth-nav__link {
   text-decoration: none;
-  transition: opacity 0.3s linear;
+  transition: opacity 0.4s;
 }
 
 .auth-nav__link:hover {

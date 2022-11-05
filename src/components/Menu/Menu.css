@@ -30,6 +30,11 @@
   font-weight: 400;
   font-size: 14px;
   line-height: calc(18 / 14);
+  transform: opacity 0.4s;
+}
+
+.menu__link:hover {
+  opacity: 0.6;
 }
 
 .menu__link_active {
@@ -45,6 +50,11 @@
   font-weight: 500;
   font-size: 14px;
   line-height: calc(16 / 14);
+  transform: poacity 0.4s;
+}
+
+.menu__profile:hover {
+  opacity: 0.6;
 }
 
 .menu__profile-icon {

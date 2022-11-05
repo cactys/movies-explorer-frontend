@@ -24,8 +24,11 @@
   line-height: 19px;
 }
 
-.error-page__link {
-  display: block;
+.error-page__button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  align-items: center;
   margin: 184px 0 0;
   font-weight: 400;
   font-size: 14px;
@@ -35,7 +38,7 @@
   transition: opacity .4s;
 }
 
-.error-page__link:hover {
+.error-page__button:hover {
   opacity: .6;
 }
 
@@ -57,7 +60,7 @@
     font-size: 12px;
     line-height: calc(15 / 12);
   }
-  .error-page__link {
+  .error-page__button {
     margin: 284px 0 0;
     font-size: 12px;
     line-height: calc(15 / 12);

@@ -16,17 +16,6 @@ const SearchForm = () => {
           Найти
         </button>
       </label>
-      <div className="search-form__switch-container">
-        <label className="search-form__switch">
-          <input
-            type="checkbox"
-            id="input-checkbox"
-            className="search-form__checkbox"
-          />
-          <span className="search-form__checkbox-buble" />
-        </label>
-        <span className="search-form__checkbox-title">Короткометражки</span>
-      </div>
     </fieldset>
   );
 };

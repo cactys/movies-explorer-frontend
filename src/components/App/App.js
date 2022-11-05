@@ -10,15 +10,9 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { cards } from '../../utils/content';
-import { useState } from 'react';
+import { cards, savedCards } from '../../utils/content';
 
 const App = () => {
-
-  const handleSaveMovie = (card) => {
-    
-  };
-
   return (
     <div className="page">
       <CurrentUserContext.Provider
@@ -40,7 +34,7 @@ const App = () => {
           </Route>
           <Route exact path="/saved-movies">
             <Header loggedIn={true} />
-            <SaveMovies cards={cards} />
+            <SaveMovies cards={savedCards} />
             <Footer />
           </Route>
           <Route exact path="/profile">

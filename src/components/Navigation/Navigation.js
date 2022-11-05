@@ -1,4 +1,3 @@
-import './Navigation.css';
 import Menu from '../Menu/Menu';
 import Burger from '../Burger/Burger';
 import { useState } from 'react';

@@ -1,0 +1,21 @@
+.load-more {
+  max-width: 1140px;
+  margin: 50px auto 80px;
+}
+
+.load-more__button {
+  height: 36px;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  transition: opacity 0.4s;
+}
+
+.load-more__button:hover {
+  opacity: 0.6;
+}

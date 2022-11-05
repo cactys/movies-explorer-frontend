@@ -40,7 +40,7 @@
   background: linear-gradient(to right, #a0a0a000, #073042 50%, #fff 50%);
   background-size: 200% 100%;
   background-position: 100%;
-  transition: opacity 0.6s, background-position 0.6s linear;
+  transition: opacity 0.4s, background-position 0.4s;
   font-weight: 400;
   font-size: 30px;
   line-height: calc(50 / 30);
@@ -54,7 +54,7 @@
 
 .portfolio__navigation-link:hover {
   background-position: 0 100%;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .portfolio__navigation-arrow {
