@@ -30,7 +30,4 @@ const MoviesCard = ({ card, mark }) => {
   );
 };
 
-// кнопка еще
-// https://translated.turbopages.org/proxy_u/en-ru.ru.fd2e2d2c-6362ce0c-67a5d0be-74722d776562/https/stackoverflow.com/questions/64284221/load-more-button-in-react
-
 export default MoviesCard;

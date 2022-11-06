@@ -1,12 +1,10 @@
-import { Link, Route } from 'react-router-dom';
-import './Logo.css';
+import { Link } from "react-router-dom";
+import "./Logo.css";
 
 const Logo = () => {
   return (
     <div className="logo">
-      <Route path="/">
-        <Link className="logo__link" to="/" />
-      </Route>
+      <Link className="logo__link" to="/" />
     </div>
   );
 };

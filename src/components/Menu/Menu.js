@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import profileIcon from '../../images/profile-icon.svg';
 import './Menu.css';
