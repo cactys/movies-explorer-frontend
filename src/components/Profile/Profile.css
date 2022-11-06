@@ -82,12 +82,12 @@
 }
 
 .profile__edit-profile:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .profile__edit-profile_disable {
   cursor: default;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .profile__exit-auth {
@@ -100,7 +100,7 @@
 }
 
 .profile__exit-auth:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 768px) {
