@@ -8,6 +8,7 @@ const FilterCheckbox = () => {
           type="checkbox"
           id="input-checkbox"
           className="filter-checkbox__checkbox"
+          defaultChecked
         />
         <span className="filter-checkbox__checkbox-buble" />
       </label>
