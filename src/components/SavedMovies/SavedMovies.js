@@ -8,7 +8,7 @@ const SavedMovies = ({ cards }) => {
     <div className="save-movies">
       <SearchForm />
       <FilterCheckbox />
-      <MoviesCardList cards={cards} mark='cross' />
+      <MoviesCardList cards={cards} mark="cross" />
     </div>
   );
 };

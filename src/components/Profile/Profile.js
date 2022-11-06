@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
-import "./Profile.css";
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import './Profile.css';
 
 const Profile = ({ inputError, errorSpan }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleNameChange = (evt) => {
     setName(evt.target.value);
@@ -17,8 +17,8 @@ const Profile = ({ inputError, errorSpan }) => {
   };
 
   useEffect(() => {
-    setName(currentUser.name || "");
-    setEmail(currentUser.email || "");
+    setName(currentUser.name || '');
+    setEmail(currentUser.email || '');
   }, [currentUser]);
 
   return (
@@ -57,7 +57,9 @@ const Profile = ({ inputError, errorSpan }) => {
       <nav className="profile__navigation">
         <button
           className={`profile__edit-profile ${
-            currentUser.name === name && currentUser.email === email ? "profile__edit-profile_disable" : ""
+            currentUser.name === name && currentUser.email === email
+              ? 'profile__edit-profile_disable'
+              : ''
           }`}
         >
           Редактировать

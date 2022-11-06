@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./AuthNav.css";
+import { Link } from 'react-router-dom';
+import './AuthNav.css';
 
 const AuthNav = () => {
   return (

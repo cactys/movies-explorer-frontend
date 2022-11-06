@@ -7,14 +7,14 @@ import './Main.css';
 
 const Main = () => {
   return (
-      <div className='main'>
-        <Promo />
-        <AboutProject />
-        <Techs />
-        <AboutAuthor />
-        <Portfolio />
-      </div>
-  )
-}
+    <div className="main">
+      <Promo />
+      <AboutProject />
+      <Techs />
+      <AboutAuthor />
+      <Portfolio />
+    </div>
+  );
+};
 
-export default Main
+export default Main;

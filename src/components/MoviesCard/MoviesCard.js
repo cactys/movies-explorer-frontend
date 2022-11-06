@@ -6,7 +6,7 @@ const MoviesCard = ({ card, mark }) => {
 
   const handleSaveMovie = () => {
     if (!saveMovies && mark === 'tag') {
-      return setSaveMovies(true)
+      return setSaveMovies(true);
     }
     return setSaveMovies(false);
   };
@@ -25,7 +25,11 @@ const MoviesCard = ({ card, mark }) => {
           onClick={handleSaveMovie}
         />
       </div>
-      <img className="movies-card__image" alt={card.duration} src={card.image} />
+      <img
+        className="movies-card__image"
+        alt={card.duration}
+        src={card.image}
+      />
     </div>
   );
 };

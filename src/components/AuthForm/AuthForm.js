@@ -2,14 +2,7 @@ import './AuthForm.css';
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 
-const Form = ({
-  title,
-  buttonText,
-  text,
-  path,
-  link,
-  children,
-}) => {
+const Form = ({ title, buttonText, text, path, link, children }) => {
   return (
     <form className="auth-form">
       <div className="auth-form__header">
