@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ebebeb;
+  background-color: #2be080;
   transition: 0.4s;
   border-radius: 34px;
   z-index: 0;
@@ -48,6 +48,10 @@
 
 .filter-checkbox__checkbox:checked + .filter-checkbox__checkbox-buble:before {
   transform: translateX(-16px);
+}
+
+.filter-checkbox__checkbox:checked + .filter-checkbox__checkbox-buble {
+  background-color: #ebebeb;
 }
 
 .filter-checkbox__checkbox-title {
