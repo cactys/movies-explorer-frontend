@@ -10,9 +10,22 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { cards, savedCards } from '../../utils/content';
+import { savedCards } from '../../utils/content';
+import { useEffect, useState } from 'react';
+import movies from '../../utils/movies';
 
 const App = () => {
+  const [getMovies, setGetMovies] = useState([]);
+
+  useEffect(() => {
+    movies
+      .getMovies()
+      .then((res) => {
+        setGetMovies(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="page">
       <CurrentUserContext.Provider
@@ -29,7 +42,7 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={true} />
-            <Movies cards={cards} />
+            <Movies cards={getMovies} />
             <Footer />
           </Route>
           <Route exact path="/saved-movies">

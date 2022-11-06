@@ -4,6 +4,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
 const Movies = ({ cards }) => {
+  console.log(cards);
+  
   return (
     <div className="movies">
       <SearchForm />

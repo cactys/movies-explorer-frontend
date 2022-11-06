@@ -30,7 +30,7 @@ const MoviesCardList = ({ cards, mark }) => {
       <div className="movies-card-list">
         {Array.isArray(visibleData)
           ? visibleData.map((item) => {
-              return <MoviesCard key={item._id} card={item} mark={mark} />;
+              return <MoviesCard key={item.id} card={item} mark={mark} />;
             })
           : null}
       </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { intToTime, URL } from '../../utils/content';
 import './MoviesCard.css';
 
 const MoviesCard = ({ card, mark }) => {
@@ -15,8 +16,8 @@ const MoviesCard = ({ card, mark }) => {
     <div className="movies-card">
       <div className="movies-card__header">
         <div className="movies-card__description">
-          <h2 className="movies-card__title">{card.title}</h2>
-          <p className="movies-card__duration">{card.duration}</p>
+          <h2 className="movies-card__title">{card.nameRU}</h2>
+          <p className="movies-card__duration">{intToTime(card.duration)}</p>
         </div>
         <div
           className={`movies-card__mark movies-card__mark_${mark} movies-card__mark_${
@@ -28,7 +29,7 @@ const MoviesCard = ({ card, mark }) => {
       <img
         className="movies-card__image"
         alt={card.duration}
-        src={card.image}
+        src={`${URL}${card.image.url}`}
       />
     </div>
   );
