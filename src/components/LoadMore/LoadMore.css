@@ -19,3 +19,12 @@
 .load-more__button:hover {
   opacity: 0.6;
 }
+
+.load-more__button_disabled {
+  cursor: default;
+  opacity: 0.2;
+}
+
+.load-more__button_disabled:hover {
+  opacity: .2;
+}

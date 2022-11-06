@@ -8,7 +8,7 @@ const Portfolio = () => {
         <li className="portfolio__navigation-item">
           <a
             className="portfolio__navigation-link"
-            href="https://cactys.github.io/how-to-learn/"
+            href="https://github.com/cactys/how-to-learn"
             target="blanck"
           >
             Статичный сайт
@@ -18,7 +18,7 @@ const Portfolio = () => {
         <li className="portfolio__navigation-item">
           <a
             className="portfolio__navigation-link"
-            href="https://cactys.github.io/russian-travel/"
+            href="https://github.com/cactys/russian-travel"
             target="blanck"
           >
             Адаптивный сайт
@@ -28,7 +28,7 @@ const Portfolio = () => {
         <li className="portfolio__navigation-item">
           <a
             className="portfolio__navigation-link"
-            href="https://cactys.nomoredomains.icu/"
+            href="https://github.com/cactys/react-mesto-api-full"
             target="blanck"
           >
             Одностраничное приложение

@@ -117,6 +117,12 @@
     max-width: 260px;
   }
   .profile__title {
+    width: 260px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .profile__title {
     margin: 70px 0 80px;
   }
   .profile__navigation {

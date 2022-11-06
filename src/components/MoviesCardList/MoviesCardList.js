@@ -34,7 +34,11 @@ const MoviesCardList = ({ cards, mark }) => {
             })
           : null}
       </div>
-      <LoadMore setIndex={cards.length > 12} isVisible={handleLoadMore} />
+      <LoadMore
+        isVisible={cards.length > 12}
+        isDisable={cards.length === visibleData.length}
+        setIndex={handleLoadMore}
+      />
     </>
   );
 };

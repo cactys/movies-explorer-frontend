@@ -11,6 +11,11 @@
   text-decoration: none;
   color: #000;
   display: none;
+  transform: opacity 0.4s;
+}
+
+.menu__main:hover {
+  opacity: 0.6;
 }
 
 .menu__container {
