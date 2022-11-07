@@ -20,7 +20,7 @@ const SignIn = ({ inputError, errorSpan }) => {
               inputError ? `auth-form__input_error` : ''
             }`}
             id="input-email"
-            name="name"
+            name="email"
             required
           />
           <span
