@@ -1,8 +1,8 @@
-import Form from '../AuthForm/AuthForm';
+import AuthForm from '../AuthForm/AuthForm';
 
 const SignIn = ({ inputError, errorSpan }) => {
   return (
-    <Form
+    <AuthForm
       name="signin"
       title="Рады видеть!"
       buttonText="Войти"
@@ -52,7 +52,7 @@ const SignIn = ({ inputError, errorSpan }) => {
           </span>
         </label>
       </fieldset>
-    </Form>
+    </AuthForm>
   );
 };
 
