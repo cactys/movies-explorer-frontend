@@ -1,6 +1,27 @@
+import { useState } from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignUp = ({ inputError, errorSpan }) => {
+const SignUp = ({ inputError, errorSpan, handleRegister }) => {
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const { name, email, password } = data;
+    handleRegister(name, email, password);
+  };
+
   return (
     <AuthForm
       name="signup"
@@ -21,6 +42,8 @@ const SignUp = ({ inputError, errorSpan }) => {
             }`}
             id="input-name"
             name="name"
+            value={data.name}
+            onChange={handleChange}
             required
             minLength="2"
             maxLength="30"
@@ -42,7 +65,7 @@ const SignUp = ({ inputError, errorSpan }) => {
               inputError ? `auth-form__input_error` : ''
             }`}
             id="input-email"
-            name="name"
+            name="email"
             required
           />
           <span

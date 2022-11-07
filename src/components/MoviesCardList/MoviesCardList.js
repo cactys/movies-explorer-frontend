@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
 import { useEffect, useState } from 'react';
-import { PAGE_SIZE } from '../../utils/content';
+import { PAGE_SIZE } from '../../utils/config';
 
 const MoviesCardList = ({ cards, mark }) => {
   const [index, setIndex] = useState(0);

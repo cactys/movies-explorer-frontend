@@ -1,6 +1,6 @@
 import './FilterCheckbox.css';
 
-const FilterCheckbox = () => {
+const FilterCheckbox = ({ checked, setChecked }) => {
   return (
     <fieldset className="filter-checkbox">
       <label className="filter-checkbox__switch">
@@ -8,7 +8,8 @@ const FilterCheckbox = () => {
           type="checkbox"
           id="input-checkbox"
           className="filter-checkbox__checkbox"
-          defaultChecked
+          checked={checked}
+          onChange={() => setChecked(!checked)}
         />
         <span className="filter-checkbox__checkbox-buble" />
       </label>

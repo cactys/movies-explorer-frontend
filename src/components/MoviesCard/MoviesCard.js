@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { intToTime, URL } from '../../utils/content';
+import { intToTime, GLOBAL_URL } from '../../utils/config';
 import './MoviesCard.css';
 
 const MoviesCard = ({ card, mark }) => {
@@ -29,7 +29,7 @@ const MoviesCard = ({ card, mark }) => {
       <img
         className="movies-card__image"
         alt={card.duration}
-        src={`${URL}${card.image.url}`}
+        src={`${GLOBAL_URL}${card.image.url}`}
       />
     </div>
   );

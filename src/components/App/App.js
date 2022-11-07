@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -10,15 +10,29 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { savedCards } from '../../utils/content';
+import { savedCards } from '../../utils/config';
 import { useEffect, useState } from 'react';
-import movies from '../../utils/movies';
+import { api } from '../../utils/api';
+import { auth } from '../../utils/auth';
 
 const App = () => {
   const [getMovies, setGetMovies] = useState([]);
 
+  const [checked, setChecked] = useState(true);
+
+  const history = useHistory();
+
+  const handleRegister = (name, email, password) => {
+    auth
+      .signUp(name, email, password)
+      .then(() => {
+        history.push('/signin');
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
-    movies
+    api
       .getMovies()
       .then((res) => {
         setGetMovies(res);
@@ -42,12 +56,20 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={true} />
-            <Movies cards={getMovies} />
+            <Movies
+              cards={getMovies}
+              checked={checked}
+              setChecked={setChecked}
+            />
             <Footer />
           </Route>
           <Route exact path="/saved-movies">
             <Header loggedIn={true} />
-            <SaveMovies cards={savedCards} />
+            <SaveMovies
+              cards={savedCards}
+              checked={checked}
+              setChecked={setChecked}
+            />
             <Footer />
           </Route>
           <Route exact path="/profile">
@@ -58,7 +80,7 @@ const App = () => {
             <Login />
           </Route>
           <Route exact path="/signup">
-            <Register />
+            <Register handleRegister={handleRegister} />
           </Route>
           <Route path="*">
             <PageNotFound />
