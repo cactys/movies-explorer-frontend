@@ -1,8 +1,32 @@
-import Form from '../AuthForm/AuthForm';
+import { useState } from 'react';
+import AuthForm from '../AuthForm/AuthForm';
 
-const SignIn = ({ inputError, errorSpan }) => {
+const SignIn = ({ handleLogin, inputError, errorSpan }) => {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    if (!data.email || !data.password) {
+      return;
+    }
+    const { email, password } = data;
+    handleLogin(email, password);
+  };
+
   return (
-    <Form
+    <AuthForm
+      onSubmit={handleSubmit}
       name="signin"
       title="Рады видеть!"
       buttonText="Войти"
@@ -20,7 +44,9 @@ const SignIn = ({ inputError, errorSpan }) => {
               inputError ? `auth-form__input_error` : ''
             }`}
             id="input-email"
-            name="name"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
             required
           />
           <span
@@ -41,6 +67,8 @@ const SignIn = ({ inputError, errorSpan }) => {
             }`}
             id="input-password"
             name="password"
+            value={data.password}
+            onChange={handleChange}
             required
           />
           <span
@@ -52,7 +80,7 @@ const SignIn = ({ inputError, errorSpan }) => {
           </span>
         </label>
       </fieldset>
-    </Form>
+    </AuthForm>
   );
 };
 

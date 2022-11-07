@@ -24,6 +24,7 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
 
   return (
     <AuthForm
+      onSubmit={handleSubmit}
       name="signup"
       title="Добро пожаловать!"
       buttonText="Зарегистрироваться"
@@ -65,6 +66,8 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
               inputError ? `auth-form__input_error` : ''
             }`}
             id="input-email"
+            value={data.email}
+            onChange={handleChange}
             name="email"
             required
           />
@@ -85,6 +88,8 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
               inputError ? `auth-form__input_error` : ''
             }`}
             id="input-password"
+            value={data.password}
+            onChange={handleChange}
             name="password"
             required
           />
