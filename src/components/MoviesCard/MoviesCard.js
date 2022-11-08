@@ -12,13 +12,14 @@ const MoviesCard = ({ card, mark }) => {
   };
 
   return (
-    <section className="movies-card">
+    <li className="movies-card">
       <div className="movies-card__header">
         <div className="movies-card__description">
           <h2 className="movies-card__title">{card.title}</h2>
           <p className="movies-card__duration">{card.duration}</p>
         </div>
-        <div
+        <button
+          type="submit"
           className={`movies-card__mark movies-card__mark_${mark} movies-card__mark_${
             saveMovies ? 'active' : ''
           }`}
@@ -30,7 +31,7 @@ const MoviesCard = ({ card, mark }) => {
         alt={card.duration}
         src={card.image}
       />
-    </section>
+    </li>
   );
 };
 
