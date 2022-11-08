@@ -3,9 +3,9 @@ import './Logo.css';
 
 const Logo = () => {
   return (
-    <div className="logo">
+    <section className="logo">
       <Link className="logo__link" to="/" />
-    </div>
+    </section>
   );
 };
 

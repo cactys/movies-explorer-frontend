@@ -3,17 +3,17 @@ import './LoadMore.css';
 const LoadMore = ({ setIndex, isVisible, isDisable }) => {
   return (
     isVisible && (
-      <div className="load-more">
+      <section className="load-more">
         <button
           className={`load-more__button ${
             isDisable ? 'load-more__button_disabled' : ''
           }`}
-          type="button"
+          type="submit"
           onClick={setIndex}
         >
           Еще
         </button>
-      </div>
+      </section>
     )
   );
 };

@@ -1,7 +1,7 @@
 .about-project {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 110px 5px;
+  padding: 110px 10px;
   display: flex;
   flex-direction: column;
 }
@@ -17,12 +17,16 @@
 }
 
 .about-project__cards {
+  padding: 0;
+  list-style: none;
   margin: 70px 0 0;
   display: flex;
   column-gap: 40px;
 }
 
 .about-project__card {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   row-gap: 26px;
@@ -44,6 +48,7 @@
 }
 
 .about-project__grid {
+  padding: 0;
   margin: 110px 0 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -51,6 +56,8 @@
 }
 
 .about-project__grid-item {
+  margin: 0;
+  padding: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: calc(17 / 14);
@@ -93,7 +100,7 @@
 @media screen and (max-width: 768px) {
   .about-project {
     max-width: 668px;
-    padding: 90px 5px;
+    padding: 90px 10px;
   }
   .about-project__cards {
     column-gap: 30px;
@@ -116,7 +123,7 @@
 
 @media screen and (max-width: 425px) {
   .about-project {
-    padding: 70px 15px;
+    padding: 70px 10px;
   }
   .about-project__title {
     padding: 0 0 28px;

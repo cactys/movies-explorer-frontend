@@ -4,7 +4,7 @@ import './Menu.css';
 
 const Menu = ({ active, setActive }) => {
   return (
-    <div
+    <section
       className={`menu ${active ? 'menu_active' : ''}`}
       onClick={() => setActive(false)}
     >
@@ -42,7 +42,7 @@ const Menu = ({ active, setActive }) => {
           <img className="menu__profile-icon" src={profileIcon} alt="Аккаунт" />
         </Link>
       </div>
-    </div>
+    </section>
   );
 };
 

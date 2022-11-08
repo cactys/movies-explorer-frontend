@@ -12,7 +12,7 @@ const MoviesCard = ({ card, mark }) => {
   };
 
   return (
-    <div className="movies-card">
+    <section className="movies-card">
       <div className="movies-card__header">
         <div className="movies-card__description">
           <h2 className="movies-card__title">{card.title}</h2>
@@ -30,7 +30,7 @@ const MoviesCard = ({ card, mark }) => {
         alt={card.duration}
         src={card.image}
       />
-    </div>
+    </section>
   );
 };
 

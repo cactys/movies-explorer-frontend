@@ -1,5 +1,5 @@
 .about-author {
-  padding: 100px 5px 0;
+  padding: 100px 10px 0;
   margin: 0 auto;
   max-width: 1140px;
 }
@@ -82,7 +82,7 @@
 
 @media screen and (max-width: 768px) {
   .about-author {
-    padding: 90px 5px 0;
+    padding: 90px 10px 0;
     max-width: 668px;
   }
   .about-author__block {
@@ -129,7 +129,7 @@
 
 @media screen and (max-width: 425px) {
   .about-author {
-    padding: 70px 15px 0;
+    padding: 70px 10px 0;
   }
   .about-author__author-name {
     margin: 0 0 20px;
@@ -164,7 +164,6 @@
     line-height: calc(16 / 11);
   }
   .about-author__author-avatar {
-    /* max-width: 100%; */
     height: 352px;
     width: 100%;
     max-height: 100%;

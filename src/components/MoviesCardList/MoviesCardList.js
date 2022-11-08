@@ -26,20 +26,20 @@ const MoviesCardList = ({ cards, mark }) => {
   };
 
   return (
-    <>
-      <div className="movies-card-list">
+    <section className="movies-card-list">
+      <ul className="movies-card-list__list">
         {Array.isArray(visibleData)
           ? visibleData.map((item) => {
               return <MoviesCard key={item._id} card={item} mark={mark} />;
             })
           : null}
-      </div>
+      </ul>
       <LoadMore
         isVisible={cards.length > 12}
         isDisable={cards.length === visibleData.length}
         setIndex={handleLoadMore}
       />
-    </>
+    </section>
   );
 };
 

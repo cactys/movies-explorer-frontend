@@ -5,12 +5,12 @@ import Navigation from '../Navigation/Navigation';
 
 const Header = ({ loggedIn }) => {
   return (
-    <div className={`header ${!loggedIn ? 'header_auth' : ''}`}>
+    <header className={`header ${!loggedIn ? 'header_auth' : ''}`}>
       <div className="header__container">
         <Logo />
         {!loggedIn ? <AuthNav /> : <Navigation />}
       </div>
-    </div>
+    </header>
   );
 };
 

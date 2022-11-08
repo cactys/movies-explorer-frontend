@@ -5,11 +5,11 @@ import './SavedMovies.css';
 
 const SavedMovies = ({ cards }) => {
   return (
-    <div className="save-movies">
+    <main className="save-movies">
       <SearchForm />
       <FilterCheckbox />
       <MoviesCardList cards={cards} mark="cross" />
-    </div>
+    </main>
   );
 };
 

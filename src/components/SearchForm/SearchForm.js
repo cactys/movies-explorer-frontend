@@ -12,7 +12,7 @@ const SearchForm = () => {
           id="search-movies"
           name="search"
         />
-        <button className="search-form__search-btn" type="button">
+        <button className="search-form__search-btn" type="submit">
           Найти
         </button>
       </label>

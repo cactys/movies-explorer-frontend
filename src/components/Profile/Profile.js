@@ -22,7 +22,7 @@ const Profile = ({ inputError, errorSpan }) => {
   }, [currentUser]);
 
   return (
-    <div className="profile">
+    <main className="profile">
       <h2 className="profile__title">Привет, {name}</h2>
       <fieldset className="profile__set-profile">
         <label className="profile__field">
@@ -56,6 +56,7 @@ const Profile = ({ inputError, errorSpan }) => {
       </fieldset>
       <nav className="profile__navigation">
         <button
+          type="submit"
           className={`profile__edit-profile ${
             currentUser.name === name && currentUser.email === email
               ? 'profile__edit-profile_disable'
@@ -68,7 +69,7 @@ const Profile = ({ inputError, errorSpan }) => {
           Выйти из аккаунта
         </Link>
       </nav>
-    </div>
+    </main>
   );
 };
 
