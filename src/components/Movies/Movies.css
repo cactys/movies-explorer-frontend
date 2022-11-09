@@ -1,3 +1,15 @@
 .movies {
   flex: 1 0 auto;
 }
+
+.movies__set {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 70px 10px 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

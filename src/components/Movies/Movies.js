@@ -6,8 +6,12 @@ import './Movies.css';
 const Movies = ({ cards }) => {
   return (
     <main className="movies">
-      <SearchForm />
-      <FilterCheckbox />
+      <form className="movies__form">
+        <fieldset className="movies__set">
+          <SearchForm />
+          <FilterCheckbox />
+        </fieldset>
+      </form>
       <MoviesCardList cards={cards} mark="tag" />
     </main>
   );
