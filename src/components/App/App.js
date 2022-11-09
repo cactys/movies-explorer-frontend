@@ -84,6 +84,7 @@ const App = () => {
     auth
       .signIn(email, password)
       .then((res) => {
+        console.log(res);
         if (res.token) {
           localStorage.setItem('jwt', res.token);
           setData({

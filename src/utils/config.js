@@ -1,5 +1,5 @@
 export const GLOBAL_URL = 'https://api.nomoreparties.co';
-export const BASE_URL = 'https://api.khnychkov.nomoredomains.icu';
+export const BASE_URL = 'http://localhost:3030';
 
 export const intToTime = (time) => {
   const hours = Math.trunc(time / 60);
