@@ -23,7 +23,7 @@ const App = () => {
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [data, setData] = useState({
     email: '',
     password: '',

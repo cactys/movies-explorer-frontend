@@ -7,4 +7,7 @@ export const intToTime = (time) => {
   return hours === 0 ? `${minutes}м` : `${hours}ч ${minutes}м`;
 };
 
-export const PAGE_SIZE = 12;
+export const PAGE_SIZE_1280 = 12;
+export const PAGE_SIZE_1024 = 8;
+export const PAGE_SIZE_425 = 5;
+

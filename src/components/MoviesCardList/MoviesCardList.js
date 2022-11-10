@@ -2,44 +2,36 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
 import { useEffect, useState } from 'react';
-import { PAGE_SIZE } from '../../utils/config';
+import {
+  PAGE_SIZE_1024,
+  PAGE_SIZE_1280,
+  PAGE_SIZE_425,
+} from '../../utils/config';
 
 const MoviesCardList = ({ cards, mark }) => {
-  const [index, setIndex] = useState(0); // window.innerWidth ><=
-  const [visibleData, setVisibleData] = useState([]);
-
   const pageSize = () => {
-    if (window.innerWidth <= 2560) {
-      return 12;
+    if (window.innerWidth <= 500) {
+      return PAGE_SIZE_425;
+    }
+    if (window.innerWidth > 1024) {
+      return PAGE_SIZE_1280;
+    } else {
+      return PAGE_SIZE_1024;
     }
   };
-
-
-  useEffect(() => {
-    const numderOfIndex = pageSize() * (index + 1);
-    const newArray = [];
-
-    for (let i = 0; i < cards.length; i++) {
-      if (i < numderOfIndex) {
-        newArray.push(cards[i]);
-      }
-    }
-
-    return setVisibleData(newArray);
-  }, [cards, index]);
+  // window.innerWidth ><=
+  const [visibleData, setVisibleData] = useState(pageSize());
 
   const handleLoadMore = () => {
-    return setIndex(index + 1);
+    return setVisibleData(visibleData + pageSize());
   };
 
   return (
     <>
       <div className="movies-card-list">
-        {Array.isArray(visibleData)
-          ? visibleData.map((item) => {
-              return <MoviesCard key={item.id} card={item} mark={mark} />;
-            })
-          : null}
+        {cards.slice(0, visibleData).map((item) => {
+          return <MoviesCard key={item.id} card={item} mark={mark} />;
+        })}
       </div>
       <LoadMore
         isVisible={cards.length > 12}
