@@ -65,7 +65,7 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    padding: 140px 5px 76px;
+    padding: 140px 10px 76px;
   }
   .promo__container {
     max-width: 668px;
@@ -93,7 +93,7 @@
 
 @media screen and (max-width: 425px) {
   .promo {
-    padding: 70px 5px 30px;
+    padding: 70px 10px 30px;
   }
   .promo__title {
     margin: 44px 0 24px;
