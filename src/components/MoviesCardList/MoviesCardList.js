@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { PAGE_SIZE } from '../../utils/config';
 
 const MoviesCardList = ({ cards, mark }) => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0); // window.innerWidth ><=
   const [visibleData, setVisibleData] = useState([]);
 
   useEffect(() => {
