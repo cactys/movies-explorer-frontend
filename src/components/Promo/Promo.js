@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Promo = () => {
   return (
-    <div className="promo">
+    <section className="promo">
       <div className="promo__container">
         <div className="promo__article">
           <h1 className="promo__title">
@@ -19,7 +19,7 @@ const Promo = () => {
         </div>
         <img className="promo__logo" src={landingLogo} alt="Логотип Промо" />
       </div>
-    </div>
+    </section>
   );
 };
 

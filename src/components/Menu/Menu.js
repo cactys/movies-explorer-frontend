@@ -4,34 +4,32 @@ import './Menu.css';
 
 const Menu = ({ active, setActive }) => {
   return (
-    <section
+    <div
       className={`menu ${active ? 'menu_active' : ''}`}
       onClick={() => setActive(false)}
     >
-      <div className="menu__blur" />
+      <span className="menu__blur" />
       <div className="menu__content" onClick={(e) => e.stopPropagation()}>
         <Link to="/" className="menu__main">
           Главная
         </Link>
-        <div className="menu__container">
-          <div className="menu__links">
-            <NavLink
-              to="/movies"
-              className="menu__link"
-              activeClassName="menu__link_active"
-              onClick={() => setActive(false)}
-            >
-              Фильмы
-            </NavLink>
-            <NavLink
-              to="/saved-movies"
-              className="menu__link"
-              activeClassName="menu__link_active"
-              onClick={() => setActive(false)}
-            >
-              Сохранённые фильмы
-            </NavLink>
-          </div>
+        <div className="menu__links">
+          <NavLink
+            to="/movies"
+            className="menu__link"
+            activeClassName="menu__link_active"
+            onClick={() => setActive(false)}
+          >
+            Фильмы
+          </NavLink>
+          <NavLink
+            to="/saved-movies"
+            className="menu__link"
+            activeClassName="menu__link_active"
+            onClick={() => setActive(false)}
+          >
+            Сохранённые фильмы
+          </NavLink>
         </div>
         <Link
           to="/profile"
@@ -42,7 +40,7 @@ const Menu = ({ active, setActive }) => {
           <img className="menu__profile-icon" src={profileIcon} alt="Аккаунт" />
         </Link>
       </div>
-    </section>
+    </div>
   );
 };
 

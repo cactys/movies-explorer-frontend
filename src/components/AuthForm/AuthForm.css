@@ -135,7 +135,7 @@
 
 @media screen and (max-width: 768px) {
   .auth-form__header {
-    margin: 232px auto 0;
+    margin: 232px auto 40px;
   }
   .auth-form__footer {
     margin: 0 auto 232px;
@@ -143,15 +143,9 @@
 }
 
 @media screen and (max-width: 425px) {
-  .auth-form {
-    padding: 0 10px;
-  }
   .auth-form__footer {
     margin: 0 auto 30px;
   }
-}
-
-@media screen and (max-width: 320px) {
   .auth-form {
     padding: 0 30px;
   }

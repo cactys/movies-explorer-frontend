@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 const Form = ({ title, buttonText, text, path, link, children }) => {
   return (
     <form className="auth-form">
-      <section className="auth-form__header">
+      <div className="auth-form__header">
         <Logo />
         <h2 className="auth-form__title">{title}</h2>
-      </section>
+      </div>
       {children}
-      <section className="auth-form__footer">
+      <div className="auth-form__footer">
         <button type="submit" className="auth-form__submit">
           {buttonText}
         </button>
@@ -20,7 +20,7 @@ const Form = ({ title, buttonText, text, path, link, children }) => {
             {link}
           </Link>
         </div>
-      </section>
+      </div>
     </form>
   );
 };

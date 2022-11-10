@@ -19,7 +19,7 @@ const MoviesCard = ({ card, mark }) => {
           <p className="movies-card__duration">{card.duration}</p>
         </div>
         <button
-          type="submit"
+          type="button"
           className={`movies-card__mark movies-card__mark_${mark} movies-card__mark_${
             saveMovies ? 'active' : ''
           }`}

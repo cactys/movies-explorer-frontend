@@ -9,7 +9,7 @@ const MoviesCardList = ({ cards, mark }) => {
   const [visibleData, setVisibleData] = useState([]);
 
   useEffect(() => {
-    const numderOfIndex = PAGE_SIZE * (index + 1);
+    const numderOfIndex = PAGE_SIZE + index;
     const newArray = [];
 
     for (let i = 0; i < cards.length; i++) {
@@ -22,7 +22,7 @@ const MoviesCardList = ({ cards, mark }) => {
   }, [cards, index]);
 
   const handleLoadMore = () => {
-    return setIndex(index + 1);
+    return setIndex(index + 3);
   };
 
   return (

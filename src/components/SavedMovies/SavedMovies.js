@@ -6,8 +6,12 @@ import './SavedMovies.css';
 const SavedMovies = ({ cards }) => {
   return (
     <main className="save-movies">
-      <SearchForm />
-      <FilterCheckbox />
+      <form className="save-movies__form">
+        <fieldset className="save-movies__set">
+          <SearchForm />
+          <FilterCheckbox />
+        </fieldset>
+      </form>
       <MoviesCardList cards={cards} mark="cross" />
     </main>
   );

@@ -97,3 +97,9 @@
     line-height: calc(15 / 12);
   }
 }
+
+@media screen and (max-width: 320px) {
+  .footer__container {
+    max-width: 300px;
+  }
+}
