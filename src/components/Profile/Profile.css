@@ -1,0 +1,146 @@
+.profile {
+  margin: 0 auto;
+  max-width: 410px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: calc(100vh - 74px);
+}
+
+.profile__title {
+  margin: 74px 0 123px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: calc(29 / 24);
+}
+
+.profile__set-profile {
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.profile__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile__field:not(:last-child) {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0 0 16px;
+}
+
+.profile__field:not(:first-child) {
+  padding: 17px 0 0;
+}
+
+.profile__input-title {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: calc(13 / 11);
+}
+
+.profile__input {
+  box-sizing: border-box;
+  text-align: right;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: calc(13 / 11);
+  color: #000;
+  border: none;
+  outline: none;
+}
+
+.profile__error {
+  display: none;
+}
+
+.profile__navigation {
+  margin: 0 0 70px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.profile__edit-profile {
+  padding: 0;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: calc(16 / 13);
+  transition: opacity 0.4s;
+}
+
+.profile__edit-profile:hover {
+  opacity: 0.7;
+}
+
+.profile__edit-profile_disable {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.profile__exit-auth {
+  text-decoration: none;
+  color: #ff3055;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: calc(16 / 13);
+  transition: opacity 0.4s;
+}
+
+.profile__exit-auth:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    margin: 236px 0 96px;
+  }
+  .profile__navigation {
+    margin: 0 0 269px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile {
+    max-width: 260px;
+  }
+  .profile__title {
+    width: 260px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .profile__title {
+    margin: 70px 0 80px;
+  }
+  .profile__navigation {
+    margin: 0 0 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    margin: 0 auto;
+    max-width: 260px;
+  }
+  .profile__edit-profile {
+    font-size: 12px;
+    line-height: calc(15 / 12);
+  }
+  .profile__exit-auth {
+    font-size: 12px;
+    line-height: calc(15 / 12);
+  }
+}

@@ -1,0 +1,57 @@
+@media screen and (max-width: 768px) {
+  .burger {
+    width: 44px;
+    height: 44px;
+    position: relative;
+    padding: 11px 8px;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .burger__button {
+    height: 23px;
+    width: 28px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #fff;
+  }
+  .burger__button::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+  }
+  .burger__button span {
+    position: absolute;
+    top: 21px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+    transition: transform 0.2s ease-in-out;
+  }
+  .burger__button::after {
+    content: '';
+    position: absolute;
+    top: 31px;
+    width: 28px;
+    height: 3px;
+    background-color: #000;
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+  .burger__button:hover {
+    opacity: 0.7;
+  }
+  .burger__button_active::before {
+    transform: rotate(45deg);
+  }
+  .burger__button_active span {
+    transform: scaleY(0);
+  }
+  .burger__button_active::after {
+    transform: rotate(-45deg);
+  }
+}

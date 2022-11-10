@@ -1,0 +1,27 @@
+.header {
+  padding: 0 10px;
+}
+
+.header__container {
+  margin: 18px auto;
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_auth {
+  background-color: #073042;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    max-width: 708px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__container {
+    max-width: 292px;
+  }
+}
