@@ -5,7 +5,7 @@
 .save-movies__set {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 70px 10px 0;
+  padding: 0 10px 0;
   border: none;
   display: flex;
   flex-direction: column;
