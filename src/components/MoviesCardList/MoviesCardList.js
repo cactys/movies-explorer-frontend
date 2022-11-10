@@ -8,8 +8,15 @@ const MoviesCardList = ({ cards, mark }) => {
   const [index, setIndex] = useState(0); // window.innerWidth ><=
   const [visibleData, setVisibleData] = useState([]);
 
+  const pageSize = () => {
+    if (window.innerWidth <= 2560) {
+      return 12;
+    }
+  };
+
+
   useEffect(() => {
-    const numderOfIndex = PAGE_SIZE * (index + 1);
+    const numderOfIndex = pageSize() * (index + 1);
     const newArray = [];
 
     for (let i = 0; i < cards.length; i++) {
