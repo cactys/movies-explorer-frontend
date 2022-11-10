@@ -96,6 +96,7 @@
     padding: 70px 10px 30px;
   }
   .promo__title {
+    max-width: 300px;
     margin: 44px 0 24px;
     font-size: 30px;
     line-height: calc(38 / 30);
