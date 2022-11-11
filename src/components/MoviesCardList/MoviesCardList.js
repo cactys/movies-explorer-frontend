@@ -23,7 +23,7 @@ const MoviesCardList = ({ cards, mark }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
 
   const handleLoadMore = () => {
-    return setVisibleData(visibleData + 3);
+    return setVisibleData(visibleData + pageSize());
   };
 
   return (
@@ -34,7 +34,7 @@ const MoviesCardList = ({ cards, mark }) => {
         })}
       </ul>
       <LoadMore
-        isVisible={cards.length > 12}
+        isVisible={cards.length > pageSize()}
         isDisable={cards.length === visibleData.length}
         setIndex={handleLoadMore}
       />

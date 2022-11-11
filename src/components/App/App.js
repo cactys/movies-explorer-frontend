@@ -23,7 +23,7 @@ const App = () => {
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -84,7 +84,6 @@ const App = () => {
     auth
       .signIn(email, password)
       .then((res) => {
-        console.log(res);
         if (res.token) {
           localStorage.setItem('jwt', res.token);
           setData({
@@ -128,14 +127,14 @@ const App = () => {
         auth
           .getContent()
           .then((res) => {
-            if (res && res.data.email) {
+            if (res && res.email) {
               setData({
-                email: res.data.email,
-                password: res.data.password,
+                email: res.email,
+                password: res.password,
               });
-              setCurrentUser(res.data);
+              setCurrentUser(res);
               setIsLogin(true);
-              history.push('/');
+              history.replace('/movies');
             } else {
               history.push('/signin');
             }
@@ -147,7 +146,7 @@ const App = () => {
     api
       .getUser()
       .then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
       })
       .catch((err) => console.log(err));
     api
@@ -181,7 +180,6 @@ const App = () => {
           <Route exact path="/saved-movies">
             <Header loggedIn={isLogin} />
             <ProtectedRoute
-              // path="/saved-movies"
               loggedIn={isLogin}
               component={SaveMovies}
               cards={currentMovies}
@@ -195,7 +193,6 @@ const App = () => {
             <ProtectedRoute
               loggedIn={isLogin}
               component={Profile}
-              dataUser={data}
               signOut={signOut}
             />
           </Route>

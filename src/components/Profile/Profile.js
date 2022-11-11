@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import './Profile.css';
 
-const Profile = ({ data }) => {
+const Profile = () => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
