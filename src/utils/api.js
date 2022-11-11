@@ -28,6 +28,18 @@ class Api {
     }).then(this._checkingResponse);
   }
 
+  editUser(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+      }),
+    }).then(this._checkingResponse);
+  }
+
   getCurrentMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',

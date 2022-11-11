@@ -94,7 +94,6 @@ const App = () => {
           setIsLogin(true);
           setInfoTooltip(true);
           setMessageTooltip('Вы успешно вошли!');
-          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -105,6 +104,15 @@ const App = () => {
       .finally(() => {
         setIsTooltipPopupOpen(true);
       });
+  };
+
+  const handleUpdateUser = (data) => {
+    api
+      .editUser(data)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   const signOut = () => {
@@ -194,6 +202,7 @@ const App = () => {
               loggedIn={isLogin}
               component={Profile}
               signOut={signOut}
+              onUpdateUser={handleUpdateUser}
             />
           </Route>
           <Route exact path="/signin">

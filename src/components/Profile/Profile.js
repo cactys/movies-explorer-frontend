@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import './Profile.css';
 
-const Profile = () => {
+const Profile = ({ signOut, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +14,15 @@ const Profile = () => {
 
   const handleEmailChange = (evt) => {
     setEmail(evt.target.value);
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onUpdateUser({
+      name,
+      email,
+    });
   };
 
   useEffect(() => {
@@ -55,17 +64,19 @@ const Profile = () => {
         </label>
       </fieldset>
       <nav className="profile__navigation">
-        <button
-          type="submit"
-          className={`profile__edit-profile ${
-            currentUser.name === name && currentUser.email === email
-              ? 'profile__edit-profile_disable'
-              : ''
-          }`}
-        >
-          Редактировать
-        </button>
-        <Link className="profile__exit-auth" to="/">
+        <form className="profile__form" onSubmit={handleSubmit}>
+          <button
+            type="submit"
+            className={`profile__edit-profile ${
+              currentUser.name === name && currentUser.email === email
+                ? 'profile__edit-profile_disable'
+                : ''
+            }`}
+          >
+            Редактировать
+          </button>
+        </form>
+        <Link className="profile__exit-auth" to="/signin" onClick={signOut}>
           Выйти из аккаунта
         </Link>
       </nav>
