@@ -9,7 +9,7 @@ const Movies = ({ cards, checked, setChecked }) => {
       <form className="movies__form">
         <fieldset className="movies__set">
           <SearchForm />
-          <FilterCheckbox />
+          <FilterCheckbox checked={checked} setChecked={setChecked} />
         </fieldset>
       </form>
       <MoviesCardList cards={cards} mark="tag" />
