@@ -1,9 +1,10 @@
 .load-more {
   max-width: 1140px;
-  margin: 50px auto 80px;
+  margin: 80px auto 80px;
 }
 
 .load-more__button {
+  padding: 0;
   height: 36px;
   width: 100%;
   cursor: pointer;
@@ -27,4 +28,11 @@
 
 .load-more__button_disabled:hover {
   opacity: 0.6;
+}
+
+
+@media screen and (max-width: 831px) {
+  .load-more {
+    max-width: 708px;
+  }
 }

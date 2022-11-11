@@ -2,21 +2,20 @@ import './SearchForm.css';
 
 const SearchForm = () => {
   return (
-    <fieldset className="search-form">
-      <label className="search-form__search-lable">
-        <span className="search-form__magnifier" />
-        <input
-          type="text"
-          placeholder="Фильм"
-          className="search-form__search-bar"
-          id="search-movies"
-          name="search"
-        />
-        <button className="search-form__search-btn" type="button">
-          Найти
-        </button>
-      </label>
-    </fieldset>
+    <label className="search-form">
+      <span className="search-form__magnifier" />
+      <input
+        type="text"
+        placeholder="Фильм"
+        className="search-form__search-bar"
+        id="search-movies"
+        name="search"
+        required
+      />
+      <button className="search-form__search-btn" type="submit">
+        Найти
+      </button>
+    </label>
   );
 };
 

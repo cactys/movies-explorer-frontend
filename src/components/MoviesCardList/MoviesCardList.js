@@ -23,22 +23,22 @@ const MoviesCardList = ({ cards, mark }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
 
   const handleLoadMore = () => {
-    return setVisibleData(visibleData + pageSize());
+    return setVisibleData(visibleData + 3);
   };
 
   return (
-    <>
-      <div className="movies-card-list">
+    <section className="movies-card-list">
+      <ul className="movies-card-list__list">
         {cards.slice(0, visibleData).map((item) => {
           return <MoviesCard key={item.id} card={item} mark={mark} />;
         })}
-      </div>
+      </ul>
       <LoadMore
         isVisible={cards.length > 12}
         isDisable={cards.length === visibleData.length}
         setIndex={handleLoadMore}
       />
-    </>
+    </section>
   );
 };
 

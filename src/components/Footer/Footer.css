@@ -1,10 +1,11 @@
 .footer {
   flex: 0 0 auto;
+  padding: 79px 10px 20px;
 }
 
 .footer__container {
   max-width: 1140px;
-  padding: 79px 5px 20px;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -57,14 +58,16 @@
 }
 
 @media screen and (max-width: 768px) {
+  .footer {
+    padding: 79px 10px 20px;
+  }
   .footer__container {
-    padding: 79px 5px 20px;
     max-width: 708px;
   }
 }
 
 @media screen and (max-width: 425px) {
-  .footer__container {
+  .footer {
     padding: 79px 10px 10px;
   }
   .footer__about {
@@ -92,5 +95,11 @@
   .footer__nav-link {
     font-size: 12px;
     line-height: calc(15 / 12);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer__container {
+    max-width: 300px;
   }
 }

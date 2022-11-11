@@ -3,7 +3,7 @@ import avatar from '../../images/avatar.jpg';
 
 const AboutAuthor = () => {
   return (
-    <div className="about-author">
+    <section className="about-author">
       <h2 className="about-author__title">Студент</h2>
       <div className="about-author__container">
         <address className="about-author__block">
@@ -31,7 +31,7 @@ const AboutAuthor = () => {
           alt="Аватар"
         />
       </div>
-    </div>
+    </section>
   );
 };
 

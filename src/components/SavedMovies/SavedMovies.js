@@ -5,11 +5,15 @@ import './SavedMovies.css';
 
 const SavedMovies = ({ cards, checked, setChecked }) => {
   return (
-    <div className="save-movies">
-      <SearchForm />
-      <FilterCheckbox checked={checked} setChecked={setChecked} />
+    <main className="save-movies">
+      <form className="save-movies__form">
+        <fieldset className="save-movies__set">
+          <SearchForm />
+          <FilterCheckbox />
+        </fieldset>
+      </form>
       <MoviesCardList cards={cards} mark="cross" />
-    </div>
+    </main>
   );
 };
 

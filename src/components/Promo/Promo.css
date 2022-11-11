@@ -1,6 +1,6 @@
 .promo {
   background-color: #073042;
-  padding: 75px 5px;
+  padding: 75px 10px;
 }
 
 .promo__container {
@@ -65,7 +65,7 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    padding: 140px 5px 76px;
+    padding: 140px 10px 76px;
   }
   .promo__container {
     max-width: 668px;
@@ -93,12 +93,17 @@
 
 @media screen and (max-width: 425px) {
   .promo {
-    padding: 70px 5px 30px;
+    padding: 70px 10px 30px;
   }
   .promo__title {
+    max-width: 300px;
     margin: 44px 0 24px;
     font-size: 30px;
     line-height: calc(38 / 30);
+  }
+  .promo__logo {
+    width: 210px;
+    height: 206px;
   }
   .promo__learn-more {
     margin: 80px 0 0;

@@ -1,25 +1,21 @@
 .filter-checkbox {
-  border: none;
-  justify-content: center;
   display: flex;
   column-gap: 12px;
   margin: 29px 0 48px;
-}
-
-.filter-checkbox__switch {
   position: relative;
   display: flex;
-  width: 36px;
-  height: 20px;
+  align-items: center;
 }
 
 .filter-checkbox__checkbox {
   opacity: 0;
-  width: 0;
-  height: 0;
+  min-width: 36px;
+  min-height: 20px;
 }
 
 .filter-checkbox__checkbox-buble {
+  width: 36px;
+  max-height: 20px;
   position: absolute;
   cursor: pointer;
   top: 0;

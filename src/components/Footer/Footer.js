@@ -2,8 +2,8 @@ import './Footer.css';
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <div className="footer__container">
+    <footer className="footer">
+      <section className="footer__container">
         <p className="footer__about">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </p>
@@ -31,8 +31,8 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-      </div>
-    </div>
+      </section>
+    </footer>
   );
 };
 

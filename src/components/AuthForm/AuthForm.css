@@ -78,7 +78,7 @@
 }
 
 .auth-form__footer {
-  margin: 0 auto 70px;
+  margin: 69px auto 70px;
   width: 396px;
   max-width: 100%;
   flex: 0 0 auto;
@@ -135,23 +135,17 @@
 
 @media screen and (max-width: 768px) {
   .auth-form__header {
-    margin: 232px auto 0;
+    margin: 232px auto 40px;
   }
   .auth-form__footer {
-    margin: 0 auto 232px;
+    margin: 69px auto 232px;
   }
 }
 
 @media screen and (max-width: 425px) {
-  .auth-form {
-    padding: 0 15px;
-  }
   .auth-form__footer {
-    margin: 0 auto 30px;
+    margin: 157px auto 30px;
   }
-}
-
-@media screen and (max-width: 320px) {
   .auth-form {
     padding: 0 30px;
   }

@@ -8,10 +8,10 @@ const LoadMore = ({ setIndex, isVisible, isDisable }) => {
           className={`load-more__button ${
             isDisable ? 'load-more__button_disabled' : ''
           }`}
-          type="button"
+          type="submit"
           onClick={setIndex}
         >
-          Еще
+          Ещё
         </button>
       </div>
     )
