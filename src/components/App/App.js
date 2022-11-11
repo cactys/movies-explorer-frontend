@@ -134,7 +134,7 @@ const App = () => {
               });
               setCurrentUser(res);
               setIsLogin(true);
-              history.replace('/movies');
+              history.replace('/profile');
             } else {
               history.push('/signin');
             }
