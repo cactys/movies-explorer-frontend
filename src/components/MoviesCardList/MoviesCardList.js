@@ -4,7 +4,7 @@ import LoadMore from '../LoadMore/LoadMore';
 import { useState } from 'react';
 import { pageSize } from '../../utils/config';
 
-const MoviesCardList = ({ cards, mark, onAddMovie }) => {
+const MoviesCardList = ({ cards, currentCards, onAddMovie, onDeleteMovie }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
 
   const handleLoadMore = () => {
@@ -19,8 +19,9 @@ const MoviesCardList = ({ cards, mark, onAddMovie }) => {
             <MoviesCard
               key={item._id || item.id}
               card={item}
-              mark={mark}
+              currentCards={currentCards}
               onAddMovie={onAddMovie}
+              onDeleteMovie={onDeleteMovie}
             />
           );
         })}

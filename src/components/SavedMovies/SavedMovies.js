@@ -12,11 +12,7 @@ const SavedMovies = ({ cards, checked, setChecked, onDeleteMovie }) => {
           <FilterCheckbox checked={checked} setChecked={setChecked} />
         </fieldset>
       </form>
-      <MoviesCardList
-        cards={cards}
-        mark="cross"
-        onDeleteMovie={onDeleteMovie}
-      />
+      <MoviesCardList cards={cards} onDeleteMovie={onDeleteMovie} />
     </main>
   );
 };

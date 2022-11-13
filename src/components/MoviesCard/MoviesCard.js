@@ -3,14 +3,19 @@ import { useHistory } from 'react-router-dom';
 import { GLOBAL_URL, intToTime } from '../../utils/config';
 import './MoviesCard.css';
 
-const MoviesCard = ({ card, mark, onAddMovie, onDeleteMovie }) => {
+const MoviesCard = ({ card, currentCards, onAddMovie, onDeleteMovie }) => {
   const [saveMovies, setSaveMovies] = useState(false);
 
   const history = useHistory();
 
+  console.log(
+    currentCards.some((item) => console.log(item.movieId === card.id))
+  );
+
   const handleSaveMovie = () => {
     onAddMovie(card);
-    if (!saveMovies && mark === 'tag') {
+
+    if (!saveMovies) {
       return setSaveMovies(true);
     }
     return setSaveMovies(false);

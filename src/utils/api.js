@@ -32,9 +32,9 @@ class Api {
       }),
     }).then(this._checkingResponse);
   }
-  
+
   getAllPromise() {
-    return Promise.all();
+    return Promise.all([this.getUser()]);
   }
 }
 

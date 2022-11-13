@@ -181,7 +181,7 @@ const App = () => {
       nameEN: movie.nameEN,
     };
     mainApi
-      .addMovie(addMovie)
+      .addCurrentMovie(addMovie)
       .then((saveMovie) => {
         setCurrentMovies([...currentMovies, saveMovie]);
       })
@@ -213,6 +213,7 @@ const App = () => {
                 loggedIn={isLogin}
                 component={Movies}
                 cards={movies}
+                currentCards={currentMovies}
                 checked={checked}
                 setChecked={setChecked}
                 onAddMovie={handleAddMovie}

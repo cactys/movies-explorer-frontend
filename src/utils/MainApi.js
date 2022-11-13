@@ -21,8 +21,11 @@ class MainApi {
     }).then(this._checkingResponse);
   }
 
-  addMovie(data) {
-    console.log(data);
+  changeAddMovieStatus(data, state) {
+    return state ? this.addCurrentMovie(data) : this.deleteMovie(data.id);
+  }
+
+  addCurrentMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       credentials: 'include',
