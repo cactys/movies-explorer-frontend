@@ -86,8 +86,7 @@
 }
 
 .profile__edit-profile_disable {
-  cursor: default;
-  opacity: 0.7;
+  cursor: inherit;
 }
 
 .profile__exit-auth {

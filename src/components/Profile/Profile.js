@@ -67,6 +67,7 @@ const Profile = ({ signOut, onUpdateUser }) => {
         <form className="profile__form" onSubmit={handleSubmit}>
           <button
             type="submit"
+            disabled={currentUser.name === name && currentUser.email === email}
             className={`profile__edit-profile ${
               currentUser.name === name && currentUser.email === email
                 ? 'profile__edit-profile_disable'

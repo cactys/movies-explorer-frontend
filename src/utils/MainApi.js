@@ -1,6 +1,6 @@
-import { GLOBAL_URL, BASE_URL } from './config';
+import { BASE_URL } from './config';
 
-class Api {
+class MainApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -13,33 +13,34 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUser() {
-    return fetch(`${this._baseUrl}/users/me`, {
+  getCurrentMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       credentials: 'include',
       headers: this._headers,
     }).then(this._checkingResponse);
   }
 
-  editUser(data) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
+  addMovie(data) {
+    console.log(data);
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
       credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-      }),
+      body: JSON.stringify(data),
     }).then(this._checkingResponse);
   }
-  
-  getAllPromise() {
-    return Promise.all();
+
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: this._headers,
+    }).then(this._checkingResponse);
   }
 }
 
-export const api = new Api({
-  globalUrl: GLOBAL_URL,
+export const mainApi = new MainApi({
   baseUrl: BASE_URL,
   headers: {
     'Content-Type': 'application/json',

@@ -11,10 +11,14 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useEffect, useState } from 'react';
-import { api } from '../../utils/api';
-import { auth } from '../../utils/auth';
+import { api } from '../../utils/Api';
+import { auth } from '../../utils/Auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { moviesApi } from '../../utils/MoviesApi';
+import { mainApi } from '../../utils/MainApi';
+import Preloader from '../Preloader/Preloader';
+import { GLOBAL_URL } from '../../utils/config';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -24,10 +28,6 @@ const App = () => {
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
 
   const [checked, setChecked] = useState(true);
 
@@ -50,23 +50,48 @@ const App = () => {
     }
   }, [isOpenPopup]);
 
-  useEffect(() => {
-    api
-      .getMovies()
-      .then((res) => {
-        setMovies(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   const closeAllPopups = () => {
     setIsTooltipPopupOpen(false);
   };
 
+  useEffect(() => {
+    const tokenCheck = () => {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        auth
+          .getContent()
+          .then((res) => {
+            if (res) {
+              setIsLogin(true);
+              history.push(history.location.pathname);
+              setCurrentUser(res);
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    };
+    tokenCheck();
+    api
+      .getUser()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => console.log(err));
+    mainApi
+      .getCurrentMovies()
+      .then((res) => {
+        setCurrentMovies(res);
+      })
+      .catch((err) => console.log(err));
+    moviesApi.getMovies().then((res) => {
+      setMovies(res);
+    });
+  }, [isLogin, history]);
+
   const handleRegister = (name, email, password) => {
     auth
       .signUp(name, email, password)
-      .then((res) => {
+      .then(() => {
         setIsTooltipPopupOpen(true);
         setInfoTooltip(true);
         setMessageTooltip('Вы успешно зарегистрировались!');
@@ -86,14 +111,10 @@ const App = () => {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
-          setData({
-            email: email,
-            password: password,
-          });
-          setCurrentUser(res.data);
           setIsLogin(true);
           setInfoTooltip(true);
           setMessageTooltip('Вы успешно вошли!');
+          history.push('/profile');
         }
       })
       .catch((err) => {
@@ -106,64 +127,75 @@ const App = () => {
       });
   };
 
-  const handleUpdateUser = (data) => {
-    api
-      .editUser(data)
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const signOut = () => {
     auth
       .signOut()
       .then(() => {
-        setData({
+        setCurrentUser({
+          name: '',
           email: '',
           password: '',
         });
         setIsLogin(false);
       })
+      .finally(() => {
+        history.push('/signin');
+        setInfoTooltip(true);
+        setIsTooltipPopupOpen(true);
+        setMessageTooltip('Выход УСПЕХ!');
+      })
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    const tokenCheck = () => {
-      const jwt = localStorage.getItem('jwt');
-      if (jwt) {
-        auth
-          .getContent()
-          .then((res) => {
-            if (res && res.email) {
-              setData({
-                email: res.email,
-                password: res.password,
-              });
-              setCurrentUser(res);
-              setIsLogin(true);
-              history.replace('/profile');
-            } else {
-              history.push('/signin');
-            }
-          })
-          .catch((err) => console.log(err));
-      }
-    };
-    tokenCheck();
+  const handleUpdateUser = (data) => {
     api
-      .getUser()
+      .editUser(data)
       .then((res) => {
         setCurrentUser(res);
+        setInfoTooltip(true);
+        setIsTooltipPopupOpen(true);
+        setMessageTooltip('Вы изменили личный данные.');
+      })
+      .catch((err) => {
+        console.log(err);
+        setInfoTooltip(false);
+        setMessageTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+      })
+      .finally(() => {
+        setIsTooltipPopupOpen(true);
+      });
+  };
+
+  const handleAddMovie = (movie) => {
+    const addMovie = {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `${GLOBAL_URL}${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `${GLOBAL_URL}${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    };
+    mainApi
+      .addMovie(addMovie)
+      .then((saveMovie) => {
+        setCurrentMovies([...currentMovies, saveMovie]);
       })
       .catch((err) => console.log(err));
-    api
-      .getCurrentMovies()
-      .then((res) => {
-        setCurrentMovies(res);
+  };
+
+  const handleDeleteMovie = (movie) => {
+    mainApi
+      .deleteMovie(movie._id)
+      .then(() => {
+        setCurrentMovies((state) => state.filter((c) => c._id !== movie._id));
       })
       .catch((err) => console.log(err));
-  }, [history, isLogin]);
+  };
 
   return (
     <div className="page">
@@ -176,34 +208,48 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={isLogin} />
-            <ProtectedRoute
-              loggedIn={isLogin}
-              component={Movies}
-              cards={movies}
-              checked={checked}
-              setChecked={setChecked}
-            />
+            {isLogin ? (
+              <ProtectedRoute
+                loggedIn={isLogin}
+                component={Movies}
+                cards={movies}
+                checked={checked}
+                setChecked={setChecked}
+                onAddMovie={handleAddMovie}
+              />
+            ) : (
+              <Preloader />
+            )}
             <Footer />
           </Route>
           <Route exact path="/saved-movies">
             <Header loggedIn={isLogin} />
-            <ProtectedRoute
-              loggedIn={isLogin}
-              component={SaveMovies}
-              cards={currentMovies}
-              checked={checked}
-              setChecked={setChecked}
-            />
+            {isLogin ? (
+              <ProtectedRoute
+                loggedIn={isLogin}
+                component={SaveMovies}
+                cards={currentMovies}
+                checked={checked}
+                setChecked={setChecked}
+                onDeleteMovie={handleDeleteMovie}
+              />
+            ) : (
+              <Preloader />
+            )}
             <Footer />
           </Route>
           <Route exact path="/profile">
             <Header loggedIn={isLogin} />
-            <ProtectedRoute
-              loggedIn={isLogin}
-              component={Profile}
-              signOut={signOut}
-              onUpdateUser={handleUpdateUser}
-            />
+            {isLogin ? (
+              <ProtectedRoute
+                loggedIn={isLogin}
+                component={Profile}
+                signOut={signOut}
+                onUpdateUser={handleUpdateUser}
+              />
+            ) : (
+              <Preloader />
+            )}
           </Route>
           <Route exact path="/signin">
             <Login handleLogin={handleLogin} />
