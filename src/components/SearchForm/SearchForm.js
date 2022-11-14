@@ -1,6 +1,8 @@
+import useValidationForm from '../../hooks/useValidationForm';
 import './SearchForm.css';
 
 const SearchForm = () => {
+  const { values, handleChange, isValid, setIsValid } = useValidationForm();
   return (
     <label className="search-form">
       <form className="search-form__form">
@@ -11,6 +13,8 @@ const SearchForm = () => {
           className="search-form__search-bar"
           id="search-movies"
           name="search"
+          value={values.search || ''}
+          onChange={handleChange}
           required
         />
         <button className="search-form__search-btn" type="submit">

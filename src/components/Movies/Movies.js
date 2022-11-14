@@ -1,3 +1,4 @@
+import { filterShortCheckbox } from '../../utils/utils';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
@@ -11,12 +12,6 @@ const Movies = ({
   onAddMovie,
   onDeleteMovie,
 }) => {
-  const handleFilterCheckbox = (movies) => {
-    if (checked) {
-      return movies.filter((movie) => movie.duration < 40);
-    }
-  };
-
   return (
     <main className="movies">
       <section className="movies__form">
@@ -26,11 +21,11 @@ const Movies = ({
         </fieldset>
       </section>
       <MoviesCardList
-        movies={movies}
-        onShortChecked={handleFilterCheckbox}
+        onChecked={filterShortCheckbox(checked, movies)}
         savedMovies={savedMovies}
         onDeleteMovie={onDeleteMovie}
         onAddMovie={onAddMovie}
+        checked={checked}
       />
     </main>
   );

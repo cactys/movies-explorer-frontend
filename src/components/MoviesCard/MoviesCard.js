@@ -18,11 +18,9 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
     onDeleteMovie(movie);
   };
 
-  const location = history.location.pathname === '/movies';
-
   return (
     <li className="movies-card">
-      {location ? (
+      {history.location.pathname === '/movies' && (
         <>
           <div className="movies-card__header">
             <div className="movies-card__description">
@@ -45,7 +43,8 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
             src={`${GLOBAL_URL}${movie.image.url}`}
           />
         </>
-      ) : (
+      )}
+      {history.location.pathname === '/saved-movies' && (
         <>
           <div className="movies-card__header">
             <div className="movies-card__description">

@@ -1,27 +1,35 @@
 import { useState } from 'react';
+import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
 const SignIn = ({ handleLogin, inputError, errorSpan }) => {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const { values, handleChange, resetForm, errors, isValid } =
+    useValidationForm();
+  // const [data, setData] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+  // const handleChange = (evt) => {
+  //   const { name, value } = evt.target;
+  //   setData({
+  //     ...data,
+  //     [name]: value,
+  //   });
+  // };
+
+  // const handleSubmit = (evt) => {
+  //   evt.preventDefault();
+  //   if (!data.email || !data.password) {
+  //     return;
+  //   }
+  //   const { email, password } = data;
+  //   handleLogin(email, password);
+  // };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!data.email || !data.password) {
-      return;
-    }
-    const { email, password } = data;
-    handleLogin(email, password);
+    handleLogin(values);
   };
 
   return (
@@ -41,20 +49,20 @@ const SignIn = ({ handleLogin, inputError, errorSpan }) => {
             type="email"
             placeholder="E-mail"
             className={`auth-form__input ${
-              inputError ? `auth-form__input_error` : ''
+              errors.email ? `auth-form__input_error` : ''
             }`}
             id="input-email"
             name="email"
-            value={data.email}
+            value={values.email}
             onChange={handleChange}
             required
           />
           <span
             className={`auth-form__error ${
-              errorSpan ? `auth-form__error_active` : ''
+              errors.email ? `auth-form__error_active` : ''
             } input-email-error`}
           >
-            Что-то пошло не так...
+            {errors.email}
           </span>
         </label>
         <label className="auth-form__field">
@@ -63,20 +71,20 @@ const SignIn = ({ handleLogin, inputError, errorSpan }) => {
             type="password"
             placeholder="Пароль"
             className={`auth-form__input ${
-              inputError ? `auth-form__input_error` : ''
+              errors.password ? `auth-form__input_error` : ''
             }`}
             id="input-password"
             name="password"
-            value={data.password}
+            value={errors.password}
             onChange={handleChange}
             required
           />
           <span
             className={`auth-form__error ${
-              errorSpan ? `auth-form__error_active` : ''
+              errors.password ? `auth-form__error_active` : ''
             } input-password-error`}
           >
-            Что-то пошло не так...
+            {errors.password}
           </span>
         </label>
       </fieldset>
