@@ -34,17 +34,17 @@
   box-sizing: border-box;
   height: 16px;
   width: 16px;
-  left: 18px;
+  left: 2px;
   bottom: 2px;
-  background-color: #2be080;
+  background-color: #F5F5F5;
   border: 1px solid #ffffff;
   transition: 0.4s;
   border-radius: 50%;
 }
 
 .filter-checkbox__checkbox:checked + .filter-checkbox__checkbox-buble:before {
-  transform: translateX(-16px);
-  background-color: #F5F5F5;
+  transform: translateX(16px);
+  background-color: #2be080;
 }
 
 .filter-checkbox__checkbox-title {

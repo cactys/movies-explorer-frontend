@@ -1,28 +1,21 @@
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { GLOBAL_URL, intToTime } from '../../utils/config';
+import { GLOBAL_URL } from '../../utils/constants';
+import { intToTime } from '../../utils/utils';
 import './MoviesCard.css';
 
-const MoviesCard = ({ card, currentCards, onAddMovie, onDeleteMovie }) => {
-  const [saveMovies, setSaveMovies] = useState(false);
-
+const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
   const history = useHistory();
 
-  console.log(
-    currentCards.some((item) => console.log(item.movieId === card.id))
-  );
-
   const handleSaveMovie = () => {
-    onAddMovie(card);
+    onAddMovie(movie);
+  };
 
-    if (!saveMovies) {
-      return setSaveMovies(true);
-    }
-    return setSaveMovies(false);
+  const handleDeleteSavedMovie = () => {
+    onDeleteMovie(savedMovie);
   };
 
   const handleDeleteClick = () => {
-    onDeleteMovie(card);
+    onDeleteMovie(movie);
   };
 
   const location = history.location.pathname === '/movies';
@@ -33,32 +26,32 @@ const MoviesCard = ({ card, currentCards, onAddMovie, onDeleteMovie }) => {
         <>
           <div className="movies-card__header">
             <div className="movies-card__description">
-              <h2 className="movies-card__title">{card.nameRU}</h2>
+              <h2 className="movies-card__title">{movie.nameRU}</h2>
               <p className="movies-card__duration">
-                {intToTime(card.duration)}
+                {intToTime(movie.duration)}
               </p>
             </div>
             <button
               type="button"
               className={`movies-card__mark movies-card__mark_tag ${
-                saveMovies ? 'movies-card__mark_active' : ''
+                savedMovie ? 'movies-card__mark_active' : ''
               }`}
-              onClick={handleSaveMovie}
+              onClick={savedMovie ? handleDeleteSavedMovie : handleSaveMovie}
             />
           </div>
           <img
             className="movies-card__image"
-            alt={card.nameRU}
-            src={`${GLOBAL_URL}${card.image.url}`}
+            alt={movie.nameRU}
+            src={`${GLOBAL_URL}${movie.image.url}`}
           />
         </>
       ) : (
         <>
           <div className="movies-card__header">
             <div className="movies-card__description">
-              <h2 className="movies-card__title">{card.nameRU}</h2>
+              <h2 className="movies-card__title">{movie.nameRU}</h2>
               <p className="movies-card__duration">
-                {intToTime(card.duration)}
+                {intToTime(movie.duration)}
               </p>
             </div>
             <button
@@ -69,8 +62,8 @@ const MoviesCard = ({ card, currentCards, onAddMovie, onDeleteMovie }) => {
           </div>
           <img
             className="movies-card__image"
-            alt={card.nameRU}
-            src={card.image}
+            alt={movie.nameRU}
+            src={movie.image}
           />
         </>
       )}

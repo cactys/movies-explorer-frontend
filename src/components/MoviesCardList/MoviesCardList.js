@@ -2,10 +2,21 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
 import { useState } from 'react';
-import { pageSize } from '../../utils/config';
+import { getSavedMovie, pageSize } from '../../utils/utils';
+import { useHistory } from 'react-router-dom';
 
-const MoviesCardList = ({ cards, currentCards, onAddMovie, onDeleteMovie }) => {
+const MoviesCardList = ({
+  movies,
+  savedMovies,
+  onAddMovie,
+  onDeleteMovie,
+  onShortChecked,
+}) => {
   const [visibleData, setVisibleData] = useState(pageSize());
+
+  console.log(onShortChecked(movies));
+
+  const history = useHistory();
 
   const handleLoadMore = () => {
     return setVisibleData(visibleData + pageSize());
@@ -13,24 +24,48 @@ const MoviesCardList = ({ cards, currentCards, onAddMovie, onDeleteMovie }) => {
 
   return (
     <section className="movies-card-list">
-      <ul className="movies-card-list__list">
-        {cards.slice(0, visibleData).map((item) => {
-          return (
-            <MoviesCard
-              key={item._id || item.id}
-              card={item}
-              currentCards={currentCards}
-              onAddMovie={onAddMovie}
-              onDeleteMovie={onDeleteMovie}
-            />
-          );
-        })}
-      </ul>
-      <LoadMore
-        isVisible={cards.length > pageSize()}
-        isDisable={cards.length === visibleData.length}
-        setIndex={handleLoadMore}
-      />
+      {history.location.pathname === '/movies' && (
+        <>
+          <ul className="movies-card-list__list">
+            {movies.slice(0, visibleData).map((movie) => {
+              return (
+                <MoviesCard
+                  key={movie.id}
+                  movie={movie}
+                  savedMovie={getSavedMovie(savedMovies, movie)}
+                  onAddMovie={onAddMovie}
+                  onDeleteMovie={onDeleteMovie}
+                />
+              );
+            })}
+          </ul>
+          <LoadMore
+            isVisible={movies.length > pageSize()}
+            isDisable={movies.length === visibleData.length}
+            setIndex={handleLoadMore}
+          />
+        </>
+      )}
+      {history.location.pathname === '/saved-movies' && (
+        <>
+          <ul className="movies-card-list__list">
+            {savedMovies.slice(0, visibleData).map((savedMovie) => {
+              return (
+                <MoviesCard
+                  key={savedMovie._id}
+                  movie={savedMovie}
+                  onDeleteMovie={onDeleteMovie}
+                />
+              );
+            })}
+          </ul>
+          <LoadMore
+            isVisible={savedMovies.length > pageSize()}
+            isDisable={savedMovies.length === visibleData.length}
+            setIndex={handleLoadMore}
+          />
+        </>
+      )}
     </section>
   );
 };

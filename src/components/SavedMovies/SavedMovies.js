@@ -3,7 +3,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
-const SavedMovies = ({ cards, checked, setChecked, onDeleteMovie }) => {
+const SavedMovies = ({ savedMovies, checked, setChecked, onDeleteMovie }) => {
   return (
     <main className="save-movies">
       <form className="save-movies__form">
@@ -12,7 +12,7 @@ const SavedMovies = ({ cards, checked, setChecked, onDeleteMovie }) => {
           <FilterCheckbox checked={checked} setChecked={setChecked} />
         </fieldset>
       </form>
-      <MoviesCardList cards={cards} onDeleteMovie={onDeleteMovie} />
+      <MoviesCardList savedMovies={savedMovies} onDeleteMovie={onDeleteMovie} />
     </main>
   );
 };

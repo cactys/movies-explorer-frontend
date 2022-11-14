@@ -1,4 +1,4 @@
-import { BASE_URL } from './config';
+import { BASE_URL } from "./constants";
 
 class MainApi {
   constructor({ baseUrl, headers }) {
@@ -13,7 +13,7 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getCurrentMovies() {
+  getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       credentials: 'include',
@@ -21,11 +21,7 @@ class MainApi {
     }).then(this._checkingResponse);
   }
 
-  changeAddMovieStatus(data, state) {
-    return state ? this.addCurrentMovie(data) : this.deleteMovie(data.id);
-  }
-
-  addCurrentMovie(data) {
+  addSavedMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       credentials: 'include',

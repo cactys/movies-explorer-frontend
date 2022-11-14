@@ -1,4 +1,4 @@
-import { GLOBAL_URL, BASE_URL } from './config';
+import { BASE_URL, GLOBAL_URL } from "./constants";
 
 class Api {
   constructor({ baseUrl, headers }) {

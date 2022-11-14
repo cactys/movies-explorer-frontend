@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import SaveMovies from '../SavedMovies/SavedMovies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -18,18 +18,18 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
-import { GLOBAL_URL } from '../../utils/config';
+import { GLOBAL_URL } from '../../utils/constants';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [currentMovies, setCurrentMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
 
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const history = useHistory();
 
@@ -78,9 +78,9 @@ const App = () => {
       })
       .catch((err) => console.log(err));
     mainApi
-      .getCurrentMovies()
+      .getSavedMovies()
       .then((res) => {
-        setCurrentMovies(res);
+        setSavedMovies(res);
       })
       .catch((err) => console.log(err));
     moviesApi.getMovies().then((res) => {
@@ -181,9 +181,9 @@ const App = () => {
       nameEN: movie.nameEN,
     };
     mainApi
-      .addCurrentMovie(addMovie)
+      .addSavedMovie(addMovie)
       .then((saveMovie) => {
-        setCurrentMovies([...currentMovies, saveMovie]);
+        setSavedMovies([...savedMovies, saveMovie]);
       })
       .catch((err) => console.log(err));
   };
@@ -192,7 +192,7 @@ const App = () => {
     mainApi
       .deleteMovie(movie._id)
       .then(() => {
-        setCurrentMovies((state) => state.filter((c) => c._id !== movie._id));
+        setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
       })
       .catch((err) => console.log(err));
   };
@@ -212,11 +212,12 @@ const App = () => {
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Movies}
-                cards={movies}
-                currentCards={currentMovies}
+                movies={movies}
+                savedMovies={savedMovies}
                 checked={checked}
                 setChecked={setChecked}
                 onAddMovie={handleAddMovie}
+                onDeleteMovie={handleDeleteMovie}
               />
             ) : (
               <Preloader />
@@ -228,8 +229,8 @@ const App = () => {
             {isLogin ? (
               <ProtectedRoute
                 loggedIn={isLogin}
-                component={SaveMovies}
-                cards={currentMovies}
+                component={SavedMovies}
+                savedMovies={savedMovies}
                 checked={checked}
                 setChecked={setChecked}
                 onDeleteMovie={handleDeleteMovie}
