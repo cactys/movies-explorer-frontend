@@ -31,8 +31,6 @@ const Profile = ({ signOut, onUpdateUser }) => {
     resetForm();
   }, [currentUser, resetForm]);
 
-  console.log(isValid);
-
   return (
     <main className="profile">
       <h2 className="profile__title">Привет, {name}</h2>

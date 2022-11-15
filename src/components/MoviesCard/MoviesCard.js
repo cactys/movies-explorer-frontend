@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { GLOBAL_URL } from '../../utils/constants';
+import { GLOBAL_URL } from '../../utils/url';
 import { intToTime } from '../../utils/utils';
 import './MoviesCard.css';
 

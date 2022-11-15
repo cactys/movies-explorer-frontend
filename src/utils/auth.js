@@ -1,4 +1,4 @@
-import { BASE_URL } from './constants';
+import { BASE_URL } from './url';
 
 class Auth {
   constructor({ baseUrl }) {

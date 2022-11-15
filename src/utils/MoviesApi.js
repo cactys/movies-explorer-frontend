@@ -1,4 +1,4 @@
-import { GLOBAL_URL } from "./constants";
+import { GLOBAL_URL } from "./url";
 
 class MoviesApi {
   constructor({ baseUrl, headers }) {

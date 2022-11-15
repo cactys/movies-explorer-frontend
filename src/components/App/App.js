@@ -18,7 +18,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
-import { GLOBAL_URL } from '../../utils/constants';
+import { GLOBAL_URL } from '../../utils/url';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
