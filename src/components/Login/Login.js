@@ -1,36 +1,19 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignIn = ({ handleLogin, inputError, errorSpan }) => {
+const SignIn = ({ handleLogin }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
-  // const [data, setData] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const handleChange = (evt) => {
-  //   const { name, value } = evt.target;
-  //   setData({
-  //     ...data,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   if (!data.email || !data.password) {
-  //     return;
-  //   }
-  //   const { email, password } = data;
-  //   handleLogin(email, password);
-  // };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin(values);
   };
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <AuthForm
@@ -41,6 +24,7 @@ const SignIn = ({ handleLogin, inputError, errorSpan }) => {
       text="Ещё не зарегистрированы?"
       link="Регистрация"
       path="/signup"
+      isValid={isValid}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">
@@ -53,7 +37,7 @@ const SignIn = ({ handleLogin, inputError, errorSpan }) => {
             }`}
             id="input-email"
             name="email"
-            value={values.email}
+            value={values.email || ''}
             onChange={handleChange}
             required
           />
@@ -75,7 +59,7 @@ const SignIn = ({ handleLogin, inputError, errorSpan }) => {
             }`}
             id="input-password"
             name="password"
-            value={errors.password}
+            value={values.password || ''}
             onChange={handleChange}
             required
           />

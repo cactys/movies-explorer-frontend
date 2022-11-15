@@ -11,8 +11,8 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { useEffect, useState } from 'react';
-import { api } from '../../utils/Api';
-import { auth } from '../../utils/Auth';
+import { api } from '../../utils/api';
+import { auth } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { moviesApi } from '../../utils/MoviesApi';
@@ -88,9 +88,9 @@ const App = () => {
     });
   }, [isLogin, history]);
 
-  const handleRegister = (name, email, password) => {
+  const handleRegister = (data) => {
     auth
-      .signUp(name, email, password)
+      .signUp(data)
       .then(() => {
         setIsTooltipPopupOpen(true);
         setInfoTooltip(true);
@@ -105,9 +105,9 @@ const App = () => {
       });
   };
 
-  const handleLogin = (email, password) => {
+  const handleLogin = (data) => {
     auth
-      .signIn(email, password)
+      .signIn(data)
       .then((res) => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
@@ -148,6 +148,7 @@ const App = () => {
   };
 
   const handleUpdateUser = (data) => {
+    console.log(data);
     api
       .editUser(data)
       .then((res) => {

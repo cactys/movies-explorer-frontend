@@ -104,6 +104,12 @@
   opacity: 0.8;
 }
 
+.auth-form__submit_disable {
+  cursor: inherit;
+  background: #a0a0a0;
+  opacity: 0.8;
+}
+
 .auth-form__question {
   margin: 16px 0 0;
   display: flex;

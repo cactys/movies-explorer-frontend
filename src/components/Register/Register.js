@@ -1,26 +1,19 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignUp = ({ inputError, errorSpan, handleRegister }) => {
-  const [data, setData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+const SignUp = ({ handleRegister }) => {
+  const { values, handleChange, resetForm, errors, isValid } =
+    useValidationForm();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const { name, email, password } = data;
-    handleRegister(name, email, password);
+    handleRegister(values);
   };
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <AuthForm
@@ -31,6 +24,7 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
       text="Уже зарегистрированы?"
       link="Войти"
       path="/signin"
+      isValid={isValid}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">
@@ -39,11 +33,11 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
             type="text"
             placeholder="Имя"
             className={`auth-form__input ${
-              inputError ? `auth-form__input_error` : ''
+              errors.name ? `auth-form__input_error` : ''
             }`}
             id="input-name"
             name="name"
-            value={data.name}
+            value={values.name || ''}
             onChange={handleChange}
             required
             minLength="2"
@@ -51,10 +45,10 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
           />
           <span
             className={`auth-form__error ${
-              errorSpan ? `auth-form__error_active` : ''
+              errors.name ? `auth-form__error_active` : ''
             } input-name-error`}
           >
-            Что-то пошло не так...
+            {errors.name}
           </span>
         </label>
         <label className="auth-form__field">
@@ -63,20 +57,20 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
             type="email"
             placeholder="E-mail"
             className={`auth-form__input ${
-              inputError ? `auth-form__input_error` : ''
+              errors.email ? `auth-form__input_error` : ''
             }`}
             id="input-email"
-            value={data.email}
+            value={values.email || ''}
             onChange={handleChange}
             name="email"
             required
           />
           <span
             className={`auth-form__error ${
-              errorSpan ? `auth-form__error_active` : ''
+              errors.email ? `auth-form__error_active` : ''
             } input-email-error`}
           >
-            Что-то пошло не так...
+            {errors.email}
           </span>
         </label>
         <label className="auth-form__field">
@@ -85,20 +79,21 @@ const SignUp = ({ inputError, errorSpan, handleRegister }) => {
             type="password"
             placeholder="Пароль"
             className={`auth-form__input ${
-              inputError ? `auth-form__input_error` : ''
+              errors.password ? `auth-form__input_error` : ''
             }`}
             id="input-password"
-            value={data.password}
+            value={values.password || ''}
             onChange={handleChange}
             name="password"
+            minLength={8}
             required
           />
           <span
             className={`auth-form__error ${
-              !errorSpan ? `auth-form__error_active` : ''
+              errors.password ? `auth-form__error_active` : ''
             } input-password-error`}
           >
-            Что-то пошло не так...
+            {errors.password}
           </span>
         </label>
       </fieldset>

@@ -12,7 +12,7 @@ class Auth {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  signUp(name, email, password) {
+  signUp(data) {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       credentials: 'include',
@@ -20,14 +20,14 @@ class Auth {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
+        name: data.name,
+        email: data.email,
+        password: data.password,
       }),
     }).then(this._checkingResponse);
   }
 
-  signIn(email, password) {
+  signIn(data) {
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       credentials: 'include',
@@ -35,8 +35,8 @@ class Auth {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email: data.email,
+        password: data.password,
       }),
     }).then(this._checkingResponse);
   }

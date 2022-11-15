@@ -2,7 +2,16 @@ import './AuthForm.css';
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 
-const Form = ({ onSubmit, title, buttonText, text, path, link, children }) => {
+const Form = ({
+  onSubmit,
+  title,
+  buttonText,
+  text,
+  path,
+  link,
+  children,
+  isValid,
+}) => {
   return (
     <form className="auth-form" onSubmit={onSubmit}>
       <div className="auth-form__header">
@@ -11,7 +20,13 @@ const Form = ({ onSubmit, title, buttonText, text, path, link, children }) => {
       </div>
       {children}
       <div className="auth-form__footer">
-        <button type="submit" className="auth-form__submit">
+        <button
+          type="submit"
+          className={`auth-form__submit ${
+            !isValid ? 'auth-form__submit_disable' : ''
+          }`}
+          disabled={!isValid}
+        >
           {buttonText}
         </button>
         <div className="auth-form__question">

@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
 
 const useValidationForm = () => {
@@ -9,13 +8,7 @@ const useValidationForm = () => {
 
   const handleChange = (evt) => {
     const input = evt.target;
-    const { value, name } = input;
-
-    // const { name, value } = evt.target;
-    //   setData({
-    //     ...data,
-    //     [name]: value,
-    //   });
+    const { name, value } = input;
 
     if (name === 'name' && input.validity.patternMismatch) {
       input.setCustomValidity(
@@ -33,9 +26,15 @@ const useValidationForm = () => {
       }
     }
 
-    setValues({ ...values, [name]: values });
-    setErrors({ ...errors, [name]: input.validationMessage });
-    setIsValid(input.closest('from').checkValidity());
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      [name]: input.validationMessage,
+    });
+    setIsValid(input.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
