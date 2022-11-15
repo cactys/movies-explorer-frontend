@@ -1,6 +1,6 @@
 import './FilterCheckbox.css';
 
-const FilterCheckbox = ({ checked, setChecked, handleFilterCheckbox }) => {
+const FilterCheckbox = ({ checked, setChecked }) => {
   return (
       <label className="filter-checkbox">
         <input

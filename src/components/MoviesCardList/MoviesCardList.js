@@ -41,7 +41,7 @@ const MoviesCardList = ({
       </ul>
       <LoadMore
         isVisible={filterCheckbox.length > pageSize()}
-        isDisable={filterCheckbox.length === visibleData.length}
+        isDisable={filterCheckbox.length <= visibleData}
         setIndex={handleLoadMore}
       />
     </section>

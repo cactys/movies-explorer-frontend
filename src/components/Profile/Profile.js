@@ -6,19 +6,8 @@ import './Profile.css';
 
 const Profile = ({ signOut, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
-
-  // const handleNameChange = (evt) => {
-  //   setName(evt.target.value);
-  // };
-
-  // const handleEmailChange = (evt) => {
-  //   setEmail(evt.target.value);
-  // };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -26,14 +15,14 @@ const Profile = ({ signOut, onUpdateUser }) => {
   };
 
   useEffect(() => {
-    setName(currentUser.name || '');
-    setEmail(currentUser.email || '');
-    resetForm();
+    if (currentUser) {
+      resetForm(currentUser);
+    }
   }, [currentUser, resetForm]);
 
   return (
     <main className="profile">
-      <h2 className="profile__title">Привет, {name}</h2>
+      <h2 className="profile__title">Привет, {currentUser.name}</h2>
       <form className="profile__form" onSubmit={handleSubmit}>
         <fieldset className="profile__set-profile">
           <label className="profile__field">
@@ -47,11 +36,11 @@ const Profile = ({ signOut, onUpdateUser }) => {
               required
               minLength="2"
               maxLength="30"
-              value={values.name || name || ''}
+              value={values.name || ''}
               onChange={handleChange}
             />
+            {/* <span>{errors.name}</span> */}
           </label>
-          <span>{errors.name}</span>
           <label className="profile__field">
             <span className="profile__input-title">E-mail</span>
             <input
@@ -61,11 +50,11 @@ const Profile = ({ signOut, onUpdateUser }) => {
               id="edit-email"
               name="email"
               required
-              value={values.email || email || ''}
+              value={values.email || ''}
               onChange={handleChange}
             />
+            {/* <span>{errors.email}</span> */}
           </label>
-          <span>{errors.email}</span>
         </fieldset>
         <nav className="profile__navigation">
           <button

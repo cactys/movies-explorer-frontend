@@ -26,6 +26,12 @@ const useValidationForm = () => {
       }
     }
 
+    if (name === 'search') {
+      input.setCustomValidity('Введите ключевое слово');
+    } else {
+      input.setCustomValidity('');
+    }
+
     setValues({
       ...values,
       [name]: value,

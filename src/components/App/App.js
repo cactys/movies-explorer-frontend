@@ -28,6 +28,7 @@ const App = () => {
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  const [preloader, setPreloader] = useState(false);
 
   const [checked, setChecked] = useState(false);
 
@@ -148,7 +149,6 @@ const App = () => {
   };
 
   const handleUpdateUser = (data) => {
-    console.log(data);
     api
       .editUser(data)
       .then((res) => {
@@ -213,12 +213,14 @@ const App = () => {
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Movies}
-                movies={movies}
+                allMovies={movies}
                 savedMovies={savedMovies}
                 checked={checked}
                 setChecked={setChecked}
                 onAddMovie={handleAddMovie}
                 onDeleteMovie={handleDeleteMovie}
+                preloader={preloader}
+                setPreloader={setPreloader}
               />
             ) : (
               <Preloader />

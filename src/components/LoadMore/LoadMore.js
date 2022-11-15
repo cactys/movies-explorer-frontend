@@ -5,6 +5,7 @@ const LoadMore = ({ setIndex, isVisible, isDisable }) => {
     isVisible && (
       <div className="load-more">
         <button
+          disabled={isDisable}
           className={`load-more__button ${
             isDisable ? 'load-more__button_disabled' : ''
           }`}

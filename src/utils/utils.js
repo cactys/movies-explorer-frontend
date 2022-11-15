@@ -1,4 +1,9 @@
-import { MOVIE_DURATION, PAGE_SIZE_1024, PAGE_SIZE_1280, PAGE_SIZE_425 } from "./constants";
+import {
+  MOVIE_DURATION,
+  PAGE_SIZE_1024,
+  PAGE_SIZE_1280,
+  PAGE_SIZE_425,
+} from './constants';
 
 export const intToTime = (time) => {
   const hours = Math.trunc(time / 60);
@@ -29,4 +34,15 @@ export const filterShortCheckbox = (checked, movies) => {
   } else {
     return movies;
   }
+};
+
+export const searchMovie = (shortCheckbox, movies, query) => {
+  const movieByUserQuery = movies.filter((movie) => {
+    const nameRu = String(movie.nameRU).toLowerCase().trim();
+    const nameEn = String(movie.nameEN).toLowerCase().trim();
+    const userMovie = query.toLowerCase().trim();
+    return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
+  });
+
+  return shortCheckbox ? filterShortCheckbox(movieByUserQuery) : movieByUserQuery;
 };
