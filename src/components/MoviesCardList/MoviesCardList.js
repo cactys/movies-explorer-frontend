@@ -9,24 +9,24 @@ const MoviesCardList = ({
   savedMovies,
   onAddMovie,
   onDeleteMovie,
-  onChecked,
+  filterMovies,
 }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
-  const [filterCheckbox, setFilterCheckbox] = useState([]);
+  const [filter, setFilter] = useState([]);
 
   const handleLoadMore = () => {
     return setVisibleData(visibleData + pageSize());
   };
 
   useEffect(() => {
-    setFilterCheckbox(onChecked);
-  }, [onChecked]);
+    setFilter(filterMovies);
+  }, [filterMovies]);
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {Array.isArray(filterCheckbox)
-          ? filterCheckbox.slice(0, visibleData).map((movie) => {
+        {Array.isArray(filter)
+          ? filter.slice(0, visibleData).map((movie) => {
               return (
                 <MoviesCard
                   key={movie.id || movie._id}
@@ -40,8 +40,8 @@ const MoviesCardList = ({
           : null}
       </ul>
       <LoadMore
-        isVisible={filterCheckbox.length > pageSize()}
-        isDisable={filterCheckbox.length <= visibleData}
+        isVisible={filter.length > pageSize()}
+        isDisable={filter.length <= visibleData}
         setIndex={handleLoadMore}
       />
     </section>

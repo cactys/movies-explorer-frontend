@@ -45,7 +45,7 @@ const SignUp = ({ handleRegister }) => {
           />
           <span
             className={`auth-form__error ${
-              errors.name ? `auth-form__error_active` : ''
+              errors.name ? `auth-form__error_active` : 'uth-form__error_active'
             } input-name-error`}
           >
             {errors.name}

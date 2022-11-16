@@ -19,6 +19,7 @@ import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { GLOBAL_URL } from '../../utils/url';
+import { searchMovie } from '../../utils/utils';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -28,7 +29,9 @@ const App = () => {
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
-  const [preloader, setPreloader] = useState(false);
+  const [preloader, setPreloader] = useState(true);
+  const [searchMovies, setSearchMovies] = useState([]);
+  const [onSearch, setOnSearch] = useState(false);
 
   const [checked, setChecked] = useState(false);
 
@@ -83,10 +86,15 @@ const App = () => {
       .then((res) => {
         setSavedMovies(res);
       })
+      .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-    moviesApi.getMovies().then((res) => {
-      setMovies(res);
-    });
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        setMovies(res);
+      })
+      .finally(() => setPreloader(false))
+      .catch((err) => console.log(err));
   }, [isLogin, history]);
 
   const handleRegister = (data) => {
@@ -198,6 +206,22 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleSearchMovie = (movies, query) => {
+    const moviesList = searchMovie(movies, query);
+
+    if (moviesList.length === 0) {
+      setInfoTooltip(false);
+      setIsTooltipPopupOpen(true);
+      setMessageTooltip('Видео не найдено!');
+    } else {
+      setInfoTooltip(true);
+      setIsTooltipPopupOpen(true);
+      setMessageTooltip(`Найдено фильмов = ${moviesList.length}`);
+    }
+
+    setSearchMovies(moviesList);
+  };
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -219,8 +243,11 @@ const App = () => {
                 setChecked={setChecked}
                 onAddMovie={handleAddMovie}
                 onDeleteMovie={handleDeleteMovie}
-                preloader={preloader}
-                setPreloader={setPreloader}
+                onSearchMovie={handleSearchMovie}
+                searchMovies={searchMovies}
+                setSearchMovies={setSearchMovies}
+                onSearch={onSearch}
+                setOnSearch={setOnSearch}
               />
             ) : (
               <Preloader />
@@ -237,6 +264,13 @@ const App = () => {
                 checked={checked}
                 setChecked={setChecked}
                 onDeleteMovie={handleDeleteMovie}
+                onSearchMovie={handleSearchMovie}
+                preloader={preloader}
+                setPreloader={setPreloader}
+                searchMovies={searchMovies}
+                setSearchMovies={setSearchMovies}
+                onSearch={onSearch}
+                setOnSearch={setOnSearch}
               />
             ) : (
               <Preloader />

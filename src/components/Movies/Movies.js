@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { filterShortCheckbox, searchMovie } from '../../utils/utils';
+import { useEffect } from 'react';
+import { filterShortCheckbox } from '../../utils/utils';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 
@@ -13,54 +12,41 @@ const Movies = ({
   setChecked,
   onAddMovie,
   onDeleteMovie,
-  preloader,
-  setPreloader,
+  searchMovies,
+  setSearchMovies,
+  onSearchMovie,
+  onSearch,
+  setOnSearch,
 }) => {
-  const [notFound, setNotFound] = useState(false);
-  const [queryMovies, setQueryMovies] = useState([]);
-  const [filterShort, setFilterShort] = useState([]);
-
-  const handleSearchMovie = (movies, query, shortCheckbox) => {
-    const moviesList = searchMovie(movies, query, shortCheckbox);
-
-    if (moviesList.length === 0) {
-      setNotFound(true);
-    } else {
-      setNotFound(false);
-    }
-
-    setQueryMovies(moviesList);
-    setFilterShort(
-      shortCheckbox ? filterShortCheckbox(moviesList) : moviesList
-    );
-  };
 
   const handleSearchSubmit = (input) => {
-    if (allMovies === 0) {
-      setPreloader(true);
-    } else {
-      handleSearchMovie(allMovies, input, checked);
-    }
+    onSearchMovie(allMovies, input, checked);
   };
+
+  useEffect(() => {
+    setSearchMovies([]);
+  }, [setSearchMovies]);
 
   return (
     <main className="movies">
       <section className="movies__form">
         <fieldset className="movies__set">
-          <SearchForm handleSearchSubmit={handleSearchSubmit} />
+          <SearchForm
+            handleSearchSubmit={handleSearchSubmit}
+            setOnSearch={setOnSearch}
+          />
           <FilterCheckbox checked={checked} setChecked={setChecked} />
         </fieldset>
       </section>
-      {!notFound ? (
+      {onSearch && (
         <MoviesCardList
-          onChecked={filterShortCheckbox(checked, allMovies)}
+          filterMovies={filterShortCheckbox(checked, searchMovies)}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           onAddMovie={onAddMovie}
           checked={checked}
         />
-      ) : null}
-      {preloader ? <Preloader /> : null}
+      )}
     </main>
   );
 };

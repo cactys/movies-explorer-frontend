@@ -1,29 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import useValidationForm from '../../hooks/useValidationForm';
 import './SearchForm.css';
 
-const SearchForm = ({ handleSearchSubmit }) => {
-  const {
-    values,
-    handleChange,
-    isValid,
-    errors,
-    setErrors,
-    resetForm,
-    setIsValid,
-  } = useValidationForm();
+const SearchForm = ({ handleSearchSubmit, setOnSearch }) => {
+  const { values, handleChange, isValid } = useValidationForm();
 
   const [errorQuery, setErrorQuery] = useState('');
 
-  const history = useHistory();
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // handleSearchSubmit(values);
-    isValid
-      ? handleSearchSubmit(values.search)
-      : setErrorQuery('Введите ключевое слово');
+    if (isValid) {
+      handleSearchSubmit(values.search);
+      setOnSearch(true);
+    } else {
+      setErrorQuery('Введите ключевое слово');
+      setOnSearch(false);
+    }
   };
 
   useEffect(() => {
