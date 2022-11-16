@@ -51,7 +51,7 @@ const Movies = ({
           <FilterCheckbox checked={checked} setChecked={setChecked} />
         </fieldset>
       </section>
-      {notFound ? (
+      {!notFound ? (
         <MoviesCardList
           onChecked={filterShortCheckbox(checked, allMovies)}
           savedMovies={savedMovies}
