@@ -32,6 +32,7 @@ const App = () => {
   const [preloader, setPreloader] = useState(true);
   const [searchMovies, setSearchMovies] = useState([]);
   const [onSearch, setOnSearch] = useState(false);
+  const [moviesNotFound, setMoviesNotFound] = useState(false);
 
   const [checked, setChecked] = useState(false);
 
@@ -59,26 +60,30 @@ const App = () => {
   };
 
   useEffect(() => {
-    const tokenCheck = () => {
-      const jwt = localStorage.getItem('jwt');
-      if (jwt) {
-        auth
-          .getContent()
-          .then((res) => {
-            if (res) {
-              setIsLogin(true);
-              history.push(history.location.pathname);
-              setCurrentUser(res);
-            }
-          })
-          .catch((err) => console.log(err));
-      }
-    };
-    tokenCheck();
+    // const tokenCheck = () => {
+    //   const jwt = localStorage.getItem('jwt');
+    //   if (jwt) {
+    // auth
+    //   .getContent()
+    //   .then((res) => {
+    //     if (res) {
+    //       setIsLogin(true);
+    //       history.push(history.location.pathname);
+    //       setCurrentUser(res);
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
+    //   }
+    // };
+    // tokenCheck();
     api
       .getUser()
       .then((res) => {
-        setCurrentUser(res);
+        if (res) {
+          setIsLogin(true);
+          history.push(history.location.pathname);
+          setCurrentUser(res);
+        }
       })
       .catch((err) => console.log(err));
     mainApi
@@ -88,13 +93,13 @@ const App = () => {
       })
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-    moviesApi
-      .getMovies()
-      .then((res) => {
-        setMovies(res);
-      })
-      .finally(() => setPreloader(false))
-      .catch((err) => console.log(err));
+    // moviesApi
+    //   .getMovies()
+    //   .then((res) => {
+    //     setMovies(res);
+    //   })
+    //   .finally(() => setPreloader(false))
+    //   .catch((err) => console.log(err));
   }, [isLogin, history]);
 
   const handleRegister = (data) => {
@@ -119,7 +124,7 @@ const App = () => {
       .signIn(data)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('jwt', res.token);
+          // localStorage.setItem('jwt', res.token);
           setIsLogin(true);
           setInfoTooltip(true);
           setMessageTooltip('Вы успешно вошли!');
@@ -210,13 +215,11 @@ const App = () => {
     const moviesList = searchMovie(movies, query);
 
     if (moviesList.length === 0) {
-      setInfoTooltip(false);
-      setIsTooltipPopupOpen(true);
-      setMessageTooltip('Видео не найдено!');
+      setMoviesNotFound(true);
+      setOnSearch(false)
     } else {
-      setInfoTooltip(true);
-      setIsTooltipPopupOpen(true);
-      setMessageTooltip(`Найдено фильмов = ${moviesList.length}`);
+      setMoviesNotFound(false);
+      setOnSearch(true)
     }
 
     setSearchMovies(moviesList);
@@ -237,17 +240,20 @@ const App = () => {
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Movies}
-                allMovies={movies}
+                // allMovies={movies}
                 savedMovies={savedMovies}
                 checked={checked}
                 setChecked={setChecked}
                 onAddMovie={handleAddMovie}
                 onDeleteMovie={handleDeleteMovie}
                 onSearchMovie={handleSearchMovie}
+                preloader={preloader}
+                setPreloader={setPreloader}
                 searchMovies={searchMovies}
                 setSearchMovies={setSearchMovies}
                 onSearch={onSearch}
                 setOnSearch={setOnSearch}
+                moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />
@@ -265,12 +271,11 @@ const App = () => {
                 setChecked={setChecked}
                 onDeleteMovie={handleDeleteMovie}
                 onSearchMovie={handleSearchMovie}
-                preloader={preloader}
-                setPreloader={setPreloader}
                 searchMovies={searchMovies}
                 setSearchMovies={setSearchMovies}
                 onSearch={onSearch}
                 setOnSearch={setOnSearch}
+                moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />

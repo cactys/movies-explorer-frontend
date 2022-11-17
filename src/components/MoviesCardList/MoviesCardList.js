@@ -4,12 +4,14 @@ import LoadMore from '../LoadMore/LoadMore';
 import { useState } from 'react';
 import { getSavedMovie, pageSize } from '../../utils/utils';
 import { useEffect } from 'react';
+import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 
 const MoviesCardList = ({
   savedMovies,
   onAddMovie,
   onDeleteMovie,
   filterMovies,
+  moviesNotFound,
 }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
   const [filter, setFilter] = useState([]);
@@ -24,26 +26,32 @@ const MoviesCardList = ({
 
   return (
     <section className="movies-card-list">
-      <ul className="movies-card-list__list">
-        {Array.isArray(filter)
-          ? filter.slice(0, visibleData).map((movie) => {
-              return (
-                <MoviesCard
-                  key={movie.id || movie._id}
-                  movie={movie}
-                  savedMovie={getSavedMovie(savedMovies, movie)}
-                  onAddMovie={onAddMovie}
-                  onDeleteMovie={onDeleteMovie}
-                />
-              );
-            })
-          : null}
-      </ul>
-      <LoadMore
-        isVisible={filter.length > pageSize()}
-        isDisable={filter.length <= visibleData}
-        setIndex={handleLoadMore}
-      />
+      {!moviesNotFound ? (
+        <>
+          <ul className="movies-card-list__list">
+            {Array.isArray(filter)
+              ? filter.slice(0, visibleData).map((movie) => {
+                  return (
+                    <MoviesCard
+                      key={movie.id || movie._id}
+                      movie={movie}
+                      savedMovie={getSavedMovie(savedMovies, movie)}
+                      onAddMovie={onAddMovie}
+                      onDeleteMovie={onDeleteMovie}
+                    />
+                  );
+                })
+              : null}
+          </ul>
+          <LoadMore
+            isVisible={filter.length > pageSize()}
+            isDisable={filter.length <= visibleData}
+            setIndex={handleLoadMore}
+          />
+        </>
+      ) : (
+        <MoviesNotFound />
+      )}
     </section>
   );
 };

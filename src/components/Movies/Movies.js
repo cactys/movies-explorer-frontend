@@ -1,31 +1,57 @@
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { filterShortCheckbox } from '../../utils/utils';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { moviesApi } from '../../utils/MoviesApi';
+import Preloader from '../Preloader/Preloader';
+import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 
 const Movies = ({
-  allMovies,
+  // allMovies,
   savedMovies,
   checked,
   setChecked,
   onAddMovie,
   onDeleteMovie,
+  preloader,
+  setPreloader,
   searchMovies,
   setSearchMovies,
   onSearchMovie,
   onSearch,
   setOnSearch,
+  moviesNotFound,
 }) => {
+  const [movies, setMovies] = useState([]);
+
+  const currentUser = useContext(CurrentUserContext);
 
   const handleSearchSubmit = (input) => {
-    onSearchMovie(allMovies, input, checked);
+    localStorage.setItem(`${currentUser.email} - searchMovie`, input);
+    localStorage.setItem(`${currentUser.email} - shortMovie`, checked);
+
+    if (movies.length === 0) {
+      setPreloader(true);
+      moviesApi
+        .getMovies()
+        .then((res) => {
+          setMovies(res);
+          onSearchMovie(res, input, checked);
+        })
+        .finally(() => setPreloader(false))
+        .catch((err) => console.log(err));
+    } else {
+      onSearchMovie(movies, input, checked);
+    }
   };
 
   useEffect(() => {
+    // localStorage.setItem(`${currentUser.email} - shortMovie`, checked);
     setSearchMovies([]);
-  }, [setSearchMovies]);
+  }, [checked, currentUser.email, setSearchMovies]);
 
   return (
     <main className="movies">
@@ -45,8 +71,10 @@ const Movies = ({
           onDeleteMovie={onDeleteMovie}
           onAddMovie={onAddMovie}
           checked={checked}
+          moviesNotFound={moviesNotFound}
         />
       )}
+      {preloader ? <Preloader /> : null}
     </main>
   );
 };

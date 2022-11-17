@@ -2,10 +2,9 @@ import './LoadMore.css';
 
 const LoadMore = ({ setIndex, isVisible, isDisable }) => {
   return (
-    isVisible && (
-      <div className="load-more">
+    <div className="load-more">
+      {isVisible ? (
         <button
-          disabled={isDisable}
           className={`load-more__button ${
             isDisable ? 'load-more__button_disabled' : ''
           }`}
@@ -14,8 +13,8 @@ const LoadMore = ({ setIndex, isVisible, isDisable }) => {
         >
           Ещё
         </button>
-      </div>
-    )
+      ) : null}
+    </div>
   );
 };
 

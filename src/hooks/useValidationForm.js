@@ -26,11 +26,11 @@ const useValidationForm = () => {
       }
     }
 
-    if (name === 'search' && input.validity.patternMismatch) {
-      input.setCustomValidity('Введите ключевое слово');
-    } else {
-      input.setCustomValidity('');
-    }
+    // if (name === 'search' && input.validity.patternMismatch) {
+    //   input.setCustomValidity('Введите ключевое слово');
+    // } else {
+    //   input.setCustomValidity('');
+    // }
 
     setValues({
       ...values,

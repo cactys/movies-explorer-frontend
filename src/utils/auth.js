@@ -51,15 +51,15 @@ class Auth {
     }).then(this._checkingResponse);
   }
 
-  getContent() {
-    return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(this._checkingResponse);
-  }
+//   getContent() {
+//     return fetch(`${this._url}/users/me`, {
+//       method: 'GET',
+//       credentials: 'include',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }).then(this._checkingResponse);
+//   }
 }
 
 export const auth = new Auth({
