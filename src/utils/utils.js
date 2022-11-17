@@ -28,15 +28,15 @@ export const getSavedMovie = (arr, movie) => {
   });
 };
 
-export const filterShortCheckbox = (checked, movies) => {
-  if (checked) {
-    return movies.filter((movie) => movie.duration < MOVIE_DURATION);
-  } else {
-    return movies;
-  }
+export const filterShortCheckbox = (movies) => {
+  // if (checked) {
+  return movies.filter((movie) => movie.duration < MOVIE_DURATION);
+  // } else {
+  // return movies;
+  // }
 };
 
-export const searchMovie = (movies, query) => {
+export const filterSearchMovie = (movies, query, shortCheckbox) => {
   const movieByUserQuery = movies.filter((movie) => {
     const nameRu = String(movie.nameRU).toLowerCase().trim();
     const nameEn = String(movie.nameEN).toLowerCase().trim();
@@ -44,5 +44,9 @@ export const searchMovie = (movies, query) => {
     return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
   });
 
-  return movieByUserQuery;
+  if (shortCheckbox) {
+    return filterShortCheckbox(movieByUserQuery);
+  } else {
+    return movieByUserQuery;
+  }
 };

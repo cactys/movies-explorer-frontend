@@ -15,14 +15,14 @@ import { api } from '../../utils/api';
 import { auth } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { moviesApi } from '../../utils/MoviesApi';
+// import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { GLOBAL_URL } from '../../utils/url';
-import { searchMovie } from '../../utils/utils';
+// import { searchMovie } from '../../utils/utils';
 
 const App = () => {
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
@@ -30,11 +30,11 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const [preloader, setPreloader] = useState(true);
-  const [searchMovies, setSearchMovies] = useState([]);
-  const [onSearch, setOnSearch] = useState(false);
-  const [moviesNotFound, setMoviesNotFound] = useState(false);
+  // const [searchMovies, setSearchMovies] = useState([]);
+  // const [onSearch, setOnSearch] = useState(false);
+  // const [moviesNotFound, setMoviesNotFound] = useState(false);
 
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
 
   const history = useHistory();
 
@@ -211,19 +211,19 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleSearchMovie = (movies, query) => {
-    const moviesList = searchMovie(movies, query);
+  // const handleSearchMovie = (movies, query) => {
+  //   const moviesList = searchMovie(movies, query);
 
-    if (moviesList.length === 0) {
-      setMoviesNotFound(true);
-      setOnSearch(false)
-    } else {
-      setMoviesNotFound(false);
-      setOnSearch(true)
-    }
+  //   if (moviesList.length === 0) {
+  //     setMoviesNotFound(true);
+  //     setOnSearch(false)
+  //   } else {
+  //     setMoviesNotFound(false);
+  //     setOnSearch(true)
+  //   }
 
-    setSearchMovies(moviesList);
-  };
+  //   setSearchMovies(moviesList);
+  // };
 
   return (
     <div className="page">
@@ -242,18 +242,18 @@ const App = () => {
                 component={Movies}
                 // allMovies={movies}
                 savedMovies={savedMovies}
-                checked={checked}
-                setChecked={setChecked}
+                // checked={checked}
+                // setChecked={setChecked}
                 onAddMovie={handleAddMovie}
                 onDeleteMovie={handleDeleteMovie}
-                onSearchMovie={handleSearchMovie}
+                // onSearchMovie={handleSearchMovie}
                 preloader={preloader}
                 setPreloader={setPreloader}
-                searchMovies={searchMovies}
-                setSearchMovies={setSearchMovies}
-                onSearch={onSearch}
-                setOnSearch={setOnSearch}
-                moviesNotFound={moviesNotFound}
+                // searchMovies={searchMovies}
+                // setSearchMovies={setSearchMovies}
+                // onSearch={onSearch}
+                // setOnSearch={setOnSearch}
+                // moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />
@@ -267,15 +267,15 @@ const App = () => {
                 loggedIn={isLogin}
                 component={SavedMovies}
                 savedMovies={savedMovies}
-                checked={checked}
-                setChecked={setChecked}
+                // checked={checked}
+                // setChecked={setChecked}
                 onDeleteMovie={handleDeleteMovie}
-                onSearchMovie={handleSearchMovie}
-                searchMovies={searchMovies}
-                setSearchMovies={setSearchMovies}
-                onSearch={onSearch}
-                setOnSearch={setOnSearch}
-                moviesNotFound={moviesNotFound}
+                // onSearchMovie={handleSearchMovie}
+                // searchMovies={searchMovies}
+                // setSearchMovies={setSearchMovies}
+                // onSearch={onSearch}
+                // setOnSearch={setOnSearch}
+                // moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />

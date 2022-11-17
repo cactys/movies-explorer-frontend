@@ -1,25 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import useValidationForm from '../../hooks/useValidationForm';
 import './SearchForm.css';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-const SearchForm = ({ handleSearchSubmit, setOnSearch }) => {
-  const { values, handleChange, isValid } = useValidationForm();
+const SearchForm = ({ handleSearchSubmit }) => {
+  const { values, handleChange, isValid, setIsValid } = useValidationForm();
+  const [errorMessage, setErrorMessage] = useState('');
+  const history = useHistory();
 
-  const [errorQuery, setErrorQuery] = useState('');
+  const currentUser = useContext(CurrentUserContext);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
-      setOnSearch(true);
     } else {
-      setErrorQuery('Введите ключевое слово');
-      setOnSearch(false);
+      setErrorMessage('Нужно ввести ключевое слово');
     }
   };
 
   useEffect(() => {
-    setErrorQuery('');
+    if (
+      history.location.pathname === '/movies' &&
+      localStorage.getItem(`${currentUser._id} - searchMovies`)
+    ) {
+      const search = localStorage.getItem(`${currentUser._id} - searchMovies`);
+      values.search = search;
+      setIsValid(true);
+    }
+  }, [currentUser, history, setIsValid, values]);
+
+  useEffect(() => {
+    setErrorMessage('');
   }, [isValid]);
 
   return (
@@ -37,7 +50,7 @@ const SearchForm = ({ handleSearchSubmit, setOnSearch }) => {
           autoComplete="off"
           required
         />
-        <span>{errorQuery}</span>
+        <span>{errorMessage}</span>
         <button className="search-form__search-btn" type="submit">
           Найти
         </button>
