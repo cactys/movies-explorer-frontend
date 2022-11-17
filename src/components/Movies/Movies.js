@@ -26,6 +26,7 @@ const Movies = ({
   moviesNotFound,
 }) => {
   const [movies, setMovies] = useState([]);
+  const [filterMovies, setFilterMovies] = useState([]);
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -48,10 +49,18 @@ const Movies = ({
     }
   };
 
+  console.log(checked);
+
   useEffect(() => {
+    if (localStorage.getItem(`${currentUser.email} - movies`)) {
+      const movies = JSON.parse(
+        localStorage.getItem(`${currentUser.email} - movie`)
+      );
+      setFilterMovies(movies);
+    }
     // localStorage.setItem(`${currentUser.email} - shortMovie`, checked);
-    setSearchMovies([]);
-  }, [checked, currentUser.email, setSearchMovies]);
+    // setSearchMovies([]);
+  }, []);
 
   return (
     <main className="movies">

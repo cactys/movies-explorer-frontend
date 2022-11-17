@@ -5,15 +5,13 @@ import { useContext } from 'react';
 
 const FilterCheckbox = ({ checked, setChecked }) => {
   const currentUser = useContext(CurrentUserContext);
-  const history = useHistory()
+  const history = useHistory();
   const handleShortChecked = () => {
     if (history.location.pathname === '/movies') {
+      localStorage.setItem(`${currentUser.email} - shortMovie`, checked);
       setChecked(!checked);
-      localStorage.setItem(`${currentUser.email} - shortMovie`, checked)
-    }
-    if (history.location.pathname === '/saved-movies') {
+    } else {
       setChecked(!checked);
-      localStorage.setItem(`${currentUser.email} - shortSavedMovie`, checked)
     }
   };
 
