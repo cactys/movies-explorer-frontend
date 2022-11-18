@@ -44,9 +44,8 @@ export const filterSearchMovie = (movies, query, shortCheckbox) => {
     return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
   });
 
-  if (shortCheckbox) {
-    return filterShortCheckbox(movieByUserQuery);
-  } else {
-    return movieByUserQuery;
-  }
+  // return shortCheckbox
+  //   ? filterShortCheckbox(movieByUserQuery)
+  //   :
+  return movieByUserQuery;
 };

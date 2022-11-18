@@ -10,12 +10,8 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
     onAddMovie(movie);
   };
 
-  const handleDeleteSavedMovie = () => {
-    onDeleteMovie(savedMovie);
-  };
-
   const handleDeleteClick = () => {
-    onDeleteMovie(movie);
+    onDeleteMovie(savedMovie);
   };
 
   return (
@@ -31,7 +27,7 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
             className={`movies-card__mark movies-card__mark_tag ${
               savedMovie ? 'movies-card__mark_active' : ''
             }`}
-            onClick={savedMovie ? handleDeleteSavedMovie : handleSaveMovie}
+            onClick={savedMovie ? handleDeleteClick : handleSaveMovie}
           />
         )}
         {history.location.pathname === '/saved-movies' && (

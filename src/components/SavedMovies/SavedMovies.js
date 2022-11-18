@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { useEffect, useState } from 'react';
 import { filterSearchMovie, filterShortCheckbox } from '../../utils/utils';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -7,27 +6,17 @@ import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
-const SavedMovies = ({
-  savedMovies,
-  // checked,
-  // setChecked,
-  onDeleteMovie,
-  // searchMovies,
-  // onSearchMovie,
-  // onSearch,
-  // setOnSearch,
-  // moviesNotFound,
-}) => {
+const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [searchMovies, setSearchMovies] = useState(savedMovies);
   const [shortFilter, setShortFilter] = useState(searchMovies);
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
-  const currentUser = useContext(CurrentUserContext);
-
   const handleSearchSubmit = (input) => {
     const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
+
+    console.log(input);
 
     if (moviesList.length === 0) {
       setErrorMessage('Ничего не найдено');
@@ -35,18 +24,19 @@ const SavedMovies = ({
     } else {
       setErrorMessage('');
       setMoviesNotFound(false);
-
-      setSearchMovies(moviesList);
-      setShortFilter(moviesList);
     }
+
+    setSearchMovies(moviesList);
+    setShortFilter(
+      filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
+    );
   };
 
   const handleShortFilter = () => {
     if (!filterCheckbox) {
       setFilterCheckbox(true);
-      setSearchMovies(filterShortCheckbox(shortFilter));
+      setShortFilter(filterShortCheckbox(shortFilter));
       if (filterShortCheckbox(shortFilter).length === 0) {
-        console.log('ASD');
         setErrorMessage('Ничего не найдено');
         setMoviesNotFound(true);
       } else {
@@ -54,9 +44,9 @@ const SavedMovies = ({
         setMoviesNotFound(false);
       }
     } else {
-      setFilterCheckbox(true);
-      setSearchMovies(shortFilter);
-      if (shortFilter.length === 0) {
+      setFilterCheckbox(false);
+      setShortFilter(searchMovies);
+      if (searchMovies.length === 0) {
         setErrorMessage('Ничего не найдено');
         setMoviesNotFound(true);
       } else {
@@ -67,8 +57,8 @@ const SavedMovies = ({
   };
 
   useEffect(() => {
-    setSearchMovies(savedMovies);
-    console.log(savedMovies);
+    setShortFilter(savedMovies);
+
     if (savedMovies.lengh === 0) {
       setErrorMessage('Ничего не найдено');
       setMoviesNotFound(true);
@@ -91,7 +81,7 @@ const SavedMovies = ({
       </section>
       {!moviesNotFound ? (
         <MoviesCardList
-          filterMovies={searchMovies}
+          shortFilter={shortFilter}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}

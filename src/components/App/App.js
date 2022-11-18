@@ -15,14 +15,11 @@ import { api } from '../../utils/api';
 import { auth } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-// import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { GLOBAL_URL } from '../../utils/url';
-// import { searchMovie } from '../../utils/utils';
 
 const App = () => {
-  // const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
@@ -30,12 +27,6 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const [preloader, setPreloader] = useState(true);
-  // const [searchMovies, setSearchMovies] = useState([]);
-  // const [onSearch, setOnSearch] = useState(false);
-  // const [moviesNotFound, setMoviesNotFound] = useState(false);
-
-  // const [checked, setChecked] = useState(false);
-
   const history = useHistory();
 
   const isOpenPopup = isTooltipPopupOpen;
@@ -60,22 +51,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    // const tokenCheck = () => {
-    //   const jwt = localStorage.getItem('jwt');
-    //   if (jwt) {
-    // auth
-    //   .getContent()
-    //   .then((res) => {
-    //     if (res) {
-    //       setIsLogin(true);
-    //       history.push(history.location.pathname);
-    //       setCurrentUser(res);
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
-    //   }
-    // };
-    // tokenCheck();
     api
       .getUser()
       .then((res) => {
@@ -93,13 +68,6 @@ const App = () => {
       })
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-    // moviesApi
-    //   .getMovies()
-    //   .then((res) => {
-    //     setMovies(res);
-    //   })
-    //   .finally(() => setPreloader(false))
-    //   .catch((err) => console.log(err));
   }, [isLogin, history]);
 
   const handleRegister = (data) => {
@@ -124,7 +92,7 @@ const App = () => {
       .signIn(data)
       .then((res) => {
         if (res.token) {
-          // localStorage.setItem('jwt', res.token);
+          console.log(res);
           setIsLogin(true);
           setInfoTooltip(true);
           setMessageTooltip('Вы успешно вошли!');
@@ -168,7 +136,7 @@ const App = () => {
         setCurrentUser(res);
         setInfoTooltip(true);
         setIsTooltipPopupOpen(true);
-        setMessageTooltip('Вы изменили личный данные.');
+        setMessageTooltip('Вы изменили личные данные.');
       })
       .catch((err) => {
         console.log(err);
@@ -211,20 +179,6 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  // const handleSearchMovie = (movies, query) => {
-  //   const moviesList = searchMovie(movies, query);
-
-  //   if (moviesList.length === 0) {
-  //     setMoviesNotFound(true);
-  //     setOnSearch(false)
-  //   } else {
-  //     setMoviesNotFound(false);
-  //     setOnSearch(true)
-  //   }
-
-  //   setSearchMovies(moviesList);
-  // };
-
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -240,20 +194,11 @@ const App = () => {
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Movies}
-                // allMovies={movies}
                 savedMovies={savedMovies}
-                // checked={checked}
-                // setChecked={setChecked}
                 onAddMovie={handleAddMovie}
                 onDeleteMovie={handleDeleteMovie}
-                // onSearchMovie={handleSearchMovie}
                 preloader={preloader}
                 setPreloader={setPreloader}
-                // searchMovies={searchMovies}
-                // setSearchMovies={setSearchMovies}
-                // onSearch={onSearch}
-                // setOnSearch={setOnSearch}
-                // moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />
@@ -267,15 +212,7 @@ const App = () => {
                 loggedIn={isLogin}
                 component={SavedMovies}
                 savedMovies={savedMovies}
-                // checked={checked}
-                // setChecked={setChecked}
                 onDeleteMovie={handleDeleteMovie}
-                // onSearchMovie={handleSearchMovie}
-                // searchMovies={searchMovies}
-                // setSearchMovies={setSearchMovies}
-                // onSearch={onSearch}
-                // setOnSearch={setOnSearch}
-                // moviesNotFound={moviesNotFound}
               />
             ) : (
               <Preloader />

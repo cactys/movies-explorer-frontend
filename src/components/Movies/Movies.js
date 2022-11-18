@@ -10,20 +10,11 @@ import Preloader from '../Preloader/Preloader';
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 
 const Movies = ({
-  // allMovies,
   savedMovies,
-  // checked,
-  // setChecked,
   onAddMovie,
   onDeleteMovie,
   preloader,
   setPreloader,
-  // searchMovies,
-  // setSearchMovies,
-  // onSearchMovie,
-  // onSearch,
-  // setOnSearch,
-  // moviesNotFound,
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [movies, setMovies] = useState([]);
@@ -34,8 +25,8 @@ const Movies = ({
 
   const currentUser = useContext(CurrentUserContext);
 
-  const handleSearchMovies = (movies, input, checkbox) => {
-    const moviesList = filterSearchMovie(movies, input, checkbox);
+  const handleSearchMovies = (movies, input) => {
+    const moviesList = filterSearchMovie(movies, input, filterCheckbox);
 
     if (moviesList.length === 0) {
       setErrorMessage('Ничего не найдено');
@@ -45,17 +36,19 @@ const Movies = ({
       setMoviesNotFound(false);
 
       setSearchMovies(moviesList);
-      setShortFilter(checkbox ? filterShortCheckbox(moviesList) : moviesList);
+      setShortFilter(
+        filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
+      );
       localStorage.setItem(
-        `${currentUser._id} - movies`,
+        `${currentUser.email} - movies`,
         JSON.stringify(moviesList)
       );
     }
   };
 
   const handleSearchSubmit = (input) => {
-    localStorage.setItem(`${currentUser._id} - searchMovies`, input);
-    localStorage.setItem(`${currentUser._id} - shortMovies`, filterCheckbox);
+    localStorage.setItem(`${currentUser.email} - searchMovies`, input);
+    localStorage.setItem(`${currentUser.email} - shortMovies`, filterCheckbox);
 
     if (movies.length === 0) {
       setPreloader(true);
@@ -63,7 +56,7 @@ const Movies = ({
         .getMovies()
         .then((res) => {
           setMovies(res);
-          handleSearchMovies(res, input, filterCheckbox);
+          handleSearchMovies(res, input);
         })
         .catch((err) => {
           console.log(err);
@@ -82,35 +75,49 @@ const Movies = ({
     setFilterCheckbox(!filterCheckbox);
 
     if (!filterCheckbox) {
-      setShortFilter(filterShortCheckbox(searchMovies));
+      setFilterCheckbox(true);
+      setShortFilter(filterShortCheckbox(shortFilter));
+      if (filterShortCheckbox(shortFilter).length === 0) {
+        setErrorMessage('Ничего не найдено');
+        setMoviesNotFound(true);
+      } else {
+        setErrorMessage('');
+        setMoviesNotFound(false);
+      }
     } else {
+      setFilterCheckbox(false);
       setShortFilter(searchMovies);
+      if (searchMovies.length === 0) {
+        setErrorMessage('Ничего не найдено');
+        setMoviesNotFound(true);
+      } else {
+        setErrorMessage('');
+        setMoviesNotFound(false);
+      }
     }
-
-    localStorage.setItem(`${currentUser._id} - shortMovies`, !filterCheckbox);
+    localStorage.setItem(`${currentUser.email} - shortMovies`, !filterCheckbox);
   };
 
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser._id} - shortMovies`) === 'true') {
+    if (localStorage.getItem(`${currentUser.email} - shortMovies`) === 'true') {
       setFilterCheckbox(true);
     } else {
       setFilterCheckbox(false);
     }
+
+    if (localStorage.getItem(`${currentUser.email} - movies`)) {
+      const movies = JSON.parse(
+        localStorage.getItem(`${currentUser.email} - movies`)
+      );
+      localStorage.getItem(`${currentUser.email} - shortMovies`) === 'true'
+        ? setShortFilter(filterShortCheckbox(movies))
+        : setShortFilter(movies);
+    }
   }, [currentUser]);
 
   useEffect(() => {
-    if (localStorage.getItem(`${currentUser._id} - movies`)) {
-      const movies = JSON.parse(
-        localStorage.getItem(`${currentUser._id} - movies`)
-      );
-      setSearchMovies(movies);
-      if (localStorage.getItem(`${currentUser._id} - shortMovies`) === 'true') {
-        setShortFilter(filterShortCheckbox(movies));
-      } else {
-        setShortFilter(movies);
-      }
-    }
-  }, [currentUser]);
+    setShortFilter(shortFilter);
+  }, [shortFilter]);
 
   return (
     <main className="movies">
@@ -123,9 +130,9 @@ const Movies = ({
           />
         </fieldset>
       </section>
-      {moviesNotFound ? (
+      {!moviesNotFound ? (
         <MoviesCardList
-          filterMovies={shortFilter}
+          shortFilter={shortFilter}
           errorMessage={errorMessage}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}

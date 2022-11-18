@@ -23,10 +23,12 @@ const SearchForm = ({ handleSearchSubmit }) => {
   useEffect(() => {
     if (
       history.location.pathname === '/movies' &&
-      localStorage.getItem(`${currentUser._id} - searchMovies`)
+      localStorage.getItem(`${currentUser.email} - searchMovies`)
     ) {
-      const search = localStorage.getItem(`${currentUser._id} - searchMovies`);
-      values.search = search;
+      const searchValue = localStorage.getItem(
+        `${currentUser.email} - searchMovies`
+      );
+      values.search = searchValue;
       setIsValid(true);
     }
   }, [currentUser, history, setIsValid, values]);
@@ -45,7 +47,7 @@ const SearchForm = ({ handleSearchSubmit }) => {
           className="search-form__search-bar"
           id="search-movies"
           name="search"
-          value={values.search || ''}
+          value={values.search}
           onChange={handleChange}
           autoComplete="off"
           required

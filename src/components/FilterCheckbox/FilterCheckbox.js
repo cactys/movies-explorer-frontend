@@ -7,7 +7,7 @@ const FilterCheckbox = ({ handleShortFilter, filterCheckbox }) => {
         type="checkbox"
         id="input-checkbox"
         className="filter-checkbox__checkbox"
-        checked={filterCheckbox}
+        checked={filterCheckbox ? true : false}
         onChange={handleShortFilter}
       />
       <span className="filter-checkbox__checkbox-buble" />

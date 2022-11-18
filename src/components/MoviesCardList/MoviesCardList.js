@@ -7,12 +7,10 @@ import { useEffect } from 'react';
 // import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 
 const MoviesCardList = ({
-  filterMovies,
+  shortFilter,
   savedMovies,
   onAddMovie,
   onDeleteMovie,
-  // moviesNotFound,
-  // errorMessage,
 }) => {
   const [visibleData, setVisibleData] = useState(pageSize());
   const [filter, setFilter] = useState([]);
@@ -22,25 +20,23 @@ const MoviesCardList = ({
   };
 
   useEffect(() => {
-    setFilter(filterMovies);
-  }, [filterMovies]);
+    setFilter(shortFilter);
+  }, [shortFilter]);
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {Array.isArray(filter)
-          ? filter.slice(0, visibleData).map((movie) => {
-              return (
-                <MoviesCard
-                  key={movie.id || movie._id}
-                  movie={movie}
-                  savedMovie={getSavedMovie(savedMovies, movie)}
-                  onAddMovie={onAddMovie}
-                  onDeleteMovie={onDeleteMovie}
-                />
-              );
-            })
-          : null}
+        {filter.slice(0, visibleData).map((movie) => {
+          return (
+            <MoviesCard
+              key={movie.id || movie._id}
+              movie={movie}
+              savedMovie={getSavedMovie(savedMovies, movie)}
+              onAddMovie={onAddMovie}
+              onDeleteMovie={onDeleteMovie}
+            />
+          );
+        })}
       </ul>
       <LoadMore
         isVisible={filter.length > pageSize()}
