@@ -1,7 +1,10 @@
 .movies-not-found {
   display: flex;
+  margin: 0 auto;
   align-items: center;
+  text-align: center;
   justify-content: center;
+  max-width: 410px;
 }
 
 .movies-not-found__title {
@@ -11,4 +14,10 @@
   font-size: 20px;
   line-height: calc(24 / 20);
   letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 425px) {
+  .movies-not-found {
+    max-width: 260px;
+  }
 }

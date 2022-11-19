@@ -29,11 +29,9 @@ export const getSavedMovie = (arr, movie) => {
 };
 
 export const filterShortCheckbox = (movies) => {
-  // if (checked) {
-  return movies.filter((movie) => movie.duration < MOVIE_DURATION);
-  // } else {
-  // return movies;
-  // }
+  return Array.isArray(movies)
+    ? movies.filter((movie) => movie.duration < MOVIE_DURATION)
+    : null;
 };
 
 export const filterSearchMovie = (movies, query, shortCheckbox) => {
@@ -44,8 +42,5 @@ export const filterSearchMovie = (movies, query, shortCheckbox) => {
     return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
   });
 
-  // return shortCheckbox
-  //   ? filterShortCheckbox(movieByUserQuery)
-  //   :
   return movieByUserQuery;
 };

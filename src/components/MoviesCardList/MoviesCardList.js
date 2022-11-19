@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 // import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 
 const MoviesCardList = ({
-  shortFilter,
+  filterMovies,
   savedMovies,
   onAddMovie,
   onDeleteMovie,
@@ -20,27 +20,29 @@ const MoviesCardList = ({
   };
 
   useEffect(() => {
-    setFilter(shortFilter);
-  }, [shortFilter]);
+    setFilter(filterMovies);
+  }, [filterMovies]);
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {filter.slice(0, visibleData).map((movie) => {
-          return (
-            <MoviesCard
-              key={movie.id || movie._id}
-              movie={movie}
-              savedMovie={getSavedMovie(savedMovies, movie)}
-              onAddMovie={onAddMovie}
-              onDeleteMovie={onDeleteMovie}
-            />
-          );
-        })}
+        {Array.isArray(filter)
+          ? filter.slice(0, visibleData).map((movie) => {
+              return (
+                <MoviesCard
+                  key={movie.id || movie._id}
+                  movie={movie}
+                  savedMovie={getSavedMovie(savedMovies, movie)}
+                  onAddMovie={onAddMovie}
+                  onDeleteMovie={onDeleteMovie}
+                />
+              );
+            })
+          : null}
       </ul>
       <LoadMore
-        isVisible={filter.length > pageSize()}
-        isDisable={filter.length <= visibleData}
+        isVisible={Array.isArray(filter) ? filter.length > pageSize() : null}
+        isDisable={Array.isArray(filter) ? filter.length <= visibleData : null}
         setIndex={handleLoadMore}
       />
     </section>

@@ -9,14 +9,12 @@ import './SavedMovies.css';
 const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [searchMovies, setSearchMovies] = useState(savedMovies);
-  const [shortFilter, setShortFilter] = useState(searchMovies);
+  const [filterMovies, setFilterMovies] = useState(searchMovies);
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
   const handleSearchSubmit = (input) => {
     const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
-
-    console.log(input);
 
     if (moviesList.length === 0) {
       setErrorMessage('Ничего не найдено');
@@ -27,7 +25,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
     }
 
     setSearchMovies(moviesList);
-    setShortFilter(
+    setFilterMovies(
       filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
     );
   };
@@ -35,8 +33,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
   const handleShortFilter = () => {
     if (!filterCheckbox) {
       setFilterCheckbox(true);
-      setShortFilter(filterShortCheckbox(shortFilter));
-      if (filterShortCheckbox(shortFilter).length === 0) {
+      setFilterMovies(filterShortCheckbox(filterMovies));
+      if (filterShortCheckbox(filterMovies).length === 0) {
         setErrorMessage('Ничего не найдено');
         setMoviesNotFound(true);
       } else {
@@ -45,7 +43,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
       }
     } else {
       setFilterCheckbox(false);
-      setShortFilter(searchMovies);
+      setFilterMovies(searchMovies);
       if (searchMovies.length === 0) {
         setErrorMessage('Ничего не найдено');
         setMoviesNotFound(true);
@@ -57,7 +55,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
   };
 
   useEffect(() => {
-    setShortFilter(savedMovies);
+    setFilterMovies(savedMovies);
 
     if (savedMovies.lengh === 0) {
       setErrorMessage('Ничего не найдено');
@@ -81,7 +79,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
       </section>
       {!moviesNotFound ? (
         <MoviesCardList
-          shortFilter={shortFilter}
+          filterMovies={filterMovies}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}

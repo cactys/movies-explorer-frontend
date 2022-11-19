@@ -1,18 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useValidationForm from '../../hooks/useValidationForm';
 import './SearchForm.css';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 const SearchForm = ({ handleSearchSubmit }) => {
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
-  const history = useHistory();
 
-  const currentUser = useContext(CurrentUserContext);
+  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    console.log(values.search);
     if (isValid) {
       handleSearchSubmit(values.search);
     } else {
@@ -21,21 +20,17 @@ const SearchForm = ({ handleSearchSubmit }) => {
   };
 
   useEffect(() => {
-    if (
-      history.location.pathname === '/movies' &&
-      localStorage.getItem(`${currentUser.email} - searchMovies`)
-    ) {
-      const searchValue = localStorage.getItem(
-        `${currentUser.email} - searchMovies`
-      );
-      values.search = searchValue;
-      setIsValid(true);
-    }
-  }, [currentUser, history, setIsValid, values]);
-
-  useEffect(() => {
     setErrorMessage('');
   }, [isValid]);
+
+  useEffect(() => {
+    if (history.location.pathname === '/movies') {
+      // localStorage.setItem('search-movies', values.search);
+      const searchValue = localStorage.getItem('search-movies');
+      values.search = searchValue;
+      // setIsValid(true);
+    }
+  }, [history, setIsValid, values]);
 
   return (
     <label className="search-form">
@@ -47,9 +42,8 @@ const SearchForm = ({ handleSearchSubmit }) => {
           className="search-form__search-bar"
           id="search-movies"
           name="search"
-          value={values.search}
+          value={values.search || ''}
           onChange={handleChange}
-          autoComplete="off"
           required
         />
         <span>{errorMessage}</span>

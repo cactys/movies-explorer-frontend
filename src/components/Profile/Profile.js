@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useValidationForm from '../../hooks/useValidationForm';
@@ -39,7 +39,7 @@ const Profile = ({ signOut, onUpdateUser }) => {
               value={values.name || ''}
               onChange={handleChange}
             />
-            {/* <span>{errors.name}</span> */}
+            <span>{errors.name}</span>
           </label>
           <label className="profile__field">
             <span className="profile__input-title">E-mail</span>
@@ -53,7 +53,7 @@ const Profile = ({ signOut, onUpdateUser }) => {
               value={values.email || ''}
               onChange={handleChange}
             />
-            {/* <span>{errors.email}</span> */}
+            <span>{errors.email}</span>
           </label>
         </fieldset>
         <nav className="profile__navigation">

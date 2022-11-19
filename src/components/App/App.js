@@ -92,11 +92,10 @@ const App = () => {
       .signIn(data)
       .then((res) => {
         if (res.token) {
-          console.log(res);
           setIsLogin(true);
           setInfoTooltip(true);
           setMessageTooltip('Вы успешно вошли!');
-          history.push('/profile');
+          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -118,6 +117,7 @@ const App = () => {
           email: '',
           password: '',
         });
+        localStorage.clear();
         setIsLogin(false);
       })
       .finally(() => {
