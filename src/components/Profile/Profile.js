@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import useValidationForm from '../../hooks/useValidationForm';
 import './Profile.css';
 
-const Profile = ({ signOut, onUpdateUser }) => {
+const Profile = ({ onSignOut, onUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
@@ -71,7 +71,7 @@ const Profile = ({ signOut, onUpdateUser }) => {
           >
             Редактировать
           </button>
-          <Link className="profile__exit-auth" to="/signin" onClick={signOut}>
+          <Link className="profile__exit-auth" to="/signin" onClick={onSignOut}>
             Выйти из аккаунта
           </Link>
         </nav>

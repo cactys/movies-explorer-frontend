@@ -18,6 +18,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { GLOBAL_URL } from '../../utils/url';
+import { CATCH_ERROR } from '../../utils/constants';
 
 const App = () => {
   const [savedMovies, setSavedMovies] = useState([]);
@@ -27,6 +28,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [preloader, setPreloader] = useState(true);
   const history = useHistory();
 
@@ -61,6 +63,7 @@ const App = () => {
           setCurrentUser(res);
         }
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => console.log(err));
     mainApi
       .getSavedMovies()
@@ -77,12 +80,13 @@ const App = () => {
       .then((res) => {
         if (res.token) {
           setIsLogin(true);
-          history.push('/movies')
+          history.push('/movies');
         }
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError('Что-то пошло не так! Попробуйте ещё раз.');
+        setMessageError(CATCH_ERROR);
       });
   };
 
@@ -92,16 +96,17 @@ const App = () => {
       .then((res) => {
         if (res.token) {
           setIsLogin(true);
-          history.push('/movies')
+          history.push('/movies');
         }
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError('Что-то пошло не так! Попробуйте ещё раз.');
+        setMessageError(CATCH_ERROR);
       });
   };
 
-  const signOut = () => {
+  const onSignOut = () => {
     auth
       .signOut()
       .then(() => {
@@ -112,6 +117,7 @@ const App = () => {
         });
         localStorage.clear();
         setIsLogin(false);
+        setIsChecked(false);
       })
       .finally(() => {
         history.push('/');
@@ -130,7 +136,7 @@ const App = () => {
       .catch((err) => {
         console.log(err);
         setInfoTooltip(false);
-        setMessageTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+        setMessageTooltip(CATCH_ERROR);
       })
       .finally(() => {
         setIsTooltipPopupOpen(true);
@@ -179,7 +185,7 @@ const App = () => {
           </Route>
           <Route exact path="/movies">
             <Header loggedIn={isLogin} />
-            {isLogin ? (
+            {isChecked ? (
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Movies}
@@ -196,7 +202,7 @@ const App = () => {
           </Route>
           <Route exact path="/saved-movies">
             <Header loggedIn={isLogin} />
-            {isLogin ? (
+            {isChecked ? (
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={SavedMovies}
@@ -210,21 +216,26 @@ const App = () => {
           </Route>
           <Route exact path="/profile">
             <Header loggedIn={isLogin} />
-            {isLogin ? (
+            {isChecked ? (
               <ProtectedRoute
                 loggedIn={isLogin}
                 component={Profile}
-                signOut={signOut}
+                onSignOut={onSignOut}
                 onUpdateUser={handleUpdateUser}
               />
             ) : (
               <Preloader />
             )}
           </Route>
-          <Route exact path="/signin">
-            <Login handleLogin={handleLogin} messageError={messageError} />
+          <Route path="/signin">
+            <Login
+              loggedIn={isLogin}
+              handleLogin={handleLogin}
+              messageError={messageError}
+            />
           </Route>
-          <Route exact path="/signup">
+
+          <Route path="/signup">
             <Register
               handleRegister={handleRegister}
               messageError={messageError}

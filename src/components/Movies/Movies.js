@@ -7,6 +7,7 @@ import './Movies.css';
 import { moviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
+import { NOT_FOUND, QUERY_ERROR } from '../../utils/constants';
 
 const Movies = ({
   savedMovies,
@@ -25,14 +26,12 @@ const Movies = ({
     const moviesList = filterSearchMovie(movies, input, filter);
 
     if (moviesList.length === 0) {
-      setErrorMessage('Ничего не найдено');
+      setErrorMessage(NOT_FOUND);
       setMoviesNotFound(true);
       localStorage.setItem('movies', JSON.stringify(moviesList));
     } else {
       setErrorMessage(
-        filter && filterShortCheckbox(moviesList).length === 0
-          ? 'Ничего не найдено'
-          : ''
+        filter && filterShortCheckbox(moviesList).length === 0 ? NOT_FOUND : ''
       );
       setMoviesNotFound(
         filter && filterShortCheckbox(moviesList).length === 0 ? true : false
@@ -44,6 +43,8 @@ const Movies = ({
   };
 
   const handleSearchSubmit = (input) => {
+    console.log(input);
+    localStorage.setItem('search-movies', input);
     localStorage.setItem('short-movies', filterCheckbox);
 
     if (allMovies.length === 0) {
@@ -56,9 +57,7 @@ const Movies = ({
         })
         .catch((err) => {
           console.log(err);
-          setErrorMessage(
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-          );
+          setErrorMessage(QUERY_ERROR);
           setMoviesNotFound(true);
         })
         .finally(() => setPreloader(false));
@@ -80,7 +79,7 @@ const Movies = ({
       if (
         Array.isArray(movies) ? filterShortCheckbox(movies).length === 0 : null
       ) {
-        setErrorMessage('Ничего не найдено');
+        setErrorMessage(NOT_FOUND);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -90,7 +89,7 @@ const Movies = ({
       setFilterCheckbox(false);
       setFilterMovies(movies);
       if (Array.isArray(movies) ? movies.length === 0 : null) {
-        setErrorMessage('Ничего не найдено');
+        setErrorMessage(NOT_FOUND);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -113,7 +112,7 @@ const Movies = ({
             ? filterShortCheckbox(movies).length === 0
             : null
         ) {
-          setErrorMessage('Ничего не найдено');
+          setErrorMessage(NOT_FOUND);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');
@@ -124,7 +123,7 @@ const Movies = ({
         setFilterCheckbox(false);
 
         if (Array.isArray(movies) ? movies.length === 0 : null) {
-          setErrorMessage('Ничего не найдено');
+          setErrorMessage(NOT_FOUND);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');

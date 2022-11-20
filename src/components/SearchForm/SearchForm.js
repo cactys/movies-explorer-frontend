@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useValidationForm from '../../hooks/useValidationForm';
+import { ENTER_KEYWORD } from '../../utils/constants';
 import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
-  const [errorMessage, setErrorMessage] = useState(
-    'Нужно ввести ключевое слово'
-  );
+  const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
 
@@ -16,10 +15,19 @@ const SearchForm = ({ handleSearchSubmit }) => {
     if (isValid) {
       handleSearchSubmit(values.search);
     } else {
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage(ENTER_KEYWORD);
       localStorage.setItem('search-movies', '');
     }
   };
+
+  useEffect(() => {
+    if (!isValid) {
+      localStorage.setItem('search-movies', '');
+      // localStorage.setItem('movies', '');
+    }
+
+    setErrorMessage('');
+  }, [isValid, values]);
 
   useEffect(() => {
     if (history.location.pathname === '/movies' && values.search) {
@@ -27,10 +35,6 @@ const SearchForm = ({ handleSearchSubmit }) => {
       setIsValid(true);
     }
 
-    setErrorMessage('');
-  }, [history, setIsValid, values]);
-
-  useEffect(() => {
     if (
       history.location.pathname === '/movies' &&
       localStorage.getItem('search-movies')
@@ -38,7 +42,7 @@ const SearchForm = ({ handleSearchSubmit }) => {
       const searchValue = localStorage.getItem('search-movies');
       values.search = searchValue;
     }
-  }, [history, values]);
+  }, [history, setIsValid, values]);
 
   return (
     <label className="search-form">

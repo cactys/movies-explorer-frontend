@@ -10,7 +10,7 @@ const Menu = ({ active, setActive }) => {
     >
       <span className="menu__blur" />
       <div className="menu__content" onClick={(e) => e.stopPropagation()}>
-        <Link to="/" className="menu__main">
+        <Link to="/" className="menu__main" onClick={() => setActive(false)}>
           Главная
         </Link>
         <div className="menu__links">
