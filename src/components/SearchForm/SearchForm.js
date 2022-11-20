@@ -5,32 +5,40 @@ import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(
+    'Нужно ввести ключевое слово'
+  );
 
   const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(values.search);
     if (isValid) {
       handleSearchSubmit(values.search);
     } else {
       setErrorMessage('Нужно ввести ключевое слово');
+      localStorage.setItem('search-movies', '');
     }
   };
 
   useEffect(() => {
+    if (history.location.pathname === '/movies' && values.search) {
+      localStorage.setItem('search-movies', values.search);
+      setIsValid(true);
+    }
+
     setErrorMessage('');
-  }, [isValid]);
+  }, [history, setIsValid, values]);
 
   useEffect(() => {
-    if (history.location.pathname === '/movies') {
-      // localStorage.setItem('search-movies', values.search);
+    if (
+      history.location.pathname === '/movies' &&
+      localStorage.getItem('search-movies')
+    ) {
       const searchValue = localStorage.getItem('search-movies');
       values.search = searchValue;
-      // setIsValid(true);
     }
-  }, [history, setIsValid, values]);
+  }, [history, values]);
 
   return (
     <label className="search-form">
@@ -46,11 +54,11 @@ const SearchForm = ({ handleSearchSubmit }) => {
           onChange={handleChange}
           required
         />
-        <span>{errorMessage}</span>
         <button className="search-form__search-btn" type="submit">
           Найти
         </button>
       </form>
+      <span className="search-form__error">{errorMessage}</span>
     </label>
   );
 };

@@ -25,6 +25,7 @@ const App = () => {
   const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
+  const [messageError, setMessageError] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const [preloader, setPreloader] = useState(true);
   const history = useHistory();
@@ -73,17 +74,15 @@ const App = () => {
   const handleRegister = (data) => {
     auth
       .signUp(data)
-      .then(() => {
-        setIsTooltipPopupOpen(true);
-        setInfoTooltip(true);
-        setMessageTooltip('Вы успешно зарегистрировались!');
-        history.push('/signin');
+      .then((res) => {
+        if (res.token) {
+          setIsLogin(true);
+          history.push('/movies')
+        }
       })
       .catch((err) => {
         console.log(err);
-        setIsTooltipPopupOpen(true);
-        setInfoTooltip(false);
-        setMessageTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+        setMessageError('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
 
@@ -93,18 +92,12 @@ const App = () => {
       .then((res) => {
         if (res.token) {
           setIsLogin(true);
-          setInfoTooltip(true);
-          setMessageTooltip('Вы успешно вошли!');
-          history.push('/movies');
+          history.push('/movies')
         }
       })
       .catch((err) => {
         console.log(err);
-        setInfoTooltip(false);
-        setMessageTooltip('Что-то пошло не так! Попробуйте ещё раз.');
-      })
-      .finally(() => {
-        setIsTooltipPopupOpen(true);
+        setMessageError('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
 
@@ -121,10 +114,7 @@ const App = () => {
         setIsLogin(false);
       })
       .finally(() => {
-        history.push('/signin');
-        setInfoTooltip(true);
-        setIsTooltipPopupOpen(true);
-        setMessageTooltip('Выход УСПЕХ!');
+        history.push('/');
       })
       .catch((err) => console.log(err));
   };
@@ -135,7 +125,6 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res);
         setInfoTooltip(true);
-        setIsTooltipPopupOpen(true);
         setMessageTooltip('Вы изменили личные данные.');
       })
       .catch((err) => {
@@ -233,10 +222,13 @@ const App = () => {
             )}
           </Route>
           <Route exact path="/signin">
-            <Login handleLogin={handleLogin} />
+            <Login handleLogin={handleLogin} messageError={messageError} />
           </Route>
           <Route exact path="/signup">
-            <Register handleRegister={handleRegister} />
+            <Register
+              handleRegister={handleRegister}
+              messageError={messageError}
+            />
           </Route>
           <Route path="*">
             <PageNotFound />

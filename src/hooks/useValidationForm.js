@@ -10,33 +10,23 @@ const useValidationForm = () => {
     const input = evt.target;
     const { name, value } = input;
 
-    // if (name === 'name' && input.validity.valueMissing) {
-    //   console.log(input.validationMessage);
-    //   input.setCustomValidity(
-    //     'Имя должно содержать только латиницу, кириллицу, пробел или дефис.'
-    //   );
-    // } else {
-    //   input.setCustomValidity('');
-    // }
-
-    console.log(input.value);
-
     if (name === 'email') {
       if (!isEmail(value)) {
+        console.log('1');
         input.setCustomValidity('Некорректный адрес e-mail.');
       } else {
+        console.log('2');
         input.setCustomValidity('');
       }
     }
 
-    // console.log(input.value);
-    // if (name === 'search') {
-    // localStorage.setItem('search-movies', input.value);
-    //   input.setCustomValidity('Введите ключевое слово');
-    // } else {
-    //   localStorage.setItem('search-movies', input.value);
-    //   input.setCustomValidity('');
-    // }
+    if (name === 'name' && input.validity.patternMismatch) {
+      input.setCustomValidity(
+        'Имя должно содержать только латиницу, кириллицу, пробел или дефис.'
+      );
+    } else {
+      input.setCustomValidity('');
+    }
 
     setValues({
       ...values,

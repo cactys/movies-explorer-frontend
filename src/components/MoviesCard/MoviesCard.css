@@ -32,6 +32,16 @@
   flex-direction: column;
 }
 
+.movies-card__trailer-link {
+  text-decoration: none;
+  color: inherit;
+  transform: opacity 0.4s;
+}
+
+.movies-card__trailer-link:hover {
+  opacity: 0.7;
+}
+
 .movies-card__title {
   margin: 0;
   padding: 0;
@@ -53,6 +63,7 @@
 }
 
 .movies-card__mark {
+  z-index: 2;
   position: absolute;
   top: 0;
   right: 0;

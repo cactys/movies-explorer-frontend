@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignIn = ({ handleLogin }) => {
+const SignIn = ({ handleLogin, messageError }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
 
@@ -25,6 +25,7 @@ const SignIn = ({ handleLogin }) => {
       link="Регистрация"
       path="/signup"
       isValid={isValid}
+      messageError={messageError}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">

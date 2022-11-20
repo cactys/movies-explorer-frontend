@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignUp = ({ handleRegister }) => {
+const SignUp = ({ handleRegister, messageError }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
 
@@ -25,6 +25,7 @@ const SignUp = ({ handleRegister }) => {
       link="Войти"
       path="/signin"
       isValid={isValid}
+      messageError={messageError}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">
@@ -42,6 +43,7 @@ const SignUp = ({ handleRegister }) => {
             required
             minLength="2"
             maxLength="30"
+            pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
           />
           <span
             className={`auth-form__error ${

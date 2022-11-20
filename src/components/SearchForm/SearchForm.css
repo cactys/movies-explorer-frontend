@@ -1,10 +1,12 @@
 .search-form {
+  position: relative;
   width: 100%;
   padding: 64px 0 15px;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 
 .search-form__form {
@@ -64,6 +66,15 @@
 
 .search-form__search-bar::placeholder {
   color: #a0a0a0;
+}
+
+.search-form__error {
+  position: absolute;
+  bottom: 0;
+  color: #ff3055;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: calc(12 / 10);
 }
 
 @media screen and (max-width: 831px) {

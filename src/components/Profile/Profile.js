@@ -9,6 +9,10 @@ const Profile = ({ signOut, onUpdateUser }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
 
+  const validity =
+    !isValid ||
+    (currentUser.name === values.name && currentUser.email === values.email);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onUpdateUser(values);
@@ -23,7 +27,7 @@ const Profile = ({ signOut, onUpdateUser }) => {
   return (
     <main className="profile">
       <h2 className="profile__title">Привет, {currentUser.name}</h2>
-      <form className="profile__form" onSubmit={handleSubmit}>
+      <form className="profile__form" noValidate onSubmit={handleSubmit}>
         <fieldset className="profile__set-profile">
           <label className="profile__field">
             <span className="profile__input-title">Имя</span>
@@ -38,8 +42,9 @@ const Profile = ({ signOut, onUpdateUser }) => {
               maxLength="30"
               value={values.name || ''}
               onChange={handleChange}
+              pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
             />
-            <span>{errors.name}</span>
+            <span className="profile__error">{errors.name}</span>
           </label>
           <label className="profile__field">
             <span className="profile__input-title">E-mail</span>
@@ -53,15 +58,15 @@ const Profile = ({ signOut, onUpdateUser }) => {
               value={values.email || ''}
               onChange={handleChange}
             />
-            <span>{errors.email}</span>
+            <span className="profile__error">{errors.email || ''}</span>
           </label>
         </fieldset>
         <nav className="profile__navigation">
           <button
             type="submit"
-            disabled={!isValid}
+            disabled={validity ? true : false}
             className={`profile__edit-profile ${
-              !isValid ? 'profile__edit-profile_disable' : ''
+              validity ? 'profile__edit-profile_disable' : ''
             }`}
           >
             Редактировать

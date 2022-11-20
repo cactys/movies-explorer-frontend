@@ -86,6 +86,14 @@
   width: 396px;
   max-width: 100%;
   flex: 0 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.auth-form__error-message {
+  display: block;
+  color: #ff3055;
+  margin: 0 0 15px;
 }
 
 .auth-form__submit {

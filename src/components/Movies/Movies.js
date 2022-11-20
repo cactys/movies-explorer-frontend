@@ -21,27 +21,29 @@ const Movies = ({
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
-  const handleSearchMovies = (movies, input) => {
-    const moviesList = filterSearchMovie(movies, input, filterCheckbox);
+  const handleSearchMovies = (movies, input, filter) => {
+    const moviesList = filterSearchMovie(movies, input, filter);
 
     if (moviesList.length === 0) {
       setErrorMessage('Ничего не найдено');
       setMoviesNotFound(true);
+      localStorage.setItem('movies', JSON.stringify(moviesList));
     } else {
-      setErrorMessage('');
-      setMoviesNotFound(false);
-
-      setFilterMovies(moviesList);
-      setFilterMovies(
-        filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
+      setErrorMessage(
+        filter && filterShortCheckbox(moviesList).length === 0
+          ? 'Ничего не найдено'
+          : ''
       );
+      setMoviesNotFound(
+        filter && filterShortCheckbox(moviesList).length === 0 ? true : false
+      );
+
+      setFilterMovies(filter ? filterShortCheckbox(moviesList) : moviesList);
       localStorage.setItem('movies', JSON.stringify(moviesList));
     }
   };
 
   const handleSearchSubmit = (input) => {
-    console.log(input);
-    localStorage.setItem('search-movies', input);
     localStorage.setItem('short-movies', filterCheckbox);
 
     if (allMovies.length === 0) {
@@ -50,7 +52,7 @@ const Movies = ({
         .getMovies()
         .then((res) => {
           setAllMovies(res);
-          handleSearchMovies(res, input);
+          handleSearchMovies(res, input, filterCheckbox);
         })
         .catch((err) => {
           console.log(err);
@@ -61,7 +63,7 @@ const Movies = ({
         })
         .finally(() => setPreloader(false));
     } else {
-      handleSearchMovies(allMovies, input);
+      handleSearchMovies(allMovies, input, filterCheckbox);
     }
   };
 

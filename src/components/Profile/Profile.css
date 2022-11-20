@@ -30,6 +30,7 @@
 }
 
 .profile__field {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +42,7 @@
 }
 
 .profile__field:not(:first-child) {
-  padding: 17px 0 0;
+  padding: 17px 0 16px;
 }
 
 .profile__input-title {
@@ -62,7 +63,13 @@
 }
 
 .profile__error {
-  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: calc(12 / 10);
+  color: #ff3055;
 }
 
 .profile__navigation {
