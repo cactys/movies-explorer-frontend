@@ -22,7 +22,7 @@ import { MESSAGE } from '../../utils/constants';
 
 const App = () => {
   const { beatfilmMovies } = URL;
-  const { catchError } =MESSAGE;
+  const { catchError } = MESSAGE;
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const [messageTooltip, setMessageTooltip] = useState('');
@@ -192,6 +192,8 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
+  console.log(savedMovies);
+
   const handleDeleteMovie = (movie) => {
     mainApi
       .deleteMovie(movie._id)
@@ -263,16 +265,13 @@ const App = () => {
               messageError={messageError}
             />
           </Route>
-
           <Route exact path="/signup">
             <Register
               handleRegister={handleRegister}
               messageError={messageError}
             />
           </Route>
-          <Route exact path="*">
-            <PageNotFound />
-          </Route>
+          <Route component={PageNotFound} />
         </Switch>
         <InfoTooltip
           isOpen={isTooltipPopupOpen}

@@ -7,11 +7,11 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
   const { beatfilmMovies } = URL;
   const history = useHistory();
 
-  const handleSaveMovie = () => {
+  const handleFolloweMovies = () => {
     onAddMovie(movie);
   };
 
-  const handleDeleteClick = () => {
+  const handleUnfolloweMovies = () => {
     onDeleteMovie(savedMovie);
   };
 
@@ -27,7 +27,6 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
       <div className="movies-card__header">
         <div className="movies-card__description">
           <h2 className="movies-card__title">{movie.nameRU}</h2>
-          {/* </a> */}
           <p className="movies-card__duration">{intToTime(movie.duration)}</p>
         </div>
         {history.location.pathname === '/movies' && (
@@ -36,14 +35,14 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
             className={`movies-card__mark movies-card__mark_tag ${
               savedMovie ? 'movies-card__mark_active' : ''
             }`}
-            onClick={savedMovie ? handleDeleteClick : handleSaveMovie}
+            onClick={savedMovie ? handleUnfolloweMovies : handleFolloweMovies}
           />
         )}
         {history.location.pathname === '/saved-movies' && (
           <button
             type="button"
             className="movies-card__mark movies-card__mark_cross"
-            onClick={handleDeleteClick}
+            onClick={handleUnfolloweMovies}
           />
         )}
       </div>

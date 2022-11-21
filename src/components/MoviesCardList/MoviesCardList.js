@@ -13,10 +13,9 @@ const MoviesCardList = ({
   onDeleteMovie,
   windowWidth,
 }) => {
-  const [toMount, setToMount] = useState(true);
+  const [filter, setFilter] = useState([]);
   const [showMovies, setShowMovies] = useState([]);
   const [showCards, setShowCards] = useState({ total: 12, load: 3 });
-  const [filter, setFilter] = useState([]);
 
   const { desktop, table, mobile } = PAGE_SIZE;
 
@@ -45,8 +44,7 @@ const MoviesCardList = ({
       setShowCards(mobile.cards);
     }
 
-    return () => setToMount(false);
-  }, [desktop, mobile, table, windowWidth, toMount]);
+  }, [desktop, mobile, table, windowWidth]);
 
   useEffect(() => {
     if (filter.length) {
@@ -57,8 +55,7 @@ const MoviesCardList = ({
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {showMovies.map((movie) => {
-          return (
+        {showMovies.map((movie) => (
             <MoviesCard
               key={movie.id || movie._id}
               movie={movie}
@@ -66,8 +63,7 @@ const MoviesCardList = ({
               onAddMovie={onAddMovie}
               onDeleteMovie={onDeleteMovie}
             />
-          );
-        })}
+        ))}
       </ul>
       <LoadMore
         setIndex={handleLoadMore}

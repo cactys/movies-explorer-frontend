@@ -17,31 +17,24 @@ const SearchForm = ({ handleSearchSubmit }) => {
       handleSearchSubmit(values.search);
     } else {
       setErrorMessage(enterKeyword);
-      localStorage.setItem('search-movies', '');
     }
   };
 
   useEffect(() => {
-    if (!isValid) {
-      localStorage.setItem('search-movies', '');
-      // localStorage.setItem('movies', '');
-    }
-
     setErrorMessage('');
   }, [isValid, values]);
 
   useEffect(() => {
-    if (history.location.pathname === '/movies' && values.search) {
-      localStorage.setItem('search-movies', values.search);
-      setIsValid(true);
-    }
+    if (history.location.pathname === '/movies') {
+      if (values.search) {
+        localStorage.setItem('search-movies', values.search);
+        setIsValid(true);
+      }
 
-    if (
-      history.location.pathname === '/movies' &&
-      localStorage.getItem('search-movies')
-    ) {
-      const searchValue = localStorage.getItem('search-movies');
-      values.search = searchValue;
+      if (localStorage.getItem('search-movies')) {
+        const searchValue = localStorage.getItem('search-movies');
+        values.search = searchValue;
+      }
     }
   }, [history, setIsValid, values]);
 
