@@ -40,7 +40,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: URL.mainApi,
+  baseUrl: URL.localApi,
   headers: {
     'Content-Type': 'application/json',
   },

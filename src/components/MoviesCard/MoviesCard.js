@@ -4,7 +4,7 @@ import { URL } from '../../utils/constants';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
-  const { movieApi } = URL;
+  const { beatfilmMovies } = URL;
   const history = useHistory();
 
   const handleSaveMovie = () => {
@@ -51,7 +51,7 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
         <img
           className="movies-card__image"
           alt={movie.nameRU}
-          src={`${movieApi}${movie.image.url}`}
+          src={`${beatfilmMovies}${movie.image.url}`}
         />
       )}
       {history.location.pathname === '/saved-movies' && (

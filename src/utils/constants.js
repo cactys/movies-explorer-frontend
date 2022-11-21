@@ -1,6 +1,7 @@
 export const URL = {
-  movieApi: 'https://api.nomoreparties.co',
-  mainApi: 'https://api.khnychkov.nomoredomains.icu',
+  beatfilmMovies: 'https://api.nomoreparties.co',
+  // mainApi: 'https://api.khnychkov.nomoredomains.icu',
+  localApi: 'http://localhost:3030',
 };
 
 export const PAGE_SIZE = {

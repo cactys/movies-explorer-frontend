@@ -21,7 +21,7 @@ import { URL } from '../../utils/constants';
 import { MESSAGE } from '../../utils/constants';
 
 const App = () => {
-  const { movieApi } = URL;
+  const { beatfilmMovies } = URL;
   const { catchError } =MESSAGE;
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
@@ -177,9 +177,9 @@ const App = () => {
       duration: movie.duration,
       year: movie.year,
       description: movie.description,
-      image: `${movieApi}${movie.image.url}`,
+      image: `${beatfilmMovies}${movie.image.url}`,
       trailerLink: movie.trailerLink,
-      thumbnail: `${movieApi}${movie.image.formats.thumbnail.url}`,
+      thumbnail: `${beatfilmMovies}${movie.image.formats.thumbnail.url}`,
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,

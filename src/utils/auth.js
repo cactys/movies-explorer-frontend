@@ -53,5 +53,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: URL.mainApi,
+  baseUrl: URL.localApi,
 });

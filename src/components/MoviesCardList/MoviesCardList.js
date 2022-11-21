@@ -33,7 +33,7 @@ const MoviesCardList = ({
   };
 
   useEffect(() => {
-    setFilter(filterMovies);
+    Array.isArray(filterMovies) ? setFilter(filterMovies) : setFilter([]);
   }, [filterMovies]);
 
   useEffect(() => {

@@ -39,8 +39,8 @@ class Api {
 }
 
 export const api = new Api({
-  globalUrl: URL.movieApi,
-  baseUrl: URL.mainApi,
+  globalUrl: URL.beatfilmMovies,
+  baseUrl: URL.localApi,
   headers: {
     'Content-Type': 'application/json',
   },
