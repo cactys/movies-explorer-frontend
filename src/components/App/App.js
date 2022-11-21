@@ -256,7 +256,7 @@ const App = () => {
               <Preloader />
             )}
           </Route>
-          <Route path="/signin">
+          <Route exact path="/signin">
             <Login
               loggedIn={isLogin}
               handleLogin={handleLogin}
@@ -264,13 +264,13 @@ const App = () => {
             />
           </Route>
 
-          <Route path="/signup">
+          <Route exact path="/signup">
             <Register
               handleRegister={handleRegister}
               messageError={messageError}
             />
           </Route>
-          <Route path="*">
+          <Route exact path="*">
             <PageNotFound />
           </Route>
         </Switch>
