@@ -7,7 +7,7 @@ import './Movies.css';
 import { moviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
-import { NOT_FOUND, QUERY_ERROR } from '../../utils/constants';
+import { MESSAGE } from '../../utils/constants';
 
 const Movies = ({
   savedMovies,
@@ -15,6 +15,7 @@ const Movies = ({
   onDeleteMovie,
   preloader,
   setPreloader,
+  windowWidth,
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [allMovies, setAllMovies] = useState([]);
@@ -26,12 +27,12 @@ const Movies = ({
     const moviesList = filterSearchMovie(movies, input, filter);
 
     if (moviesList.length === 0) {
-      setErrorMessage(NOT_FOUND);
+      setErrorMessage(MESSAGE.notFound);
       setMoviesNotFound(true);
       localStorage.setItem('movies', JSON.stringify(moviesList));
     } else {
       setErrorMessage(
-        filter && filterShortCheckbox(moviesList).length === 0 ? NOT_FOUND : ''
+        filter && filterShortCheckbox(moviesList).length === 0 ? MESSAGE.notFound : ''
       );
       setMoviesNotFound(
         filter && filterShortCheckbox(moviesList).length === 0 ? true : false
@@ -43,7 +44,6 @@ const Movies = ({
   };
 
   const handleSearchSubmit = (input) => {
-    console.log(input);
     localStorage.setItem('search-movies', input);
     localStorage.setItem('short-movies', filterCheckbox);
 
@@ -57,7 +57,7 @@ const Movies = ({
         })
         .catch((err) => {
           console.log(err);
-          setErrorMessage(QUERY_ERROR);
+          setErrorMessage(MESSAGE.queryError);
           setMoviesNotFound(true);
         })
         .finally(() => setPreloader(false));
@@ -79,7 +79,7 @@ const Movies = ({
       if (
         Array.isArray(movies) ? filterShortCheckbox(movies).length === 0 : null
       ) {
-        setErrorMessage(NOT_FOUND);
+        setErrorMessage(MESSAGE.notFound);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -89,7 +89,7 @@ const Movies = ({
       setFilterCheckbox(false);
       setFilterMovies(movies);
       if (Array.isArray(movies) ? movies.length === 0 : null) {
-        setErrorMessage(NOT_FOUND);
+        setErrorMessage(MESSAGE.notFound);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -112,7 +112,7 @@ const Movies = ({
             ? filterShortCheckbox(movies).length === 0
             : null
         ) {
-          setErrorMessage(NOT_FOUND);
+          setErrorMessage(MESSAGE.notFound);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');
@@ -123,7 +123,7 @@ const Movies = ({
         setFilterCheckbox(false);
 
         if (Array.isArray(movies) ? movies.length === 0 : null) {
-          setErrorMessage(NOT_FOUND);
+          setErrorMessage(MESSAGE.notFound);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');
@@ -151,6 +151,7 @@ const Movies = ({
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           onAddMovie={onAddMovie}
+          windowWidth={windowWidth}
         />
       ) : (
         <MoviesNotFound errorMessage={errorMessage} />

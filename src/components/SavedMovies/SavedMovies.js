@@ -6,7 +6,7 @@ import MoviesNotFound from '../MoviesNotFound/MoviesNotFound';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
-const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
+const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [searchMovies, setSearchMovies] = useState(savedMovies);
   const [filterMovies, setFilterMovies] = useState(searchMovies);
@@ -83,6 +83,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie }) => {
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}
+          windowWidth={windowWidth}
         />
       ) : (
         <MoviesNotFound errorMessage={errorMessage} />

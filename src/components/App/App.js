@@ -10,7 +10,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '../../utils/api';
 import { auth } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
@@ -18,7 +18,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { GLOBAL_URL } from '../../utils/url';
-import { CATCH_ERROR } from '../../utils/constants';
+import { MESSAGE } from '../../utils/constants';
 
 const App = () => {
   const [savedMovies, setSavedMovies] = useState([]);
@@ -30,9 +30,34 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [preloader, setPreloader] = useState(true);
+
+  const getWindowWidth = useCallback(() => window.innerWidth, []);
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+
   const history = useHistory();
 
   const isOpenPopup = isTooltipPopupOpen;
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(getWindowWidth());
+    };
+
+    let resizeTime;
+
+    const resizeController = () => {
+      if (!resizeTime) {
+        resizeTime = setTimeout(() => {
+          resizeTime = null;
+          handleWindowResize();
+        }, 1000);
+      }
+    };
+
+    window.addEventListener('resize', resizeController, false);
+
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, [getWindowWidth]);
 
   useEffect(() => {
     function closeByEscape(evt) {
@@ -86,7 +111,7 @@ const App = () => {
       .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError(CATCH_ERROR);
+        setMessageError(MESSAGE.catchError);
       });
   };
 
@@ -102,7 +127,7 @@ const App = () => {
       .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError(CATCH_ERROR);
+        setMessageError(MESSAGE.catchError);
       });
   };
 
@@ -136,7 +161,7 @@ const App = () => {
       .catch((err) => {
         console.log(err);
         setInfoTooltip(false);
-        setMessageTooltip(CATCH_ERROR);
+        setMessageTooltip(MESSAGE.catchError);
       })
       .finally(() => {
         setIsTooltipPopupOpen(true);
@@ -194,6 +219,7 @@ const App = () => {
                 onDeleteMovie={handleDeleteMovie}
                 preloader={preloader}
                 setPreloader={setPreloader}
+                windowWidth={windowWidth}
               />
             ) : (
               <Preloader />
@@ -208,6 +234,7 @@ const App = () => {
                 component={SavedMovies}
                 savedMovies={savedMovies}
                 onDeleteMovie={handleDeleteMovie}
+                windowWidth={windowWidth}
               />
             ) : (
               <Preloader />

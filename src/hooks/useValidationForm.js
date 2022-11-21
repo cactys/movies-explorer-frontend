@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import isEmail from 'validator/es/lib/isEmail';
-import { UN_CORRECT } from '../utils/constants';
+import { MESSAGE } from '../utils/constants';
 
 const useValidationForm = () => {
   const [values, setValues] = useState({});
@@ -13,14 +13,14 @@ const useValidationForm = () => {
 
     if (name === 'email') {
       if (!isEmail(value)) {
-        input.setCustomValidity(UN_CORRECT.email);
+        input.setCustomValidity(MESSAGE.incorrectEmail);
       } else {
         input.setCustomValidity('');
       }
     }
 
     if (name === 'name' && input.validity.patternMismatch) {
-      input.setCustomValidity(UN_CORRECT.name);
+      input.setCustomValidity(MESSAGE.incorrectName);
     } else {
       input.setCustomValidity('');
     }

@@ -1,19 +1,18 @@
 import './LoadMore.css';
 
-const LoadMore = ({ setIndex, isVisible, isDisable }) => {
+const LoadMore = ({ setIndex, showMovies, showCards, filter }) => {
   return (
     <div className="load-more">
-      {isVisible ? (
-        <button
-          className={`load-more__button ${
-            isDisable ? 'load-more__button_disabled' : ''
-          }`}
-          type="submit"
-          onClick={setIndex}
-        >
-          Ещё
-        </button>
-      ) : null}
+      {showMovies.length >= showCards.total &&
+        showMovies.length < filter.length && (
+          <button
+            className="load-more__button"
+            type="submit"
+            onClick={setIndex}
+          >
+            Ещё
+          </button>
+        )}
     </div>
   );
 };

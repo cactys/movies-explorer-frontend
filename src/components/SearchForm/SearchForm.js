@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useValidationForm from '../../hooks/useValidationForm';
-import { ENTER_KEYWORD } from '../../utils/constants';
+import { MESSAGE } from '../../utils/constants';
 import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
@@ -15,7 +15,7 @@ const SearchForm = ({ handleSearchSubmit }) => {
     if (isValid) {
       handleSearchSubmit(values.search);
     } else {
-      setErrorMessage(ENTER_KEYWORD);
+      setErrorMessage(MESSAGE.enterKeyword);
       localStorage.setItem('search-movies', '');
     }
   };
