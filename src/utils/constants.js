@@ -1,6 +1,6 @@
 export const URL = {
   beatfilmMovies: 'https://api.nomoreparties.co',
-  mainApi: 'https://api.khnychkov.nomoredomains.icu',
+  localApi: 'https://api.khnychkov.nomoredomains.icu',
   // localApi: 'http://localhost:3030',
 };
 
