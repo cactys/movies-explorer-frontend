@@ -1,9 +1,10 @@
 import { useHistory } from 'react-router-dom';
-import { GLOBAL_URL } from '../../utils/url';
 import { intToTime } from '../../utils/utils';
+import { URL } from '../../utils/constants';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
+  const { movieApi } = URL;
   const history = useHistory();
 
   const handleSaveMovie = () => {
@@ -20,7 +21,9 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
         className="movies-card__trailer-link"
         href={movie.trailerLink}
         target="blanck"
-      >{movie.nameRU}</a>
+      >
+        {movie.nameRU}
+      </a>
       <div className="movies-card__header">
         <div className="movies-card__description">
           <h2 className="movies-card__title">{movie.nameRU}</h2>
@@ -48,7 +51,7 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
         <img
           className="movies-card__image"
           alt={movie.nameRU}
-          src={`${GLOBAL_URL}${movie.image.url}`}
+          src={`${movieApi}${movie.image.url}`}
         />
       )}
       {history.location.pathname === '/saved-movies' && (

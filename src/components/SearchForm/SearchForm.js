@@ -5,6 +5,7 @@ import { MESSAGE } from '../../utils/constants';
 import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
+  const { enterKeyword } = MESSAGE;
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -15,7 +16,7 @@ const SearchForm = ({ handleSearchSubmit }) => {
     if (isValid) {
       handleSearchSubmit(values.search);
     } else {
-      setErrorMessage(MESSAGE.enterKeyword);
+      setErrorMessage(enterKeyword);
       localStorage.setItem('search-movies', '');
     }
   };

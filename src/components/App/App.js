@@ -17,13 +17,15 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
-import { GLOBAL_URL } from '../../utils/url';
+import { URL } from '../../utils/constants';
 import { MESSAGE } from '../../utils/constants';
 
 const App = () => {
+  const { movieApi } = URL;
+  const { catchError } =MESSAGE;
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
-  const [messageTooltip, setMessageTooltip] = useState(''); // заменить на нормальный сообщения
+  const [messageTooltip, setMessageTooltip] = useState('');
   const [infoTooltip, setInfoTooltip] = useState({});
   const [currentUser, setCurrentUser] = useState('');
   const [messageError, setMessageError] = useState('');
@@ -111,7 +113,7 @@ const App = () => {
       .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError(MESSAGE.catchError);
+        setMessageError(catchError);
       });
   };
 
@@ -127,7 +129,7 @@ const App = () => {
       .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
-        setMessageError(MESSAGE.catchError);
+        setMessageError(catchError);
       });
   };
 
@@ -161,7 +163,7 @@ const App = () => {
       .catch((err) => {
         console.log(err);
         setInfoTooltip(false);
-        setMessageTooltip(MESSAGE.catchError);
+        setMessageTooltip(catchError);
       })
       .finally(() => {
         setIsTooltipPopupOpen(true);
@@ -175,9 +177,9 @@ const App = () => {
       duration: movie.duration,
       year: movie.year,
       description: movie.description,
-      image: `${GLOBAL_URL}${movie.image.url}`,
+      image: `${movieApi}${movie.image.url}`,
       trailerLink: movie.trailerLink,
-      thumbnail: `${GLOBAL_URL}${movie.image.formats.thumbnail.url}`,
+      thumbnail: `${movieApi}${movie.image.formats.thumbnail.url}`,
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,

@@ -6,17 +6,6 @@ export const intToTime = (time) => {
   return hours === 0 ? `${minutes}м` : `${hours}ч ${minutes}м`;
 };
 
-// export const pageSize = () => {
-//   if (window.innerWidth <= 500) {
-//     return PAGE_SIZE[425];
-//   }
-//   if (window.innerWidth > 1024) {
-//     return PAGE_SIZE[1280];
-//   } else {
-//     return PAGE_SIZE[1024];
-//   }
-// };
-
 export const getSavedMovie = (arr, movie) => {
   return arr.find((item) => {
     return item.movieId === (movie.id || movie.movieId);

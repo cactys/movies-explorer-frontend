@@ -1,4 +1,4 @@
-import { BASE_URL, GLOBAL_URL } from "./url";
+import { URL } from './constants';
 
 class Api {
   constructor({ baseUrl, headers }) {
@@ -39,8 +39,8 @@ class Api {
 }
 
 export const api = new Api({
-  globalUrl: GLOBAL_URL,
-  baseUrl: BASE_URL,
+  globalUrl: URL.movieApi,
+  baseUrl: URL.mainApi,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,3 +1,8 @@
+export const URL = {
+  movieApi: 'https://api.nomoreparties.co',
+  mainApi: 'https://api.khnychkov.nomoredomains.icu',
+};
+
 export const PAGE_SIZE = {
   desktop: {
     width: 1024,

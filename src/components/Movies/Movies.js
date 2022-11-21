@@ -17,6 +17,7 @@ const Movies = ({
   setPreloader,
   windowWidth,
 }) => {
+  const { notFound, queryError } = MESSAGE;
   const [errorMessage, setErrorMessage] = useState('');
   const [allMovies, setAllMovies] = useState([]);
   const [filterMovies, setFilterMovies] = useState([]);
@@ -27,12 +28,14 @@ const Movies = ({
     const moviesList = filterSearchMovie(movies, input, filter);
 
     if (moviesList.length === 0) {
-      setErrorMessage(MESSAGE.notFound);
+      setErrorMessage(notFound);
       setMoviesNotFound(true);
       localStorage.setItem('movies', JSON.stringify(moviesList));
     } else {
       setErrorMessage(
-        filter && filterShortCheckbox(moviesList).length === 0 ? MESSAGE.notFound : ''
+        filter && filterShortCheckbox(moviesList).length === 0
+          ? notFound
+          : ''
       );
       setMoviesNotFound(
         filter && filterShortCheckbox(moviesList).length === 0 ? true : false
@@ -57,7 +60,7 @@ const Movies = ({
         })
         .catch((err) => {
           console.log(err);
-          setErrorMessage(MESSAGE.queryError);
+          setErrorMessage(queryError);
           setMoviesNotFound(true);
         })
         .finally(() => setPreloader(false));
@@ -79,7 +82,7 @@ const Movies = ({
       if (
         Array.isArray(movies) ? filterShortCheckbox(movies).length === 0 : null
       ) {
-        setErrorMessage(MESSAGE.notFound);
+        setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -89,7 +92,7 @@ const Movies = ({
       setFilterCheckbox(false);
       setFilterMovies(movies);
       if (Array.isArray(movies) ? movies.length === 0 : null) {
-        setErrorMessage(MESSAGE.notFound);
+        setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
         setErrorMessage('');
@@ -112,7 +115,7 @@ const Movies = ({
             ? filterShortCheckbox(movies).length === 0
             : null
         ) {
-          setErrorMessage(MESSAGE.notFound);
+          setErrorMessage(notFound);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');
@@ -123,7 +126,7 @@ const Movies = ({
         setFilterCheckbox(false);
 
         if (Array.isArray(movies) ? movies.length === 0 : null) {
-          setErrorMessage(MESSAGE.notFound);
+          setErrorMessage(notFound);
           setMoviesNotFound(true);
         } else {
           setErrorMessage('');
@@ -131,7 +134,7 @@ const Movies = ({
         }
       }
     }
-  }, [setFilterMovies]);
+  }, [notFound, setFilterMovies]);
 
   return (
     <main className="movies">

@@ -3,6 +3,7 @@ import isEmail from 'validator/es/lib/isEmail';
 import { MESSAGE } from '../utils/constants';
 
 const useValidationForm = () => {
+  const { incorrectEmail, incorrectName } = MESSAGE;
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -13,14 +14,14 @@ const useValidationForm = () => {
 
     if (name === 'email') {
       if (!isEmail(value)) {
-        input.setCustomValidity(MESSAGE.incorrectEmail);
+        input.setCustomValidity(incorrectEmail);
       } else {
         input.setCustomValidity('');
       }
     }
 
     if (name === 'name' && input.validity.patternMismatch) {
-      input.setCustomValidity(MESSAGE.incorrectName);
+      input.setCustomValidity(incorrectName);
     } else {
       input.setCustomValidity('');
     }

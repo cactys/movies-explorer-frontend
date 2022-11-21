@@ -1,4 +1,4 @@
-import { GLOBAL_URL } from "./url";
+import { URL } from './constants';
 
 class MoviesApi {
   constructor({ baseUrl, headers }) {
@@ -21,7 +21,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-  baseUrl: GLOBAL_URL,
+  baseUrl: URL.moviesApi,
   headers: {
     'Content-Type': 'application/json',
   },
