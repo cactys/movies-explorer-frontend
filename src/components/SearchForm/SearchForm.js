@@ -4,7 +4,7 @@ import useValidationForm from '../../hooks/useValidationForm';
 import { MESSAGE } from '../../utils/constants';
 import './SearchForm.css';
 
-const SearchForm = ({ handleSearchSubmit }) => {
+const SearchForm = ({ handleSearchSubmit, setIsQueryValid }) => {
   const { enterKeyword } = MESSAGE;
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,14 +15,16 @@ const SearchForm = ({ handleSearchSubmit }) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
+      localStorage.setItem('search-movies', values.search);
     } else {
       setErrorMessage(enterKeyword);
+      localStorage.setItem('search-movies', values.search);
     }
   };
 
   useEffect(() => {
     setErrorMessage('');
-  }, [isValid, values]);
+  }, [isValid]);
 
   useEffect(() => {
     if (history.location.pathname === '/movies') {

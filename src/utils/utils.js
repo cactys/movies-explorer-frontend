@@ -1,4 +1,4 @@
-import { MOVIE_DURATION, } from './constants';
+import { MOVIE_DURATION } from './constants';
 
 export const intToTime = (time) => {
   const hours = Math.trunc(time / 60);
@@ -8,7 +8,7 @@ export const intToTime = (time) => {
 
 export const getSavedMovie = (arr, movie) => {
   return arr.find((item) => {
-    return item.movieId === (movie.id || movie.movieId);
+    return item.movieId === movie.id; // || movie.movieId);
   });
 };
 

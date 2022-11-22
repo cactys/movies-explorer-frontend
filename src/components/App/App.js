@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -16,9 +16,9 @@ import { auth } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
-import Preloader from '../Preloader/Preloader';
 import { URL } from '../../utils/constants';
 import { MESSAGE } from '../../utils/constants';
+import Preloader from '../Preloader/Preloader';
 
 const App = () => {
   const { beatfilmMovies } = URL;
@@ -76,22 +76,22 @@ const App = () => {
     }
   }, [isOpenPopup]);
 
-  const closeAllPopups = () => {
-    setIsTooltipPopupOpen(false);
-  };
-
   useEffect(() => {
     api
       .getUser()
       .then((res) => {
-        if (res) {
+        if (res._id) {
           setIsLogin(true);
           history.push(history.location.pathname);
           setCurrentUser(res);
         }
       })
       .finally(() => setIsChecked(true))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsLogin(false);
+        setIsChecked(false);
+      });
     mainApi
       .getSavedMovies()
       .then((res) => {
@@ -100,6 +100,10 @@ const App = () => {
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
   }, [isLogin, history]);
+
+  const closeAllPopups = () => {
+    setIsTooltipPopupOpen(false);
+  };
 
   const handleRegister = (data) => {
     auth
@@ -143,10 +147,10 @@ const App = () => {
           password: '',
         });
         localStorage.clear();
-        setIsLogin(false);
-        setIsChecked(false);
       })
       .finally(() => {
+        setIsLogin(false);
+        setIsChecked(false);
         history.push('/');
       })
       .catch((err) => console.log(err));
@@ -192,8 +196,6 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  console.log(savedMovies);
-
   const handleDeleteMovie = (movie) => {
     mainApi
       .deleteMovie(movie._id)
@@ -208,7 +210,7 @@ const App = () => {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path="/">
-            <Header loggedIn={isLogin} />
+            <Header loggedIn={false} />
             <Main />
             <Footer />
           </Route>
@@ -258,18 +260,26 @@ const App = () => {
               <Preloader />
             )}
           </Route>
-          <Route exact path="/signin">
-            <Login
-              loggedIn={isLogin}
-              handleLogin={handleLogin}
-              messageError={messageError}
-            />
+          <Route path="/signin">
+            {isChecked ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Login
+                loggedIn={isLogin}
+                handleLogin={handleLogin}
+                messageError={messageError}
+              />
+            )}
           </Route>
-          <Route exact path="/signup">
-            <Register
-              handleRegister={handleRegister}
-              messageError={messageError}
-            />
+          <Route path="/signup">
+            {isChecked ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Register
+                handleRegister={handleRegister}
+                messageError={messageError}
+              />
+            )}
           </Route>
           <Route component={PageNotFound} />
         </Switch>

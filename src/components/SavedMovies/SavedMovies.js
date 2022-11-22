@@ -11,8 +11,10 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const { notFound } = MESSAGE;
   const [errorMessage, setErrorMessage] = useState('');
   const [filterMovies, setFilterMovies] = useState(savedMovies);
+  const [searchMovies, setSearchMovies] = useState(filterMovies);
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
+  const [isQueryValid, setIsQueryValid] = useState(false);
 
   const handleSearchSubmit = (input) => {
     const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
@@ -25,6 +27,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       setMoviesNotFound(false);
     }
 
+    setSearchMovies(moviesList);
     setFilterMovies(
       filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
     );
@@ -33,8 +36,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const handleShortFilter = () => {
     if (!filterCheckbox) {
       setFilterCheckbox(true);
-      setFilterMovies(filterShortCheckbox(savedMovies));
-      if (filterShortCheckbox(savedMovies).length === 0) {
+      setFilterMovies(filterShortCheckbox(filterMovies));
+      if (filterShortCheckbox(filterMovies).length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
@@ -43,8 +46,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       }
     } else {
       setFilterCheckbox(false);
-      setFilterMovies(savedMovies);
-      if (savedMovies.length === 0) {
+      setFilterMovies(searchMovies);
+      if (searchMovies.length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
@@ -56,7 +59,29 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
 
   useEffect(() => {
     setFilterMovies(filterMovies);
-  }, [filterMovies]);
+
+    if (filterCheckbox) {
+      setFilterCheckbox(filterCheckbox);
+      setFilterMovies(filterShortCheckbox(filterMovies));
+      if (filterShortCheckbox(filterMovies).length === 0) {
+        setErrorMessage(notFound);
+        setMoviesNotFound(true);
+      } else {
+        setErrorMessage('');
+        setMoviesNotFound(false);
+      }
+    } else {
+      setFilterCheckbox(filterCheckbox);
+      setFilterMovies(filterMovies);
+      if (filterMovies.length === 0) {
+        setErrorMessage(notFound);
+        setMoviesNotFound(true);
+      } else {
+        setErrorMessage('');
+        setMoviesNotFound(false);
+      }
+    }
+  }, [savedMovies]);
 
   return (
     <main className="save-movies">
@@ -76,6 +101,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}
           windowWidth={windowWidth}
+          isQueryValid={isQueryValid}
+          setIsQueryValid={setIsQueryValid}
         />
       ) : (
         <MoviesNotFound errorMessage={errorMessage} />

@@ -106,6 +106,8 @@ const Movies = ({
     if (localStorage.getItem('movies')) {
       const movies = JSON.parse(localStorage.getItem('movies'));
 
+      const isMovies = Array.isArray(movies) ? movies : null;
+
       if (localStorage.getItem('short-movies') === 'true') {
         setFilterMovies(filterShortCheckbox(movies));
         setFilterCheckbox(true);

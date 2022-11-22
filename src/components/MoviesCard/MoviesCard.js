@@ -15,6 +15,10 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
     onDeleteMovie(savedMovie);
   };
 
+  const handleDeleteSavedMovie = () => {
+    onDeleteMovie(movie);
+  };
+
   return (
     <li className="movies-card">
       <a
@@ -42,7 +46,7 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
           <button
             type="button"
             className="movies-card__mark movies-card__mark_cross"
-            onClick={handleUnfolloweMovies}
+            onClick={handleDeleteSavedMovie}
           />
         )}
       </div>
