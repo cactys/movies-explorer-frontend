@@ -4,7 +4,7 @@ import useValidationForm from '../../hooks/useValidationForm';
 import { MESSAGE } from '../../utils/constants';
 import './SearchForm.css';
 
-const SearchForm = ({ handleSearchSubmit, setIsQueryValid }) => {
+const SearchForm = ({ handleSearchSubmit }) => {
   const { enterKeyword } = MESSAGE;
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,10 +15,8 @@ const SearchForm = ({ handleSearchSubmit, setIsQueryValid }) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
-      localStorage.setItem('search-movies', values.search);
     } else {
       setErrorMessage(enterKeyword);
-      localStorage.setItem('search-movies', values.search);
     }
   };
 
@@ -27,16 +25,17 @@ const SearchForm = ({ handleSearchSubmit, setIsQueryValid }) => {
   }, [isValid]);
 
   useEffect(() => {
-    if (history.location.pathname === '/movies') {
-      if (values.search) {
-        localStorage.setItem('search-movies', values.search);
-        setIsValid(true);
-      }
+    if (history.location.pathname === '/movies' && values.search) {
+      localStorage.setItem('search-movies', values.search);
+      setIsValid(true);
+    }
 
-      if (localStorage.getItem('search-movies')) {
-        const searchValue = localStorage.getItem('search-movies');
-        values.search = searchValue;
-      }
+    if (
+      history.location.pathname === '/movies' &&
+      localStorage.getItem('search-movies')
+    ) {
+      const searchValue = localStorage.getItem('search-movies');
+      values.search = searchValue;
     }
   }, [history, setIsValid, values]);
 

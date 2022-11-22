@@ -10,17 +10,16 @@ import './SavedMovies.css';
 const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const { notFound } = MESSAGE;
   const [errorMessage, setErrorMessage] = useState('');
-  const [filterMovies, setFilterMovies] = useState(savedMovies);
-  const [searchMovies, setSearchMovies] = useState(filterMovies);
+  const [displayMovies, setDisplayMovies] = useState(savedMovies);
+  const [searchMovies, setSearchMovies] = useState(displayMovies);
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
-  const [isQueryValid, setIsQueryValid] = useState(false);
 
   const handleSearchSubmit = (input) => {
     const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
 
     if (moviesList.length === 0) {
-      setErrorMessage('Ничего не найдено');
+      setErrorMessage(notFound);
       setMoviesNotFound(true);
     } else {
       setErrorMessage('');
@@ -28,7 +27,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
     }
 
     setSearchMovies(moviesList);
-    setFilterMovies(
+    setDisplayMovies(
       filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
     );
   };
@@ -36,8 +35,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const handleShortFilter = () => {
     if (!filterCheckbox) {
       setFilterCheckbox(true);
-      setFilterMovies(filterShortCheckbox(filterMovies));
-      if (filterShortCheckbox(filterMovies).length === 0) {
+      setDisplayMovies(filterShortCheckbox(searchMovies));
+      if (filterShortCheckbox(searchMovies).length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
@@ -46,7 +45,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       }
     } else {
       setFilterCheckbox(false);
-      setFilterMovies(searchMovies);
+      setDisplayMovies(searchMovies);
       if (searchMovies.length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
@@ -58,30 +57,30 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   };
 
   useEffect(() => {
-    setFilterMovies(filterMovies);
-
     if (filterCheckbox) {
-      setFilterCheckbox(filterCheckbox);
-      setFilterMovies(filterShortCheckbox(filterMovies));
-      if (filterShortCheckbox(filterMovies).length === 0) {
-        setErrorMessage(notFound);
-        setMoviesNotFound(true);
-      } else {
-        setErrorMessage('');
-        setMoviesNotFound(false);
-      }
+      setFilterCheckbox(true);
+      setDisplayMovies(filterShortCheckbox(savedMovies));
     } else {
-      setFilterCheckbox(filterCheckbox);
-      setFilterMovies(filterMovies);
-      if (filterMovies.length === 0) {
-        setErrorMessage(notFound);
-        setMoviesNotFound(true);
-      } else {
-        setErrorMessage('');
-        setMoviesNotFound(false);
-      }
+      setFilterCheckbox(false);
+      setDisplayMovies(savedMovies);
     }
-  }, [savedMovies]);
+  }, [savedMovies, filterCheckbox]);
+
+  useEffect(() => {
+    setSearchMovies(displayMovies);
+
+    if (displayMovies.length === 0) {
+      setErrorMessage(notFound);
+      setMoviesNotFound(true);
+    } else {
+      setMoviesNotFound(false);
+    }
+  }, [notFound, displayMovies]);
+
+  // console.log(savedMovies.length);
+  // console.log(filterShortCheckbox(savedMovies).length);
+  console.log(displayMovies.length);
+  console.log(filterShortCheckbox(displayMovies).length);
 
   return (
     <main className="save-movies">
@@ -96,13 +95,11 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       </section>
       {!moviesNotFound ? (
         <MoviesCardList
-          filterMovies={filterMovies}
+          displayMovies={displayMovies}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}
           windowWidth={windowWidth}
-          isQueryValid={isQueryValid}
-          setIsQueryValid={setIsQueryValid}
         />
       ) : (
         <MoviesNotFound errorMessage={errorMessage} />

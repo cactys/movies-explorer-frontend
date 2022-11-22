@@ -2,12 +2,12 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
 import { useState } from 'react';
-import { getSavedMovie } from '../../utils/utils';
+import { getSavedMovie, isArray } from '../../utils/utils';
 import { useEffect } from 'react';
 import { PAGE_SIZE } from '../../utils/constants';
 
 const MoviesCardList = ({
-  filterMovies,
+  displayMovies,
   savedMovies,
   onAddMovie,
   onDeleteMovie,
@@ -32,8 +32,8 @@ const MoviesCardList = ({
   };
 
   useEffect(() => {
-    Array.isArray(filterMovies) ? setFilter(filterMovies) : setFilter([]);
-  }, [filterMovies]);
+    Array.isArray(displayMovies) ? setFilter(displayMovies) : setFilter([]);
+  }, [displayMovies]);
 
   useEffect(() => {
     if (windowWidth > desktop.width) {
