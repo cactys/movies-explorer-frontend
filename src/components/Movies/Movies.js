@@ -33,9 +33,7 @@ const Movies = ({
       localStorage.setItem('movies', JSON.stringify(moviesList));
     } else {
       setErrorMessage(
-        filter && filterShortCheckbox(moviesList).length === 0
-          ? notFound
-          : ''
+        filter && filterShortCheckbox(moviesList).length === 0 ? notFound : ''
       );
       setMoviesNotFound(
         filter && filterShortCheckbox(moviesList).length === 0 ? true : false
@@ -101,6 +99,12 @@ const Movies = ({
   };
 
   useEffect(() => {
+    if (moviesNotFound) {
+      console.log(moviesNotFound);
+      setErrorMessage(notFound);
+      setMoviesNotFound(true);
+    }
+
     if (localStorage.getItem('movies')) {
       const movies = JSON.parse(localStorage.getItem('movies'));
 
@@ -128,8 +132,11 @@ const Movies = ({
           setMoviesNotFound(false);
         }
       }
+    } else {
+      setErrorMessage(notFound);
+      setMoviesNotFound(true);
     }
-  }, [notFound, setDisplayMovies]);
+  }, [moviesNotFound, notFound, setDisplayMovies]);
 
   return (
     <main className="movies">

@@ -17,6 +17,9 @@ const SearchForm = ({ handleSearchSubmit }) => {
       handleSearchSubmit(values.search);
     } else {
       setErrorMessage(enterKeyword);
+      if (history.location.pathname === '/movies') {
+        localStorage.setItem('search-movies', '');
+      }
     }
   };
 
