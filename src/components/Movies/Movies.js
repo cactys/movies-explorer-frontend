@@ -21,6 +21,7 @@ const Movies = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [allMovies, setAllMovies] = useState([]);
   const [displayMovies, setDisplayMovies] = useState([]);
+  const [searchMovies, setSearchMovies] = useState([]);
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
@@ -30,7 +31,8 @@ const Movies = ({
     if (moviesList.length === 0) {
       setErrorMessage(notFound);
       setMoviesNotFound(true);
-      localStorage.setItem('movies', JSON.stringify(moviesList));
+
+      setSearchMovies(moviesList);
     } else {
       setErrorMessage(
         filter && filterShortCheckbox(moviesList).length === 0 ? notFound : ''
@@ -39,13 +41,13 @@ const Movies = ({
         filter && filterShortCheckbox(moviesList).length === 0 ? true : false
       );
 
-      setDisplayMovies(filter ? filterShortCheckbox(moviesList) : moviesList);
-      localStorage.setItem('movies', JSON.stringify(moviesList));
+      setSearchMovies(moviesList);
     }
+    localStorage.setItem('movies', JSON.stringify(moviesList));
   };
 
   const handleSearchSubmit = (input) => {
-    localStorage.setItem('search-movies', input);
+    localStorage.setItem('query-movies', input);
     localStorage.setItem('short-movies', filterCheckbox);
 
     if (allMovies.length === 0) {
@@ -53,15 +55,18 @@ const Movies = ({
       moviesApi
         .getMovies()
         .then((res) => {
+          console.log(res);
           setAllMovies(res);
           handleSearchMovies(res, input, filterCheckbox);
+        })
+        .finally(() => {
+          setPreloader(false);
         })
         .catch((err) => {
           console.log(err);
           setErrorMessage(queryError);
           setMoviesNotFound(true);
-        })
-        .finally(() => setPreloader(false));
+        });
     } else {
       handleSearchMovies(allMovies, input, filterCheckbox);
     }
@@ -72,7 +77,6 @@ const Movies = ({
     localStorage.setItem('short-movies', filterCheckbox);
 
     const movies = JSON.parse(localStorage.getItem('movies'));
-    localStorage.setItem('movies', JSON.stringify(movies));
 
     if (!filterCheckbox) {
       setFilterCheckbox(true);
@@ -82,7 +86,12 @@ const Movies = ({
       ) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
+        if (localStorage.getItem('movies') === null) {
+          setErrorMessage(notFound);
+          setMoviesNotFound(true);
+        }
       } else {
+        setErrorMessage('');
         setMoviesNotFound(false);
       }
     } else {
@@ -92,6 +101,7 @@ const Movies = ({
         setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
+        setErrorMessage('');
         setMoviesNotFound(false);
       }
     }
@@ -99,44 +109,29 @@ const Movies = ({
   };
 
   useEffect(() => {
-    if (moviesNotFound) {
-      console.log(moviesNotFound);
-      setErrorMessage(notFound);
-      setMoviesNotFound(true);
+    if (localStorage.getItem('short-movies') === 'true') {
+      setFilterCheckbox(true);
+    } else {
+      setFilterCheckbox(false);
     }
+
+    const movies = JSON.parse(localStorage.getItem('movies'));
 
     if (localStorage.getItem('movies')) {
-      const movies = JSON.parse(localStorage.getItem('movies'));
-
-      if (localStorage.getItem('short-movies') === 'true') {
-        setDisplayMovies(filterShortCheckbox(movies));
-        setFilterCheckbox(true);
-        if (
-          Array.isArray(movies)
-            ? filterShortCheckbox(movies).length === 0
-            : null
-        ) {
-          setErrorMessage(notFound);
-          setMoviesNotFound(true);
-        } else {
-          setMoviesNotFound(false);
-        }
-      } else {
-        setDisplayMovies(movies);
-        setFilterCheckbox(false);
-
-        if (Array.isArray(movies) ? movies.length === 0 : null) {
-          setErrorMessage(notFound);
-          setMoviesNotFound(true);
-        } else {
-          setMoviesNotFound(false);
-        }
-      }
+      setDisplayMovies(filterShortCheckbox(movies));
+      setErrorMessage(filterShortCheckbox(movies).length === 0 ? notFound : '');
+      setMoviesNotFound(
+        filterShortCheckbox(movies).length === 0 ? true : false
+      );
+      console.log(filterShortCheckbox(movies));
     } else {
-      setErrorMessage(notFound);
-      setMoviesNotFound(true);
+      setDisplayMovies(movies);
+      setErrorMessage(movies.length === 0 ? notFound : '');
+      setMoviesNotFound(movies.length === 0 ? true : false);
+
+      console.log(movies);
     }
-  }, [moviesNotFound, notFound, setDisplayMovies]);
+  }, [filterCheckbox, notFound]);
 
   return (
     <main className="movies">

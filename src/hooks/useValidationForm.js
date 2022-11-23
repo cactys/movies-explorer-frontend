@@ -20,6 +20,8 @@ const useValidationForm = () => {
       }
     }
 
+    console.log(name);
+
     if (name === 'name' && input.validity.patternMismatch) {
       input.setCustomValidity(incorrectName);
     } else {

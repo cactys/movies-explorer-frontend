@@ -84,9 +84,9 @@ const App = () => {
           setIsLogin(true);
           history.push(history.location.pathname);
           setCurrentUser(res);
+          setIsChecked(true)
         }
       })
-      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         setIsLogin(false);
@@ -112,9 +112,9 @@ const App = () => {
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');
+          setIsChecked(true)
         }
       })
-      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         setMessageError(catchError);
@@ -128,9 +128,9 @@ const App = () => {
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');
+          setIsChecked(true)
         }
       })
-      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         setMessageError(catchError);

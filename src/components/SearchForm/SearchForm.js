@@ -15,11 +15,12 @@ const SearchForm = ({ handleSearchSubmit }) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
+      // if (history.location.pathname === '/movies') {
+      // localStorage.setItem('search-movies', values.search);
+      // setIsValid(true);
+      // }
     } else {
       setErrorMessage(enterKeyword);
-      if (history.location.pathname === '/movies') {
-        localStorage.setItem('search-movies', '');
-      }
     }
   };
 
@@ -29,18 +30,17 @@ const SearchForm = ({ handleSearchSubmit }) => {
 
   useEffect(() => {
     if (history.location.pathname === '/movies' && values.search) {
-      localStorage.setItem('search-movies', values.search);
-      setIsValid(true);
+      localStorage.setItem('query-movies', values.search);
     }
 
     if (
       history.location.pathname === '/movies' &&
-      localStorage.getItem('search-movies')
+      localStorage.getItem('query-movies')
     ) {
-      const searchValue = localStorage.getItem('search-movies');
+      const searchValue = localStorage.getItem('query-movies');
       values.search = searchValue;
     }
-  }, [history, setIsValid, values]);
+  }, [history, values]);
 
   return (
     <label className="search-form">
