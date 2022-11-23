@@ -6,7 +6,7 @@ import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
   const { enterKeyword } = MESSAGE;
-  const { values, handleChange, isValid, setIsValid } = useValidationForm();
+  const { values, handleChange, isValid, setIsValid, resetForm } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
@@ -23,6 +23,10 @@ const SearchForm = ({ handleSearchSubmit }) => {
       setErrorMessage(enterKeyword);
     }
   };
+
+  useEffect(() => {
+    resetForm()
+  }, [resetForm]);
 
   useEffect(() => {
     setErrorMessage('');
