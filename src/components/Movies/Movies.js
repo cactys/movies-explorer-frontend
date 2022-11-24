@@ -50,14 +50,12 @@ const Movies = ({
 
   const handleSearchSubmit = (input) => {
     localStorage.setItem('query-movies', input);
-    console.log(input);
     if (allMovies.length === 0) {
       setPreloader(true);
       moviesApi
         .getMovies()
         .then((res) => {
           setAllMovies(res);
-          console.log(input);
           handleSearchMovies(res, input);
         })
         .finally(() => {
@@ -69,6 +67,11 @@ const Movies = ({
           setMoviesNotFound(true);
         });
     } else {
+      console.log(input);
+      if (input === '') {
+        console.log('пусто');
+        // localStorage.setItem('query-movies', input);
+      }
       handleSearchMovies(allMovies, input);
     }
   };

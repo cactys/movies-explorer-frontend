@@ -49,6 +49,12 @@
   transition: opacity 0.4s;
 }
 
+.search-form__search-btn_disabled {
+  cursor: inherit;
+  background: #a0a0a0;
+  opacity: 0.8;
+}
+
 .search-form__search-btn:hover {
   opacity: 0.8;
 }

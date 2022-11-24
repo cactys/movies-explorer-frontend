@@ -15,9 +15,12 @@ const SearchForm = ({ handleSearchSubmit }) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
+      console.log(values);
     } else {
-      handleSearchSubmit('');
       setErrorMessage(enterKeyword);
+      if (history.location.pathname === '/saved-movies') {
+        handleSearchSubmit('');
+      }
     }
   };
 
@@ -26,16 +29,16 @@ const SearchForm = ({ handleSearchSubmit }) => {
   }, [isValid]);
 
   useEffect(() => {
-    if (!isValid) {
-      setErrorMessage(enterKeyword);
-    }
-  }, [isValid, enterKeyword])
-
-  useEffect(() => {
     if (history.location.pathname === '/movies' && values.search) {
       localStorage.setItem('query-movies', values.search);
     }
-  });
+  }, [history, values]);
+
+  // useEffect(() => {
+  //   if (!isValid) {
+  //     setErrorMessage(enterKeyword);
+  //   }
+  // }, [isValid, enterKeyword]);
 
   useEffect(() => {
     if (
@@ -44,8 +47,10 @@ const SearchForm = ({ handleSearchSubmit }) => {
     ) {
       const searchValue = localStorage.getItem('query-movies');
       values.search = searchValue;
+      // setErrorMessage('');
+      // setIsValid(true);
     }
-  }, [history, values]);
+  }, [history, values, setIsValid]);
 
   return (
     <label className="search-form">
@@ -62,9 +67,11 @@ const SearchForm = ({ handleSearchSubmit }) => {
           required
         />
         <button
-          className="search-form__search-btn"
+          className={`search-form__search-btn ${
+            !isValid ? 'search-form__search-btn_disabled' : ''
+          }`}
           type="submit"
-          disabled={!isValid}
+          // disabled={!isValid}
         >
           Найти
         </button>
