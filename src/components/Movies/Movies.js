@@ -25,22 +25,24 @@ const Movies = ({
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
-  const handleSearchMovies = (movies, input, filter) => {
-    const moviesList = filterSearchMovie(movies, input, filter);
+  const handleSearchMovies = (movies, input) => {
+    const moviesList = filterSearchMovie(movies, input);
 
     if (moviesList.length === 0) {
       setErrorMessage(notFound);
       setMoviesNotFound(true);
-
       setSearchMovies(moviesList);
     } else {
       setErrorMessage(
-        filter && filterShortCheckbox(moviesList).length === 0 ? notFound : ''
+        filterCheckbox && filterShortCheckbox(moviesList).length === 0
+          ? notFound
+          : ''
       );
       setMoviesNotFound(
-        filter && filterShortCheckbox(moviesList).length === 0 ? true : false
+        filterCheckbox && filterShortCheckbox(moviesList).length === 0
+          ? true
+          : false
       );
-
       setSearchMovies(moviesList);
     }
     localStorage.setItem('movies', JSON.stringify(moviesList));
@@ -48,16 +50,15 @@ const Movies = ({
 
   const handleSearchSubmit = (input) => {
     localStorage.setItem('query-movies', input);
-    localStorage.setItem('short-movies', filterCheckbox);
-
+    console.log(input);
     if (allMovies.length === 0) {
       setPreloader(true);
       moviesApi
         .getMovies()
         .then((res) => {
-          console.log(res);
           setAllMovies(res);
-          handleSearchMovies(res, input, filterCheckbox);
+          console.log(input);
+          handleSearchMovies(res, input);
         })
         .finally(() => {
           setPreloader(false);
@@ -68,7 +69,7 @@ const Movies = ({
           setMoviesNotFound(true);
         });
     } else {
-      handleSearchMovies(allMovies, input, filterCheckbox);
+      handleSearchMovies(allMovies, input);
     }
   };
 
@@ -111,27 +112,22 @@ const Movies = ({
   useEffect(() => {
     if (localStorage.getItem('short-movies') === 'true') {
       setFilterCheckbox(true);
-    } else {
-      setFilterCheckbox(false);
     }
+  }, [filterCheckbox]);
 
-    const movies = JSON.parse(localStorage.getItem('movies'));
+  useEffect(() => {
+    const getMovies = JSON.parse(localStorage.getItem('movies'));
 
     if (localStorage.getItem('movies')) {
-      setDisplayMovies(filterShortCheckbox(movies));
-      setErrorMessage(filterShortCheckbox(movies).length === 0 ? notFound : '');
-      setMoviesNotFound(
-        filterShortCheckbox(movies).length === 0 ? true : false
-      );
-      console.log(filterShortCheckbox(movies));
-    } else {
-      setDisplayMovies(movies);
-      setErrorMessage(movies.length === 0 ? notFound : '');
-      setMoviesNotFound(movies.length === 0 ? true : false);
-
-      console.log(movies);
+      setSearchMovies(getMovies);
     }
-  }, [filterCheckbox, notFound]);
+  }, [filterCheckbox]);
+
+  useEffect(() => {
+    setDisplayMovies(
+      filterCheckbox ? filterShortCheckbox(searchMovies) : searchMovies
+    );
+  }, [searchMovies, filterCheckbox]);
 
   return (
     <main className="movies">

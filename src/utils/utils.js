@@ -18,16 +18,13 @@ export const filterShortCheckbox = (movies) => {
     : null;
 };
 
-export const filterSearchMovie = (movies, query, shortCheckbox) => {
+export const filterSearchMovie = (movies, query) => {
   const movieByUserQuery = movies.filter((movie) => {
-    const nameRu = String(movie.nameRU).toLowerCase().trim();
-    const nameEn = String(movie.nameEN).toLowerCase().trim();
-    const userMovie = query.toLowerCase().trim();
+    const nameRu = String(movie.nameRU).toLowerCase();
+    const nameEn = String(movie.nameEN).toLowerCase();
+    const userMovie = query.toLowerCase();
     return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
   });
 
-  // return shortCheckbox
-  //   ? filterShortCheckbox(movieByUserQuery)
-  //   :
   return movieByUserQuery;
 };

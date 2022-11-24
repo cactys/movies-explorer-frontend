@@ -6,7 +6,7 @@ import './SearchForm.css';
 
 const SearchForm = ({ handleSearchSubmit }) => {
   const { enterKeyword } = MESSAGE;
-  const { values, handleChange, isValid, setIsValid, resetForm } = useValidationForm();
+  const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
@@ -15,28 +15,29 @@ const SearchForm = ({ handleSearchSubmit }) => {
     evt.preventDefault();
     if (isValid) {
       handleSearchSubmit(values.search);
-      // if (history.location.pathname === '/movies') {
-      // localStorage.setItem('search-movies', values.search);
-      // setIsValid(true);
-      // }
     } else {
+      handleSearchSubmit('');
       setErrorMessage(enterKeyword);
     }
   };
-
-  useEffect(() => {
-    resetForm()
-  }, [resetForm]);
 
   useEffect(() => {
     setErrorMessage('');
   }, [isValid]);
 
   useEffect(() => {
+    if (!isValid) {
+      setErrorMessage(enterKeyword);
+    }
+  }, [isValid, enterKeyword])
+
+  useEffect(() => {
     if (history.location.pathname === '/movies' && values.search) {
       localStorage.setItem('query-movies', values.search);
     }
+  });
 
+  useEffect(() => {
     if (
       history.location.pathname === '/movies' &&
       localStorage.getItem('query-movies')
@@ -60,7 +61,11 @@ const SearchForm = ({ handleSearchSubmit }) => {
           onChange={handleChange}
           required
         />
-        <button className="search-form__search-btn" type="submit">
+        <button
+          className="search-form__search-btn"
+          type="submit"
+          disabled={!isValid}
+        >
           Найти
         </button>
       </form>
