@@ -67,11 +67,6 @@ const Movies = ({
           setMoviesNotFound(true);
         });
     } else {
-      console.log(input);
-      if (input === '') {
-        console.log('пусто');
-        // localStorage.setItem('query-movies', input);
-      }
       handleSearchMovies(allMovies, input);
     }
   };

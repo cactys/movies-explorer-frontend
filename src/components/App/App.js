@@ -84,7 +84,7 @@ const App = () => {
           setIsLogin(true);
           history.push(history.location.pathname);
           setCurrentUser(res);
-          setIsChecked(true)
+          setIsChecked(true);
         }
       })
       .catch((err) => {
@@ -112,7 +112,7 @@ const App = () => {
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');
-          setIsChecked(true)
+          setIsChecked(true);
         }
       })
       .catch((err) => {
@@ -128,7 +128,7 @@ const App = () => {
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');
-          setIsChecked(true)
+          setIsChecked(true);
         }
       })
       .catch((err) => {
@@ -210,7 +210,7 @@ const App = () => {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path="/">
-            <Header loggedIn={false} />
+            <Header loggedIn={isLogin} />
             <Main />
             <Footer />
           </Route>

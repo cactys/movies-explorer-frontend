@@ -18,28 +18,36 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const handleSearchSubmit = (input) => {
     const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
 
-    if (filterShortCheckbox(moviesList).length === 0) {
-      setErrorMessage(notFound);
-      setMoviesNotFound(true);
-    } else {
-      setMoviesNotFound(false);
-    }
     if (moviesList.length === 0) {
       setErrorMessage(notFound);
       setMoviesNotFound(true);
+      setSearchMovies(moviesList);
     } else {
-      setMoviesNotFound(false);
+      setErrorMessage(
+        filterCheckbox && filterShortCheckbox(moviesList).length === 0
+          ? notFound
+          : ''
+      );
+      setMoviesNotFound(
+        filterCheckbox && filterShortCheckbox(moviesList).length === 0
+          ? true
+          : false
+      );
+      setSearchMovies(moviesList);
     }
 
-    setDisplayMovies(
-      filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
-    );
+    // setDisplayMovies(moviesList);
+    // setSearchMovies(
+    //   filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
+    // );
   };
 
   const handleShortFilter = () => {
     if (!filterCheckbox) {
       setFilterCheckbox(true);
       setDisplayMovies(filterShortCheckbox(searchMovies));
+      console.log(filterCheckbox);
+      console.log(searchMovies);
       if (filterShortCheckbox(searchMovies).length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
@@ -50,6 +58,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
     } else {
       setFilterCheckbox(false);
       setDisplayMovies(searchMovies);
+      console.log(filterCheckbox);
+      console.log(searchMovies);
       if (searchMovies.length === 0) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
@@ -62,23 +72,29 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   useEffect(() => {
     if (filterCheckbox) {
       setFilterCheckbox(true);
-      setDisplayMovies(filterShortCheckbox(savedMovies));
+      setDisplayMovies(filterShortCheckbox(searchMovies));
     } else {
       setFilterCheckbox(false);
-      setDisplayMovies(savedMovies);
+      setDisplayMovies(searchMovies);
     }
-  }, [filterCheckbox, savedMovies]);
+  }, [filterCheckbox, searchMovies]);
 
   useEffect(() => {
-    setSearchMovies(displayMovies);
-
-    if (displayMovies.length === 0 || savedMovies.length === 0) {
+    if (displayMovies.length === 0) {
+      // || savedMovies.length === 0) {
       setErrorMessage(notFound);
       setMoviesNotFound(true);
     } else {
       setMoviesNotFound(false);
     }
-  }, [notFound, displayMovies, savedMovies.length]);
+  }, [searchMovies, notFound, savedMovies, displayMovies]);
+
+  useEffect(() => {
+    console.log(displayMovies);
+    setDisplayMovies(
+      filterCheckbox ? filterShortCheckbox(savedMovies) : savedMovies
+    );
+  }, [savedMovies, filterCheckbox]);
 
   return (
     <main className="save-movies">

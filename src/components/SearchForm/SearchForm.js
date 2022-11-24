@@ -14,31 +14,26 @@ const SearchForm = ({ handleSearchSubmit }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (isValid) {
+      if (
+        history.location.pathname === '/movies' &&
+        localStorage.getItem('query-movies')
+      ) {
+        localStorage.setItem('query-movies', values.search);
+      }
       handleSearchSubmit(values.search);
-      console.log(values);
     } else {
-      setErrorMessage(enterKeyword);
+      if (
+        history.location.pathname === '/movies' &&
+        localStorage.getItem('query-movies')
+      ) {
+        localStorage.setItem('query-movies', '');
+      }
       if (history.location.pathname === '/saved-movies') {
         handleSearchSubmit('');
       }
+      setErrorMessage(enterKeyword);
     }
   };
-
-  useEffect(() => {
-    setErrorMessage('');
-  }, [isValid]);
-
-  useEffect(() => {
-    if (history.location.pathname === '/movies' && values.search) {
-      localStorage.setItem('query-movies', values.search);
-    }
-  }, [history, values]);
-
-  // useEffect(() => {
-  //   if (!isValid) {
-  //     setErrorMessage(enterKeyword);
-  //   }
-  // }, [isValid, enterKeyword]);
 
   useEffect(() => {
     if (
@@ -47,10 +42,13 @@ const SearchForm = ({ handleSearchSubmit }) => {
     ) {
       const searchValue = localStorage.getItem('query-movies');
       values.search = searchValue;
-      // setErrorMessage('');
-      // setIsValid(true);
+      setIsValid(true);
     }
-  }, [history, values, setIsValid]);
+  }, [history]);
+
+  useEffect(() => {
+    setErrorMessage('');
+  }, [isValid]);
 
   return (
     <label className="search-form">
