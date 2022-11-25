@@ -18,7 +18,7 @@ export const filterShortCheckbox = (movies) => {
     : null;
 };
 
-export const filterSearchMovie = (movies, query) => {
+export const filterSearchMovie = (movies, query, shortFilter) => {
   const movieByUserQuery = movies.filter((movie) => {
     const nameRu = String(movie.nameRU).toLowerCase();
     const nameEn = String(movie.nameEN).toLowerCase();
@@ -26,5 +26,5 @@ export const filterSearchMovie = (movies, query) => {
     return nameRu.indexOf(userMovie) !== -1 || nameEn.indexOf(userMovie) !== -1;
   });
 
-  return movieByUserQuery;
+  return shortFilter ? filterShortCheckbox(movieByUserQuery) : movieByUserQuery;
 };
