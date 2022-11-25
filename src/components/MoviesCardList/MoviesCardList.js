@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
 import { useState } from 'react';
-import { getSavedMovie, isArray } from '../../utils/utils';
+import { getSavedMovie } from '../../utils/utils';
 import { useEffect } from 'react';
 import { PAGE_SIZE } from '../../utils/constants';
 

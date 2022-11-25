@@ -48,7 +48,7 @@ const SignUp = ({ handleRegister, messageError }) => {
           <span
             className={`auth-form__error ${
               errors.name ? `auth-form__error_active` : 'uth-form__error_active'
-            } input-name-error`}
+            }`}
           >
             {errors.name}
           </span>
@@ -70,7 +70,7 @@ const SignUp = ({ handleRegister, messageError }) => {
           <span
             className={`auth-form__error ${
               errors.email ? `auth-form__error_active` : ''
-            } input-email-error`}
+            }`}
           >
             {errors.email}
           </span>
@@ -93,7 +93,7 @@ const SignUp = ({ handleRegister, messageError }) => {
           <span
             className={`auth-form__error ${
               errors.password ? `auth-form__error_active` : ''
-            } input-password-error`}
+            }`}
           >
             {errors.password}
           </span>

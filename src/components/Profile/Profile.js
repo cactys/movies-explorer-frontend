@@ -58,7 +58,7 @@ const Profile = ({ onSignOut, onUpdateUser }) => {
               value={values.email || ''}
               onChange={handleChange}
             />
-            <span className="profile__error">{errors.email || ''}</span>
+            <span className="profile__error">{errors.email}</span>
           </label>
         </fieldset>
         <nav className="profile__navigation">

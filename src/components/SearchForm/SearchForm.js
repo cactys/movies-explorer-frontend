@@ -69,7 +69,6 @@ const SearchForm = ({ handleSearchSubmit }) => {
             !isValid ? 'search-form__search-btn_disabled' : ''
           }`}
           type="submit"
-          // disabled={!isValid}
         >
           Найти
         </button>
