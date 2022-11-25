@@ -59,18 +59,6 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
 
   useEffect(() => {
     if (filterCheckbox) {
-      console.log(
-        filterCheckbox,
-        '1',
-        filterShortCheckbox(displayMovies).length
-      );
-    } else {
-      console.log(filterCheckbox, '2', displayMovies.length);
-    }
-  });
-
-  useEffect(() => {
-    if (filterCheckbox) {
       setFilterCheckbox(true);
       setDisplayMovies(filterShortCheckbox(savedMovies));
     } else {
