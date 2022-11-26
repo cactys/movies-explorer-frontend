@@ -119,7 +119,7 @@ const Movies = ({
     if (localStorage.getItem('movies')) {
       setSearchMovies(getMovies);
     }
-  }, [filterCheckbox]);
+  }, []);
 
   useEffect(() => {
     setDisplayMovies(
@@ -141,7 +141,6 @@ const Movies = ({
       {!moviesNotFound ? (
         <MoviesCardList
           displayMovies={displayMovies}
-          errorMessage={errorMessage}
           savedMovies={savedMovies}
           onDeleteMovie={onDeleteMovie}
           onAddMovie={onAddMovie}

@@ -97,6 +97,7 @@ const App = () => {
     mainApi
       .getSavedMovies()
       .then((res) => {
+        setPreloader(true);
         setSavedMovies(res);
       })
       .finally(() => setPreloader(false))

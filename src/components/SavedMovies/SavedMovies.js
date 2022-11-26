@@ -11,72 +11,34 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
   const { notFound } = MESSAGE;
   const [errorMessage, setErrorMessage] = useState('');
   const [displayMovies, setDisplayMovies] = useState(savedMovies);
-  const [searchMovies, setSearchMovies] = useState(displayMovies);
+  const [inputQuery, setInputQuery] = useState('');
   const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
 
   const handleSearchSubmit = (input) => {
-    const moviesList = filterSearchMovie(savedMovies, input, filterCheckbox);
-    if (moviesList.length === 0) {
-      setMoviesNotFound(true);
-      setErrorMessage(notFound);
-    } else {
-      setMoviesNotFound(false);
-      setErrorMessage('');
-      if (filterCheckbox) {
-        setDisplayMovies(filterShortCheckbox(moviesList));
-      } else {
-        setDisplayMovies(moviesList);
-      }
-
-      setSearchMovies(moviesList);
-    }
+    setInputQuery(input);
   };
 
   const handleShortFilter = () => {
-    if (!filterCheckbox) {
-      setFilterCheckbox(true);
-      setDisplayMovies(filterShortCheckbox(searchMovies));
-      if (filterShortCheckbox(searchMovies).length === 0) {
-        setMoviesNotFound(true);
-        setErrorMessage(notFound);
-      } else {
-        setMoviesNotFound(false);
-        setErrorMessage('');
-      }
-    } else {
-      setFilterCheckbox(false);
-      setDisplayMovies(searchMovies);
-      if (searchMovies.length === 0) {
-        setMoviesNotFound(true);
-        setErrorMessage(notFound);
-      } else {
-        setMoviesNotFound(false);
-        setErrorMessage('');
-      }
-    }
+    setFilterCheckbox(!filterCheckbox);
   };
 
   useEffect(() => {
-    if (filterCheckbox) {
-      setFilterCheckbox(true);
-      setDisplayMovies(filterShortCheckbox(savedMovies));
-    } else {
-      setFilterCheckbox(false);
-      setDisplayMovies(savedMovies);
-    }
-  }, [filterCheckbox, savedMovies]);
+    const moviesList = filterSearchMovie(savedMovies, inputQuery);
+    setDisplayMovies(
+      filterCheckbox ? filterShortCheckbox(moviesList) : moviesList
+    );
+  }, [filterCheckbox, inputQuery, savedMovies]);
 
   useEffect(() => {
-    setSearchMovies(displayMovies);
     if (displayMovies.length === 0) {
-      setMoviesNotFound(true);
       setErrorMessage(notFound);
+      setMoviesNotFound(true);
     } else {
-      setMoviesNotFound(false);
       setErrorMessage('');
+      setMoviesNotFound(false);
     }
-  }, [displayMovies]);
+  }, [displayMovies, notFound]);
 
   return (
     <main className="save-movies">
@@ -91,7 +53,8 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       </section>
       {!moviesNotFound ? (
         <MoviesCardList
-          savedMovies={searchMovies}
+          displayMovies={displayMovies}
+          savedMovies={displayMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}
           windowWidth={windowWidth}

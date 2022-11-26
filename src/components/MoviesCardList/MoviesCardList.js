@@ -67,13 +67,13 @@ const MoviesCardList = ({
                 onDeleteMovie={onDeleteMovie}
               />
             ))
-          : savedMovies.map((movie) => (
-            <MoviesCard
+          : displayMovies.map((movie) => (
+              <MoviesCard
                 key={movie._id}
                 movie={movie}
                 onDeleteMovie={onDeleteMovie}
               />
-          ))}
+            ))}
       </ul>
       {history.location.pathname === '/movies' && (
         <LoadMore
