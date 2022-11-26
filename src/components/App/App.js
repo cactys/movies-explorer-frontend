@@ -26,11 +26,12 @@ const App = () => {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const [messageTooltip, setMessageTooltip] = useState('');
-  const [infoTooltip, setInfoTooltip] = useState({});
+  const [infoTooltip, setInfoTooltip] = useState();
   const [currentUser, setCurrentUser] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isLogin, setIsLogin] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [errorActive, setErrorActive] = useState(false);
   const [preloader, setPreloader] = useState(true);
 
   const getWindowWidth = useCallback(() => window.innerWidth, []);
@@ -82,10 +83,11 @@ const App = () => {
       .then((res) => {
         if (res._id) {
           setIsLogin(true);
-          history.push(history.location.pathname);
           setCurrentUser(res);
           setIsChecked(true);
         }
+        setMessageError('');
+        setErrorActive(false);
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +101,7 @@ const App = () => {
       })
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-  }, [isLogin, history]);
+  }, [isLogin]);
 
   const closeAllPopups = () => {
     setIsTooltipPopupOpen(false);
@@ -113,11 +115,14 @@ const App = () => {
           setIsLogin(true);
           history.push('/movies');
           setIsChecked(true);
+          setMessageTooltip('');
         }
       })
       .catch((err) => {
         console.log(err);
-        setMessageError(catchError);
+        setIsTooltipPopupOpen(true);
+        setInfoTooltip(false);
+        setMessageTooltip(catchError);
       });
   };
 
@@ -129,11 +134,14 @@ const App = () => {
           setIsLogin(true);
           history.push('/movies');
           setIsChecked(true);
+          setMessageTooltip('');
         }
       })
       .catch((err) => {
         console.log(err);
-        setMessageError(catchError);
+        setIsTooltipPopupOpen(true);
+        setInfoTooltip(false);
+        setMessageTooltip(catchError);
       });
   };
 
@@ -265,9 +273,10 @@ const App = () => {
               <Redirect to="/movies" />
             ) : (
               <Login
-                loggedIn={isLogin}
+                // loggedIn={isLogin}
                 handleLogin={handleLogin}
                 messageError={messageError}
+                errorActive={errorActive}
               />
             )}
           </Route>
@@ -278,6 +287,7 @@ const App = () => {
               <Register
                 handleRegister={handleRegister}
                 messageError={messageError}
+                errorActive={errorActive}
               />
             )}
           </Route>

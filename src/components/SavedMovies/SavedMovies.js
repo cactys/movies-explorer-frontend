@@ -91,8 +91,7 @@ const SavedMovies = ({ savedMovies, onDeleteMovie, windowWidth }) => {
       </section>
       {!moviesNotFound ? (
         <MoviesCardList
-          displayMovies={searchMovies}
-          savedMovies={savedMovies}
+          savedMovies={searchMovies}
           onDeleteMovie={onDeleteMovie}
           errorMessage={errorMessage}
           windowWidth={windowWidth}

@@ -21,13 +21,6 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
 
   return (
     <li className="movies-card">
-      <a
-        className="movies-card__trailer-link"
-        href={movie.trailerLink}
-        target="blanck"
-      >
-        {movie.nameRU}
-      </a>
       <div className="movies-card__header">
         <div className="movies-card__description">
           <h2 className="movies-card__title">{movie.nameRU}</h2>
@@ -50,20 +43,27 @@ const MoviesCard = ({ movie, savedMovie, onAddMovie, onDeleteMovie }) => {
           />
         )}
       </div>
-      {history.location.pathname === '/movies' && (
-        <img
-          className="movies-card__image"
-          alt={movie.nameRU}
-          src={`${beatfilmMovies}${movie.image.url}`}
-        />
-      )}
-      {history.location.pathname === '/saved-movies' && (
-        <img
-          className="movies-card__image"
-          alt={movie.nameRU}
-          src={movie.image}
-        />
-      )}
+      <a
+        className="movies-card__trailer-link"
+        href={movie.trailerLink}
+        target="blanck"
+      >
+        {movie.nameRU}
+        {history.location.pathname === '/movies' && (
+          <img
+            className="movies-card__image"
+            alt={movie.nameRU}
+            src={`${beatfilmMovies}${movie.image.url}`}
+          />
+        )}
+        {history.location.pathname === '/saved-movies' && (
+          <img
+            className="movies-card__image"
+            alt={movie.nameRU}
+            src={movie.image}
+          />
+        )}
+      </a>
     </li>
   );
 };

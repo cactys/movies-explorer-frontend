@@ -12,18 +12,18 @@ const useValidationForm = () => {
     const input = evt.target;
     const { name, value } = input;
 
+    if (name === 'name' && input.validity.patternMismatch) {
+      input.setCustomValidity(incorrectName);
+    } else {
+      input.setCustomValidity('');
+    }
+
     if (name === 'email') {
       if (!isEmail(value)) {
         input.setCustomValidity(incorrectEmail);
       } else {
         input.setCustomValidity('');
       }
-    }
-
-    if (name === 'name' && input.validity.patternMismatch) {
-      input.setCustomValidity(incorrectName);
-    } else {
-      input.setCustomValidity('');
     }
 
     setValues({

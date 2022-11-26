@@ -94,6 +94,11 @@
   display: block;
   color: #ff3055;
   margin: 0 0 15px;
+  opacity: 0;
+}
+
+.auth-form__error-message_active {
+  opacity: 1;
 }
 
 .auth-form__submit {

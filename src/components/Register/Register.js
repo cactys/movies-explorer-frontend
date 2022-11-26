@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignUp = ({ handleRegister, messageError }) => {
+const SignUp = ({ handleRegister, messageError, errorActive }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
 
@@ -26,6 +26,7 @@ const SignUp = ({ handleRegister, messageError }) => {
       path="/signin"
       isValid={isValid}
       messageError={messageError}
+      errorActive={errorActive}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">
@@ -36,7 +37,6 @@ const SignUp = ({ handleRegister, messageError }) => {
             className={`auth-form__input ${
               errors.name ? `auth-form__input_error` : ''
             }`}
-            id="input-name"
             name="name"
             value={values.name || ''}
             onChange={handleChange}
@@ -61,7 +61,6 @@ const SignUp = ({ handleRegister, messageError }) => {
             className={`auth-form__input ${
               errors.email ? `auth-form__input_error` : ''
             }`}
-            id="input-email"
             value={values.email || ''}
             onChange={handleChange}
             name="email"
@@ -83,7 +82,6 @@ const SignUp = ({ handleRegister, messageError }) => {
             className={`auth-form__input ${
               errors.password ? `auth-form__input_error` : ''
             }`}
-            id="input-password"
             value={values.password || ''}
             onChange={handleChange}
             name="password"

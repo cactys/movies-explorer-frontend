@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { getSavedMovie } from '../../utils/utils';
 import { useEffect } from 'react';
 import { PAGE_SIZE } from '../../utils/constants';
+import { useHistory } from 'react-router-dom';
 
 const MoviesCardList = ({
   displayMovies,
@@ -16,6 +17,8 @@ const MoviesCardList = ({
   const [filter, setFilter] = useState([]);
   const [showMovies, setShowMovies] = useState([]);
   const [showCards, setShowCards] = useState({ total: 12, load: 3 });
+
+  const history = useHistory();
 
   const { desktop, table, mobile } = PAGE_SIZE;
 
@@ -43,7 +46,6 @@ const MoviesCardList = ({
     } else {
       setShowCards(mobile.cards);
     }
-
   }, [desktop, mobile, table, windowWidth]);
 
   useEffect(() => {
@@ -55,22 +57,32 @@ const MoviesCardList = ({
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {showMovies.map((movie) => (
+        {history.location.pathname === '/movies'
+          ? showMovies.map((movie) => (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                savedMovie={getSavedMovie(savedMovies, movie)}
+                onAddMovie={onAddMovie}
+                onDeleteMovie={onDeleteMovie}
+              />
+            ))
+          : savedMovies.map((movie) => (
             <MoviesCard
-              key={movie.id || movie._id}
-              movie={movie}
-              savedMovie={getSavedMovie(savedMovies, movie)}
-              onAddMovie={onAddMovie}
-              onDeleteMovie={onDeleteMovie}
-            />
-        ))}
+                key={movie._id}
+                movie={movie}
+                onDeleteMovie={onDeleteMovie}
+              />
+          ))}
       </ul>
-      <LoadMore
-        setIndex={handleLoadMore}
-        showMovies={showMovies}
-        showCards={showCards}
-        filter={filter}
-      />
+      {history.location.pathname === '/movies' && (
+        <LoadMore
+          setIndex={handleLoadMore}
+          showMovies={showMovies}
+          showCards={showCards}
+          filter={filter}
+        />
+      )}
     </section>
   );
 };
