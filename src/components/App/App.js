@@ -91,8 +91,12 @@ const App = () => {
       })
       .catch((err) => {
         console.log(err);
-        setIsLogin(false);
-        setIsChecked(false);
+        if (err) {
+          localStorage.clear();
+          setIsLogin(false);
+          setIsChecked(false);
+          history.push('/');
+        }
       });
     mainApi
       .getSavedMovies()
@@ -131,6 +135,7 @@ const App = () => {
     auth
       .signIn(data)
       .then((res) => {
+        console.log(res);
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');

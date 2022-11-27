@@ -45,11 +45,11 @@ const Movies = ({
       );
       setSearchMovies(moviesList);
     }
-    localStorage.setItem('movies', JSON.stringify(moviesList));
   };
 
   const handleSearchSubmit = (input) => {
     localStorage.setItem('query-movies', input);
+    console.log(allMovies.length);
     if (allMovies.length === 0) {
       setPreloader(true);
       moviesApi
@@ -57,6 +57,7 @@ const Movies = ({
         .then((res) => {
           setAllMovies(res);
           handleSearchMovies(res, input);
+          localStorage.setItem('movies', JSON.stringify(res));
         })
         .finally(() => {
           setPreloader(false);
@@ -73,15 +74,14 @@ const Movies = ({
 
   const handleShortFilter = () => {
     setFilterCheckbox(!filterCheckbox);
-    localStorage.setItem('short-movies', filterCheckbox);
-
-    const movies = JSON.parse(localStorage.getItem('movies'));
 
     if (!filterCheckbox) {
       setFilterCheckbox(true);
-      setDisplayMovies(filterShortCheckbox(movies));
+      setDisplayMovies(filterShortCheckbox(searchMovies));
       if (
-        Array.isArray(movies) ? filterShortCheckbox(movies).length === 0 : null
+        Array.isArray(searchMovies)
+          ? filterShortCheckbox(searchMovies).length === 0
+          : null
       ) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
@@ -95,8 +95,8 @@ const Movies = ({
       }
     } else {
       setFilterCheckbox(false);
-      setDisplayMovies(movies);
-      if (Array.isArray(movies) ? movies.length === 0 : null) {
+      setDisplayMovies(searchMovies);
+      if (Array.isArray(searchMovies) ? searchMovies.length === 0 : null) {
         setErrorMessage(notFound);
         setMoviesNotFound(true);
       } else {
@@ -115,9 +115,10 @@ const Movies = ({
 
   useEffect(() => {
     const getMovies = JSON.parse(localStorage.getItem('movies'));
+    const getInput = localStorage.getItem('query-movies');
 
     if (localStorage.getItem('movies')) {
-      setSearchMovies(getMovies);
+      setSearchMovies(filterSearchMovie(getMovies, getInput));
     }
   }, []);
 
