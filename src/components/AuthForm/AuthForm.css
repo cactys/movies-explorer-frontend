@@ -45,6 +45,7 @@
 .auth-form__input {
   box-sizing: border-box;
   padding: 0 15px;
+  margin-bottom: 22px;
   height: 46px;
   font-weight: 400;
   font-size: 13px;
@@ -54,6 +55,7 @@
   border: none;
   background-color: #f9f9f9;
   border-radius: 8px;
+  position: relative;
 }
 
 #input-email {
@@ -65,8 +67,10 @@
 }
 
 .auth-form__error {
+  position: absolute;
+  bottom: 0;
   opacity: 0;
-  margin: 10px 0 0;
+  margin: 0;
   font-weight: 400;
   font-size: 10px;
   line-height: calc(12 / 10);
@@ -82,6 +86,19 @@
   width: 396px;
   max-width: 100%;
   flex: 0 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.auth-form__error-message {
+  display: block;
+  color: #ff3055;
+  margin: 0 0 15px;
+  opacity: 0;
+}
+
+.auth-form__error-message_active {
+  opacity: 1;
 }
 
 .auth-form__submit {
@@ -101,6 +118,12 @@
 }
 
 .auth-form__submit:hover {
+  opacity: 0.8;
+}
+
+.auth-form__submit_disable {
+  cursor: inherit;
+  background: #a0a0a0;
   opacity: 0.8;
 }
 

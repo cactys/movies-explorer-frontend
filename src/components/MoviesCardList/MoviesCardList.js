@@ -1,44 +1,88 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import LoadMore from '../LoadMore/LoadMore';
-import { useEffect, useState } from 'react';
-import { PAGE_SIZE } from '../../utils/content';
+import { useState } from 'react';
+import { getSavedMovie } from '../../utils/utils';
+import { useEffect } from 'react';
+import { PAGE_SIZE } from '../../utils/constants';
+import { useHistory } from 'react-router-dom';
 
-const MoviesCardList = ({ cards, mark }) => {
-  const [index, setIndex] = useState(0);
-  const [visibleData, setVisibleData] = useState([]);
+const MoviesCardList = ({
+  displayMovies,
+  savedMovies,
+  onAddMovie,
+  onDeleteMovie,
+  windowWidth,
+}) => {
+  const [filter, setFilter] = useState([]);
+  const [showMovies, setShowMovies] = useState([]);
+  const [showCards, setShowCards] = useState({ total: 12, load: 3 });
 
-  useEffect(() => {
-    const numderOfIndex = PAGE_SIZE + index;
-    const newArray = [];
+  const history = useHistory();
 
-    for (let i = 0; i < cards.length; i++) {
-      if (i < numderOfIndex) {
-        newArray.push(cards[i]);
-      }
-    }
-
-    return setVisibleData(newArray);
-  }, [cards, index]);
+  const { desktop, table, mobile } = PAGE_SIZE;
 
   const handleLoadMore = () => {
-    return setIndex(index + 3);
+    const learMore = filter.length - showMovies.length;
+
+    if (learMore > 0) {
+      const newCards = filter.slice(
+        showMovies.length,
+        showMovies.length + showCards.load
+      );
+      setShowMovies([...showMovies, ...newCards]);
+    }
   };
+
+  useEffect(() => {
+    Array.isArray(displayMovies) ? setFilter(displayMovies) : setFilter([]);
+  }, [displayMovies]);
+
+  useEffect(() => {
+    if (windowWidth > desktop.width) {
+      setShowCards(desktop.cards);
+    } else if (windowWidth <= desktop.width && windowWidth > mobile.width) {
+      setShowCards(table.cards);
+    } else {
+      setShowCards(mobile.cards);
+    }
+  }, [desktop, mobile, table, windowWidth]);
+
+  useEffect(() => {
+    if (filter.length) {
+      setShowMovies(filter.filter((item, i) => i < showCards.total));
+    }
+  }, [filter, showCards.total]);
 
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {Array.isArray(visibleData)
-          ? visibleData.map((item) => {
-              return <MoviesCard key={item._id} card={item} mark={mark} />;
-            })
-          : null}
+        {history.location.pathname === '/movies'
+          ? showMovies.map((movie) => (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                savedMovie={getSavedMovie(savedMovies, movie)}
+                onAddMovie={onAddMovie}
+                onDeleteMovie={onDeleteMovie}
+              />
+            ))
+          : displayMovies.map((movie) => (
+              <MoviesCard
+                key={movie._id}
+                movie={movie}
+                onDeleteMovie={onDeleteMovie}
+              />
+            ))}
       </ul>
-      <LoadMore
-        isVisible={cards.length > 12}
-        isDisable={cards.length === visibleData.length}
-        setIndex={handleLoadMore}
-      />
+      {history.location.pathname === '/movies' && (
+        <LoadMore
+          setIndex={handleLoadMore}
+          showMovies={showMovies}
+          showCards={showCards}
+          filter={filter}
+        />
+      )}
     </section>
   );
 };

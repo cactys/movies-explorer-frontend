@@ -22,14 +22,8 @@
 }
 
 .load-more__button_disabled {
-  cursor: default;
-  opacity: 0.6;
+  display: none;
 }
-
-.load-more__button_disabled:hover {
-  opacity: 0.6;
-}
-
 
 @media screen and (max-width: 831px) {
   .load-more {

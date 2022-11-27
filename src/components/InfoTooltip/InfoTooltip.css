@@ -1,0 +1,68 @@
+.info-tooltip {
+  display: flex;
+  opacity: 0;
+  transition: visibility .2s, opacity .2s linear;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  text-align: center;
+}
+
+.info-tooltip_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.info-tooltip__container {
+  position: relative;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  max-width: 430px;
+  width: 100%;
+  padding: 60px 36px;
+}
+
+.info-tooltip__close {
+  padding: 0;
+  position: absolute;
+  top: calc(-32px + -8px);
+  right: calc(-32px + -8px);
+  height: 32px;
+  width: 32px;
+  background: url("../../images/close-button.svg");
+  background-position: center;
+  background-size: cover;
+  font-size: 0px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.4s;
+}
+
+.info-tooltip__close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 540px) {
+  .info-tooltip__close {
+    top: -35px;
+    right: 0px;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.info-tooltip__tooltip-text {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: calc(29 / 24);
+  margin: 32px 0 0;
+}
