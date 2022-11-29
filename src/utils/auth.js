@@ -28,7 +28,6 @@ class Auth {
   }
 
   signIn(data) {
-    console.log(data);
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       credentials: 'include',

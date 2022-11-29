@@ -92,6 +92,11 @@ const App = () => {
       .catch((err) => {
         console.log(err);
         if (err) {
+          setCurrentUser({
+            name: '',
+            email: '',
+            password: '',
+          });
           localStorage.clear();
           setIsLogin(false);
           setIsChecked(false);
@@ -106,10 +111,27 @@ const App = () => {
       })
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-  }, [isLogin]);
+  }, [history]);
 
   const closeAllPopups = () => {
     setIsTooltipPopupOpen(false);
+  };
+
+  const onSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        setCurrentUser({
+          name: '',
+          email: '',
+          password: '',
+        });
+        localStorage.clear();
+        setIsLogin(false);
+        setIsChecked(false);
+        history.push('/');
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleRegister = (data) => {
@@ -135,7 +157,6 @@ const App = () => {
     auth
       .signIn(data)
       .then((res) => {
-        console.log(res);
         if (res.token) {
           setIsLogin(true);
           history.push('/movies');
@@ -149,25 +170,6 @@ const App = () => {
         setInfoTooltip(false);
         setMessageTooltip(catchError);
       });
-  };
-
-  const onSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        setCurrentUser({
-          name: '',
-          email: '',
-          password: '',
-        });
-        localStorage.clear();
-      })
-      .finally(() => {
-        setIsLogin(false);
-        setIsChecked(false);
-        history.push('/');
-      })
-      .catch((err) => console.log(err));
   };
 
   const handleUpdateUser = (data) => {
@@ -279,7 +281,6 @@ const App = () => {
               <Redirect to="/movies" />
             ) : (
               <Login
-                // loggedIn={isLogin}
                 handleLogin={handleLogin}
                 messageError={messageError}
                 errorActive={errorActive}

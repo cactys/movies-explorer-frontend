@@ -4,7 +4,7 @@ import useValidationForm from '../../hooks/useValidationForm';
 import { MESSAGE } from '../../utils/constants';
 import './SearchForm.css';
 
-const SearchForm = ({ handleSearchSubmit }) => {
+const SearchForm = ({ handleSearchSubmit, isLoading }) => {
   const { enterKeyword } = MESSAGE;
   const { values, handleChange, isValid, setIsValid } = useValidationForm();
   const [errorMessage, setErrorMessage] = useState('');
@@ -66,7 +66,7 @@ const SearchForm = ({ handleSearchSubmit }) => {
         />
         <button
           className={`search-form__search-btn ${
-            !isValid ? 'search-form__search-btn_disabled' : ''
+            !isValid || isLoading ? 'search-form__search-btn_disabled' : ''
           }`}
           type="submit"
         >

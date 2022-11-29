@@ -22,8 +22,11 @@ const Movies = ({
   const [allMovies, setAllMovies] = useState([]);
   const [displayMovies, setDisplayMovies] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
-  const [filterCheckbox, setFilterCheckbox] = useState(false);
   const [moviesNotFound, setMoviesNotFound] = useState(false);
+  const [filterCheckbox, setFilterCheckbox] = useState(
+    JSON.parse(localStorage.getItem('short-movies'))
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearchMovies = (movies, input) => {
     const moviesList = filterSearchMovie(movies, input);
@@ -49,8 +52,9 @@ const Movies = ({
 
   const handleSearchSubmit = (input) => {
     localStorage.setItem('query-movies', input);
-    console.log(allMovies.length);
+
     if (allMovies.length === 0) {
+      setIsLoading(true);
       setPreloader(true);
       moviesApi
         .getMovies()
@@ -60,15 +64,16 @@ const Movies = ({
           localStorage.setItem('movies', JSON.stringify(res));
         })
         .finally(() => {
+          setIsLoading(false);
           setPreloader(false);
         })
         .catch((err) => {
-          console.log(err);
           setErrorMessage(queryError);
           setMoviesNotFound(true);
         });
     } else {
       handleSearchMovies(allMovies, input);
+      setIsLoading(false);
     }
   };
 
@@ -107,11 +112,11 @@ const Movies = ({
     localStorage.setItem('short-movies', !filterCheckbox);
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('short-movies') === 'true') {
-      setFilterCheckbox(true);
-    }
-  }, [filterCheckbox]);
+  // useEffect(() => {
+  //   if (localStorage.getItem('short-movies') === 'true') {
+  //     setFilterCheckbox(true);
+  //   }
+  // }, [filterCheckbox]);
 
   useEffect(() => {
     const getMovies = JSON.parse(localStorage.getItem('movies'));
@@ -132,7 +137,10 @@ const Movies = ({
     <main className="movies">
       <section className="movies__form">
         <fieldset className="movies__set">
-          <SearchForm handleSearchSubmit={handleSearchSubmit} />
+          <SearchForm
+            handleSearchSubmit={handleSearchSubmit}
+            isLoading={isLoading}
+          />
           <FilterCheckbox
             handleShortFilter={handleShortFilter}
             filterCheckbox={filterCheckbox}
