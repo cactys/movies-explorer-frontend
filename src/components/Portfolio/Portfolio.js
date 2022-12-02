@@ -35,6 +35,26 @@ const Portfolio = () => {
             <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>
+        <li className="portfolio__navigation-item">
+          <a
+            className="portfolio__navigation-link"
+            href="https://github.com/cactys/movies-explorer-frontend"
+            target="blanck"
+          >
+            Дипломная работу (Frontend)
+            <span className="portfolio__navigation-arrow">&#8599;</span>
+          </a>
+        </li>
+        <li className="portfolio__navigation-item">
+          <a
+            className="portfolio__navigation-link"
+            href="https://github.com/cactys/movies-explorer-api"
+            target="blanck"
+          >
+            Дипломная работу (Backend)
+            <span className="portfolio__navigation-arrow">&#8599;</span>
+          </a>
+        </li>
       </ul>
     </section>
   );
