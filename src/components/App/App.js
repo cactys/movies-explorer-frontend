@@ -111,7 +111,7 @@ const App = () => {
       })
       .finally(() => setPreloader(false))
       .catch((err) => console.log(err));
-  }, [history]);
+  }, [history, isChecked, isLogin]);
 
   const closeAllPopups = () => {
     setIsTooltipPopupOpen(false);
@@ -134,15 +134,18 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleRegister = (data) => {
+  const handleLogin = () => {
+    setIsLogin(true);
+    history.push('/movies');
+    setIsChecked(true);
+  };
+
+  const handleRegisterSubmit = (data) => {
     auth
       .signUp(data)
       .then((res) => {
         if (res.token) {
-          setIsLogin(true);
-          history.push('/movies');
-          setIsChecked(true);
-          setMessageTooltip('');
+          handleLogin();
         }
       })
       .catch((err) => {
@@ -153,15 +156,12 @@ const App = () => {
       });
   };
 
-  const handleLogin = (data) => {
+  const handleLoginSubmit = (data) => {
     auth
       .signIn(data)
       .then((res) => {
         if (res.token) {
-          setIsLogin(true);
-          history.push('/movies');
-          setIsChecked(true);
-          setMessageTooltip('');
+          handleLogin();
         }
       })
       .catch((err) => {
@@ -281,7 +281,7 @@ const App = () => {
               <Redirect to="/movies" />
             ) : (
               <Login
-                handleLogin={handleLogin}
+                handleLoginSubmit={handleLoginSubmit}
                 messageError={messageError}
                 errorActive={errorActive}
               />
@@ -292,13 +292,19 @@ const App = () => {
               <Redirect to="/movies" />
             ) : (
               <Register
-                handleRegister={handleRegister}
+                handleRegisterSubmit={handleRegisterSubmit}
                 messageError={messageError}
                 errorActive={errorActive}
               />
             )}
           </Route>
-          <Route component={PageNotFound} />
+          {isChecked ? (
+            <Route path="*">
+              <PageNotFound />
+            </Route>
+          ) : (
+            <Preloader />
+          )}
         </Switch>
         <InfoTooltip
           isOpen={isTooltipPopupOpen}

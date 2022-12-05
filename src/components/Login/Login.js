@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import useValidationForm from '../../hooks/useValidationForm';
 import AuthForm from '../AuthForm/AuthForm';
 
-const SignIn = ({ handleLogin, messageError, errorActive }) => {
+const SignIn = ({ handleLoginSubmit, }) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useValidationForm();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleLogin(values);
+    handleLoginSubmit(values);
   };
 
   useEffect(() => {
@@ -25,8 +25,6 @@ const SignIn = ({ handleLogin, messageError, errorActive }) => {
       link="Регистрация"
       path="/signup"
       isValid={isValid}
-      messageError={messageError}
-      errorActive={errorActive}
     >
       <fieldset className="auth-form__set-auth">
         <label className="auth-form__field">

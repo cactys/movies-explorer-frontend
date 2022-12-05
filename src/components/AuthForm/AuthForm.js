@@ -11,8 +11,6 @@ const Form = ({
   link,
   children,
   isValid,
-  // messageError,
-  // errorActive,
 }) => {
   return (
     <form className="auth-form" onSubmit={onSubmit}>
@@ -22,13 +20,6 @@ const Form = ({
       </div>
       {children}
       <div className="auth-form__footer">
-        {/* <span
-          className={`auth-form__error-message ${
-            errorActive ? 'auth-form__error-message_active' : ''
-          }`}
-        >
-          {messageError}
-        </span> */}
         <button
           type="submit"
           className={`auth-form__submit ${

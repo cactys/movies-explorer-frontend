@@ -128,9 +128,14 @@ const Movies = ({
   }, []);
 
   useEffect(() => {
-    setDisplayMovies(
-      filterCheckbox ? filterShortCheckbox(searchMovies) : searchMovies
-    );
+    if (filterCheckbox) {
+      setDisplayMovies(filterShortCheckbox(searchMovies));
+    } else {
+      setDisplayMovies(searchMovies);
+    }
+    // setDisplayMovies(
+    //   filterCheckbox ? filterShortCheckbox(searchMovies) : searchMovies
+    // );
   }, [searchMovies, filterCheckbox]);
 
   return (

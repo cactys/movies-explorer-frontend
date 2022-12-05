@@ -44,7 +44,8 @@ const SearchForm = ({ handleSearchSubmit, isLoading }) => {
       values.search = searchValue;
       setIsValid(true);
     }
-  }, [history]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, setIsValid]);
 
   useEffect(() => {
     setErrorMessage('');
@@ -63,6 +64,7 @@ const SearchForm = ({ handleSearchSubmit, isLoading }) => {
           value={values.search || ''}
           onChange={handleChange}
           required
+          disabled={isLoading}
         />
         <button
           className={`search-form__search-btn ${
