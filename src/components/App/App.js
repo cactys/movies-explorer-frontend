@@ -77,6 +77,8 @@ const App = () => {
     }
   }, [isOpenPopup]);
 
+  console.log(isChecked);
+
   useEffect(() => {
     api
       .getUser()
@@ -84,11 +86,11 @@ const App = () => {
         if (res._id) {
           setIsLogin(true);
           setCurrentUser(res);
-          setIsChecked(true);
         }
         setMessageError('');
         setErrorActive(false);
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         if (err) {
@@ -137,7 +139,6 @@ const App = () => {
   const handleLogin = () => {
     setIsLogin(true);
     history.push('/movies');
-    setIsChecked(true);
   };
 
   const handleRegisterSubmit = (data) => {
@@ -148,6 +149,7 @@ const App = () => {
           handleLogin();
         }
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         setIsTooltipPopupOpen(true);
@@ -164,6 +166,7 @@ const App = () => {
           handleLogin();
         }
       })
+      .finally(() => setIsChecked(true))
       .catch((err) => {
         console.log(err);
         setIsTooltipPopupOpen(true);
@@ -298,13 +301,9 @@ const App = () => {
               />
             )}
           </Route>
-          {isChecked ? (
-            <Route path="*">
-              <PageNotFound />
-            </Route>
-          ) : (
-            <Preloader />
-          )}
+          <Route path="*">
+            <PageNotFound />
+          </Route>
         </Switch>
         <InfoTooltip
           isOpen={isTooltipPopupOpen}
