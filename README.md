@@ -1,10 +1,10 @@
 # movies-explorer-frontend
-**Ссылка на макет**
+**Ссылка на макет**  
 https://disk.yandex.ru/d/nppcesePgiLuHA
 
-**Demo**
-[API](https://github.com/cactys/movies-explorer-api)
-https://khnychkov.nomoredomains.icu/
+**Demo**  
+[API](https://github.com/cactys/movies-explorer-api)  
+[https://khnychkov.nomoredomains.icu/](https://khnychkov.nomoredomains.icu/) ***сервер не доступен, в процессе поиска куда задеплоить***
 
 Интерактивная страница, на которой пользователи могут искать интересный фильмы, добавлять из в избранные, удалять их из своего списка сохраненных.  
 
