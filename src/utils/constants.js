@@ -1,7 +1,7 @@
 export const URL = {
   beatfilmMovies: 'https://api.nomoreparties.co',
-  // localApi: 'https://api.khnychkov.nomoredomains.icu',
-  localApi: 'http://localhost:3030',
+  localApi: 'https://api.khnychkov.nomoredomains.icu',
+  // localApi: 'http://localhost:3030',
 };
 
 export const PAGE_SIZE = {
@@ -41,3 +41,19 @@ export const MESSAGE = {
     'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
   defaultMessage: 'Введите ключевое слово для поиска',
 };
+
+export const techList = [
+  'HTML',
+  'CSS',
+  'JS',
+  'TS',
+  'React',
+  'Redux',
+  'WebSocket',
+  'REST API',
+  'Git',
+  'Express.js',
+  'mongoDB',
+  'Webpack',
+  'Figma',
+];

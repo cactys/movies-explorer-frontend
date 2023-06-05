@@ -77,8 +77,6 @@ const App = () => {
     }
   }, [isOpenPopup]);
 
-  console.log(isChecked);
-
   useEffect(() => {
     api
       .getUser()

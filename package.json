@@ -20,7 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy-script": "npm run build && scp -r ./build/* khortys@84.201.128.221:/home/khortys/movies-explorer-frontend/build"
   },
   "eslintConfig": {
     "extends": [

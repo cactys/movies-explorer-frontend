@@ -9,7 +9,7 @@ const Portfolio = () => {
           <a
             className="portfolio__navigation-link"
             href="https://github.com/cactys/how-to-learn"
-            target="blanck"
+            target="blanc"
           >
             Статичный сайт
             <span className="portfolio__navigation-arrow">&#8599;</span>
@@ -19,7 +19,7 @@ const Portfolio = () => {
           <a
             className="portfolio__navigation-link"
             href="https://github.com/cactys/russian-travel"
-            target="blanck"
+            target="blanc"
           >
             Адаптивный сайт
             <span className="portfolio__navigation-arrow">&#8599;</span>
@@ -29,7 +29,7 @@ const Portfolio = () => {
           <a
             className="portfolio__navigation-link"
             href="https://github.com/cactys/react-mesto-api-full"
-            target="blanck"
+            target="blanc"
           >
             Одностраничное приложение
             <span className="portfolio__navigation-arrow">&#8599;</span>
@@ -39,9 +39,9 @@ const Portfolio = () => {
           <a
             className="portfolio__navigation-link"
             href="https://github.com/cactys/movies-explorer-frontend"
-            target="blanck"
+            target="blanc"
           >
-            Дипломная работу (Frontend)
+            Дипломная работа (Frontend)
             <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>
@@ -49,9 +49,19 @@ const Portfolio = () => {
           <a
             className="portfolio__navigation-link"
             href="https://github.com/cactys/movies-explorer-api"
-            target="blanck"
+            target="blanc"
           >
-            Дипломная работу (Backend)
+            Дипломная работа (Backend)
+            <span className="portfolio__navigation-arrow">&#8599;</span>
+          </a>
+        </li>
+        <li className="portfolio__navigation-item">
+          <a
+            className="portfolio__navigation-link"
+            href="https://github.com/cactys/react-burger"
+            target="blanc"
+          >
+            Учебный проект из курса "React-разработчик"
             <span className="portfolio__navigation-arrow">&#8599;</span>
           </a>
         </li>

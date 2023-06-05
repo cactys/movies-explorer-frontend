@@ -46,12 +46,23 @@
   line-height: 20px;
 }
 
+.about-author__description-list {
+  list-style: inside;
+  margin: 0;
+  padding: 0;
+}
+
 .about-author__author-description {
-  margin: 0 0 99px;
+  /* text-indent: 18px; */
+  margin: 0 0 12px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
+}
+
+.about-author__author-description:last-child {
+  margin: 0 0 99px;
 }
 
 .about-author__author-link {
@@ -85,29 +96,35 @@
     padding: 90px 10px 0;
     max-width: 668px;
   }
+
   .about-author__block {
     max-width: 364px;
     width: 100%;
   }
+
   .about-author__author-name {
     font-size: 40px;
     line-height: calc(40 / 40);
     margin: 0 0 16px;
   }
+
   .about-author__author-about {
     font-size: 12px;
     line-height: calc(18 / 12);
     margin: 0 0 20px;
   }
+
   .about-author__author-description {
     font-size: 12px;
     line-height: calc(18 / 12);
     margin: 0 0 87px;
   }
+
   .about-author__author-link {
     font-size: 14px;
     line-height: calc(17 / 14);
   }
+
   .about-author__author-avatar {
     max-width: 255px;
     height: 307px;
@@ -120,6 +137,7 @@
     column-gap: 10px;
     justify-content: space-between;
   }
+
   .about-author__author-avatar {
     height: 100%;
     max-width: 100%;
@@ -131,9 +149,11 @@
   .about-author {
     padding: 70px 10px 0;
   }
+
   .about-author__author-name {
     margin: 0 0 20px;
   }
+
   .about-author__author-description {
     margin: 0 0 40px;
   }
@@ -143,26 +163,32 @@
   .about-author {
     max-width: 292px;
   }
+
   .about-author__title {
     padding: 0 0 28px;
     font-size: 18px;
     line-height: calc(22 / 18);
   }
+
   .about-author__container {
     margin: 60px 0 0;
   }
+
   .about-author__author-name {
     font-size: 30px;
     line-height: calc(36 / 30);
   }
+
   .about-author__author-about {
     font-size: 11px;
     line-height: calc(16 / 11);
   }
+
   .about-author__author-description {
     font-size: 11px;
     line-height: calc(16 / 11);
   }
+
   .about-author__author-avatar {
     height: 352px;
     width: 100%;
