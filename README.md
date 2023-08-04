@@ -3,8 +3,8 @@
 https://disk.yandex.ru/d/nppcesePgiLuHA
 
 **Demo**  
-[API](https://github.com/cactys/movies-explorer-api)  
-[https://khnychkov.nomoredomains.icu/](https://khnychkov.nomoredomains.icu/)
+[API](https://api.movies.khortys.space)  
+[https://khnychkov.nomoredomains.icu/](https://movies.khortys.space)
 
 Интерактивная страница, на которой пользователи могут искать интересный фильмы, добавлять из в избранные, удалять их из своего списка сохраненных.  
 
